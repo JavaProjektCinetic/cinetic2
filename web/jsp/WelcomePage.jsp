@@ -15,7 +15,7 @@
         <title>Welcome Page</title>
     </head>
     <body>
-        <font face="" color="#BF8E4F">
+        <font face="Playbill" color="#BF9D6F">
             <h1>Cinetic</h1>
             
         </font>
