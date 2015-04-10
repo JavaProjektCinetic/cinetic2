@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package database;
+package beans;
 
 /**
  *
- * @author Sarah
+ * @author Laura
  */
-public class fjdosa {
+public class Room {
     
 }
