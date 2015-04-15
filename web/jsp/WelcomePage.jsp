@@ -15,9 +15,12 @@
         <title>Welcome Page</title>
     </head>
     <body>
-        <font face="Playbill" color="#BF9D6F">
-            <h1>Cinetic</h1>
-            
+        <div name="cinetic_heading">
+        <font face="Calibri light" color="#BF9D6F" size=150">
+        <table>
+            <tr><td><img src="../res/logo.jpg" alt="Cinetic Logo" style="width:120px;height:90px"></td><td></img><p>Cinetic</p></td></tr>
+        </table>
         </font>
+        </div>
     </body>
 </html>
