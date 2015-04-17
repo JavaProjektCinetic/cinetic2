@@ -16,7 +16,6 @@
             div.header {
                 width: 1366px;
                 height: 150px;
-                
                 margin-left: -8px;
                 margin-top: -8px;
                 
@@ -51,7 +50,8 @@
             }
             
             body{
-                background-image: url("../res/background2.jpg");
+                background-image: url("../../res/background2.jpg");
+                background-size: 1366px;
                 background-attachment: fixed;
                 background-repeat: no-repeat;
                 
@@ -59,11 +59,11 @@
         </style>
 
     </head>
-    <body  style="background-image: url('../res/background2.jpg'); background-size: 1366px;">
+    <body>
         <div name="cinetic_header" class="header">
             <div name="logo" style="text-align:left; float:left" class='logo'>
                 <table>
-                    <tr><td><img src="../res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
+                    <tr><td><img src="../../res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
                 </table>
             </div>
                 <div name="checkbox" style="text-align:right; float:right;" class="lang">
