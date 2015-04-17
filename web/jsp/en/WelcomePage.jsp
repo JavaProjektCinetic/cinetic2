@@ -89,7 +89,7 @@
             <div name="suggestions" class="table" style='display: table'>
                 <table border="1" style="width: 500px; height: 400px;" >
                     <tr><td align="center"><b>Movie</b></td><td align="center"><b>Description</b></td><td align="center"><b>Ranking</b></td></tr>
-                    <tr><td>Bild</td><td>blabla</td><td>Sterniiiis</td></tr>
+                    <tr><td><img src="../../res/AllInclusive.jpg" alt="x" style="width:150px" onclick="image()"/></td><td>blabla</td><td>Sterniiiis</td></tr>
                     <tr><td>Bild</td><td>blabla</td><td>Sterniiiis</td></tr>
                     <tr><td>Bild</td><td>blabla</td><td>Sterniiiis</td></tr>
                     <tr><td>Bild</td><td>blabla</td><td>Sterniiiis</td></tr>

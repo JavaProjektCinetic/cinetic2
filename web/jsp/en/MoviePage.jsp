@@ -46,7 +46,7 @@
 
             div.suggestions
             {
-                width:200px;
+                width:170px;
                 background-color: white;
                 opacity: 0.7;
                 float: right;
@@ -60,6 +60,11 @@
                 background-size: 1366px;
                 background-attachment: fixed;
                 background-repeat: no-repeat;
+            }
+            
+            p.description{
+                font-family: Georgia;
+                font-size: 14;
             }
         </style>
     </head>
@@ -77,33 +82,33 @@
                 </select>
             </div>
         </div>
-        <table style="float:right">
+        <table style="float:right" cellpadding="15">
             <tr><td>
                     <div name="movie" class="movie">
                         <center>
-                        <table>
-                            <tr>
-                                <td>
-                                    <img src="../../res/WolfOfWalstreet.jpg" alt="Hangover" style="width:300px;"/>
-                                </td>
-                                <td>
-                                    Description blablabla
-                                </td>
-                            </tr>
-                        </table>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <img src="../../res/WolfOfWallstreet.jpg" alt="Hangover" style="width:300px;"/>
+                                    </td>
+                                    <td>
+                                        <p class="description">The Wolf of Wall Street ist eine US-amerikanische Filmbiografie von Martin Scorsese aus dem Jahr 2013 mit Leonardo DiCaprio, Jonah Hill und Margot Robbie in den Hauptrollen. Der Film basiert auf dem gleichnamigen Bestseller des Börsenmaklers Jordan Belfort.
+                                            Der Film feierte seine Premiere am 17. Dezember 2013 in New York City.[2] In den Vereinigten Staaten startete er am 25. Dezember 2013, im deutschsprachigen Raum lief er am 16. Januar 2014 an.</p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div name="videoplatzhalter" style="width:500px; height:300px; background-color: blanchedalmond" ></div>
                         </center>
-                        <div name="videoplatzhalter" style="width:500px; height:300px; background-color: blanchedalmond" ></div>
                     </div>
                 </td>
                 <td>
 
                     <div name="suggestions" class="suggestions">
-                        <table>
-                            <tr><td align="center"><img src="../../res/12YearsASlave.jpg" alt="x" style="width:150px"</td></tr>
-                            <tr><td align="center"><img src="../../res/22JumpStreet.jpg" alt="x" style="width:150px"</td></tr>
-                            <tr><td align="center"><img src="../../res/AllInclusive.jpg" alt="x" style="width:150px"</td></tr>
-                            <tr><td align="center"><img src="../../res/DasParfum.JPG" alt="x" style="width:150px"</td></tr>
-                            <tr><td align="center"><img src="../../res/EagleEye.jpg" alt="x" style="width:150px"</td></tr>            
+                        <table  align="center" cellpadding="13">
+                            <tr><td><img src="../../res/12YearsASlave.jpg" alt="x" style="width:150px" onclick="image()"</td></tr>
+                            <tr><td><img src="../../res/22JumpStreet.jpg" alt="x" style="width:150px" onclick="image()"</td></tr>
+                            <tr><td><img src="../../res/AllInclusive.jpg" alt="x" style="width:150px" onclick="image()"</td></tr>           
                         </table>
                     </div>
                 </td>
