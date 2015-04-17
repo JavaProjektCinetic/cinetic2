@@ -9,6 +9,8 @@ import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,8 +31,15 @@ public class CineticServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
-        dba = DB_Access.getTheInstance();
-        genreListE = dba.getGenreList("eng");
+        try {
+            
+            dba = DB_Access.getTheInstance();
+            genreListE = dba.getGenres("e");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CineticServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(CineticServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
     
