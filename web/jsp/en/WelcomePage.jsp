@@ -4,6 +4,7 @@
     Author     : Laura
 --%>
 
+<%@page import="java.util.LinkedList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -76,10 +77,14 @@
         <div class='suggestions'>
             Search: <input type="text" name="search" style='margin-top: 20px'/>
             <select>
-                <option>Alle Filme</option>
-                <option>genre1</option>
-                <option>genre2</option>
-                <option>genre3</option>
+                <% LinkedList<String> genreList = (LinkedList<String>) request.getAttribute("genreListE");
+                    for (int i = 0; i < genreList.size(); i++)
+                    {
+                        out.println("<option>");
+                        out.println(genreList.get(i));
+                        out.println("</option>");
+                    }
+                %>
             </select>
             <div name="suggestions" class="table" style='display: table'>
                 <table border="1" style="width: 500px; height: 400px;" >

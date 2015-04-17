@@ -58,9 +58,11 @@ public class CineticServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            String path = this.getServletContext().getRealPath("jsp/en/WelcomePage.jsp");
             request.setAttribute("genreListE", genreListE);
-            request.getRequestDispatcher("WelcomePage.jsp").forward(request, response);
+            //request.getRequestDispatcher("/jsp/en/WelcomePage.jsp").forward(request, response);
+            request.getRequestDispatcher(path).forward(request, response);
+            
         }
     }
 
