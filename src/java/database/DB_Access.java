@@ -1,5 +1,3 @@
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -19,20 +17,19 @@ import java.util.LinkedList;
  */
 public class DB_Access {
 
-//    private DB_ConnectionPool connPool;
-//    private static DB_Access theInstance = null;
-//    
-//
-//    public static DB_Access getTheInstance() throws ClassNotFoundException {
-//        if (theInstance == null) {
-//            theInstance = new DB_Access();
-//        }
-//        return theInstance;
-//    }
-//
-//    private DB_Access() throws ClassNotFoundException {
-//        connPool = DB_ConnectionPool.getTheInstance();
-//    }
+    private DB_ConnectionPool connPool;
+    private static DB_Access theInstance = null;
+
+    public static DB_Access getTheInstance() throws ClassNotFoundException {
+        if (theInstance == null) {
+            theInstance = new DB_Access();
+        }
+        return theInstance;
+    }
+
+    private DB_Access() throws ClassNotFoundException {
+        connPool = DB_ConnectionPool.getTheInstance();
+    }
 //
 //    public LinkedList<Film> getList(String t, String s, String g) throws Exception {
 //        Connection conn = connPool.getConnection();
@@ -63,22 +60,38 @@ public class DB_Access {
 //        return filmList;
 //    }
 //
-//    public LinkedList<String> getGenres() throws Exception {
-//        Connection conn = connPool.getConnection();
-//        LinkedList<String> genreList = new LinkedList<>();
-//        Statement stat = conn.createStatement();
-//        String sqlString = "SELECT name\n"
-//                + "FROM category;";
-//        
-//        ResultSet rs = stat.executeQuery(sqlString);
-//        String genre;
-//        genreList.add("Alle Filme");
-//        while (rs.next()) {
-//            genre = rs.getString("name");
-//            genreList.add(genre);
-//        }
-//        connPool.releaseConnection(conn);
-//        return genreList;
-//    }
 
+    public LinkedList<String> getGenres(String lang) throws Exception {
+        Connection conn = connPool.getConnection();
+        LinkedList<String> genreList = new LinkedList<>();
+        Statement stat = conn.createStatement();
+        if (lang.equals("e")) 
+        {
+            String sqlString = "SELECT Genre\n"
+                    + "FROM Movie;";
+
+            ResultSet rs = stat.executeQuery(sqlString);
+            String genre;
+            genreList.add("All Movies");
+            while (rs.next()) {
+                genre = rs.getString("Genre");
+                genreList.add(genre);
+            }
+        }
+        else if (lang.equals("d")) 
+        {
+            String sqlString = "SELECT GenreGerman\n"
+                    + "FROM Movie;";
+
+            ResultSet rs = stat.executeQuery(sqlString);
+            String genre;
+            genreList.add("Alle Filme");
+            while (rs.next()) {
+                genre = rs.getString("GenreGerman");
+                genreList.add(genre);
+            }
+        }
+        connPool.releaseConnection(conn);
+        return genreList;
+    }
 }
