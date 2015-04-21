@@ -41,22 +41,23 @@
                 border-color: #644030;
                 width:800px;
                 background-color: white;
-                opacity: 0.7;
+                opacity: 0.9;
             }
 
             div.suggestions
             {
-                width:170px;
+                width:180px;
                 background-color: white;
-                opacity: 0.7;
+                opacity: 0.8;
                 float: right;
                 border-style: inset;
                 border-width: 5px;
                 border-color: #644030;
             }
 
-            body{
-                background-image: url("../../res/background2.jpg");
+            body
+            {
+                background-image: url("res/background2.jpg");
                 background-size: 1366px;
                 background-attachment: fixed;
                 background-repeat: no-repeat;
@@ -72,7 +73,7 @@
         <div name="cinetic_header" class="header">
             <div name="logo" style="text-align:left; float:left" class='logo'>
                 <table>
-                    <tr><td><img src="../../res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
+                    <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
                 </table>
             </div>
             <div name="checkbox" style="text-align:right; float:right;" class="lang">
@@ -89,7 +90,7 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <img src="../../res/WolfOfWallstreet.jpg" alt="Hangover" style="width:300px;"/>
+                                        <img src="res/WolfOfWallstreet.jpg" alt="Hangover" style="width:300px;"/>
                                     </td>
                                     <td>
                                         <p class="description">The Wolf of Wall Street ist eine US-amerikanische Filmbiografie von Martin Scorsese aus dem Jahr 2013 mit Leonardo DiCaprio, Jonah Hill und Margot Robbie in den Hauptrollen. Der Film basiert auf dem gleichnamigen Bestseller des Börsenmaklers Jordan Belfort.
@@ -106,9 +107,9 @@
 
                     <div name="suggestions" class="suggestions">
                         <table  align="center" cellpadding="13">
-                            <tr><td><img src="../../res/12YearsASlave.jpg" alt="x" style="width:150px" onclick="image()"</td></tr>
-                            <tr><td><img src="../../res/22JumpStreet.jpg" alt="x" style="width:150px" onclick="image()"</td></tr>
-                            <tr><td><img src="../../res/AllInclusive.jpg" alt="x" style="width:150px" onclick="image()"</td></tr>           
+                            <tr><td><img src="res/12YearsASlave.jpg" alt="x" style="width:150px" onclick="click()"</td></tr>
+                            <tr><td><img src="res/22JumpStreet.jpg" alt="x" style="width:150px" onclick="click()"</td></tr>
+                            <tr><td><img src="res/AllInclusive.jpg" alt="x" style="width:150px" onclick="click()"</td></tr>           
                         </table>
                     </div>
                 </td>

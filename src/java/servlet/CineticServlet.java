@@ -43,8 +43,6 @@ public class CineticServlet extends HttpServlet {
         
     }
     
-    
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -58,10 +56,10 @@ public class CineticServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String path = this.getServletContext().getRealPath("jsp/en/WelcomePage.jsp");
+            //String path = this.getServletContext().getRealPath("jsp/en/WelcomePage.jsp");
             request.setAttribute("genreListE", genreListE);
-            //request.getRequestDispatcher("/jsp/en/WelcomePage.jsp").forward(request, response);
-            request.getRequestDispatcher(path).forward(request, response);
+            request.getRequestDispatcher("/jsp/en/WelcomePage.jsp").forward(request, response);
+            //request.getRequestDispatcher(path).forward(request, response);
             
         }
     } 

@@ -67,27 +67,27 @@ public class DB_Access {
         Statement stat = conn.createStatement();
         if (lang.equals("e")) 
         {
-            String sqlString = "SELECT Genre\n"
-                    + "FROM Movie;";
+            String sqlString = "SELECT genre\n"
+                    + "FROM movie;";
 
             ResultSet rs = stat.executeQuery(sqlString);
             String genre;
             genreList.add("All Movies");
             while (rs.next()) {
-                genre = rs.getString("Genre");
+                genre = rs.getString("genre");
                 genreList.add(genre);
             }
         }
         else if (lang.equals("d")) 
         {
-            String sqlString = "SELECT GenreGerman\n"
-                    + "FROM Movie;";
+            String sqlString = "SELECT genregerman\n"
+                    + "FROM movie;";
 
             ResultSet rs = stat.executeQuery(sqlString);
             String genre;
             genreList.add("Alle Filme");
             while (rs.next()) {
-                genre = rs.getString("GenreGerman");
+                genre = rs.getString("genregerman");
                 genreList.add(genre);
             }
         }
