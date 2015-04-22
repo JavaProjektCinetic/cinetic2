@@ -9,7 +9,9 @@ import beans.Movie;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Set;
 
 /**
  *
@@ -65,8 +67,7 @@ public class DB_Access {
         Connection conn = connPool.getConnection();
         LinkedList<String> genreList = new LinkedList<>();
         Statement stat = conn.createStatement();
-        if (lang.equals("e")) 
-        {
+        if (lang.equals("e")) {
             String sqlString = "SELECT genre\n"
                     + "FROM movie;";
 
@@ -74,12 +75,13 @@ public class DB_Access {
             String genre;
             genreList.add("All Movies");
             while (rs.next()) {
+
                 genre = rs.getString("genre");
-                genreList.add(genre);
+                if (!genreList.contains(genre)) {
+                    genreList.add(genre);
+                }
             }
-        }
-        else if (lang.equals("d")) 
-        {
+        } else if (lang.equals("d")) {
             String sqlString = "SELECT genregerman\n"
                     + "FROM movie;";
 
@@ -93,5 +95,47 @@ public class DB_Access {
         }
         connPool.releaseConnection(conn);
         return genreList;
+    }
+
+    public HashMap<Integer,String> getDesc() throws Exception {
+        Connection conn = connPool.getConnection();
+        Statement stat = conn.createStatement();
+        String sqlString = "SELECT movieid, description FROM movie;";
+        HashMap<Integer, String> idDesc = new HashMap<>();
+        ResultSet rs = stat.executeQuery(sqlString);
+        String desc;
+        int id;
+        while (rs.next()) 
+        {
+            desc = rs.getString("description");
+            id = rs.getInt("movieid");
+            if (!idDesc.containsKey(desc)) 
+            {
+                idDesc.put(id, desc);
+            }
+        }
+        connPool.releaseConnection(conn);
+        return idDesc;
+    }
+
+    public HashMap<Integer,String> getTitle() throws Exception {
+        Connection conn = connPool.getConnection();
+        Statement stat = conn.createStatement();
+        String sqlString = "SELECT movieid, title FROM movie;";
+        HashMap<Integer, String> idTitle = new HashMap<>();
+        ResultSet rs = stat.executeQuery(sqlString);
+        String title;
+        int id;
+        while (rs.next()) 
+        {
+            title = rs.getString("description");
+            id = rs.getInt("movieid");
+            if (!idTitle.containsKey(title)) 
+            {
+                idTitle.put(id, title);
+            }
+        }
+        connPool.releaseConnection(conn);
+        return idTitle;
     }
 }

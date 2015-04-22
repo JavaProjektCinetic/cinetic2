@@ -4,6 +4,8 @@
     Author     : Laura
 --%>
 
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.LinkedList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -62,7 +64,7 @@
                 background-attachment: fixed;
                 background-repeat: no-repeat;
             }
-            
+
             p.description{
                 font-family: Georgia;
                 font-size: 14;
@@ -70,6 +72,10 @@
         </style>
     </head>
     <body>
+         <% 
+            HashMap<Integer, String> desc = (HashMap<Integer,String>) request.getAttribute("desc");
+            HashMap<Integer, String> title = (HashMap<Integer,String>) request.getAttribute("title");
+         %>
         <div name="cinetic_header" class="header">
             <div name="logo" style="text-align:left; float:left" class='logo'>
                 <table>
@@ -85,7 +91,7 @@
         </div>
         <table style="float:right" cellpadding="15">
             <tr><td>
-                    <div name="movie" class="movie">
+                    <div name<% %>" class="movie">
                         <center>
                             <table>
                                 <tr>
@@ -93,8 +99,12 @@
                                         <img src="res/WolfOfWallstreet.jpg" alt="Hangover" style="width:300px;"/>
                                     </td>
                                     <td>
-                                        <p class="description">The Wolf of Wall Street ist eine US-amerikanische Filmbiografie von Martin Scorsese aus dem Jahr 2013 mit Leonardo DiCaprio, Jonah Hill und Margot Robbie in den Hauptrollen. Der Film basiert auf dem gleichnamigen Bestseller des Börsenmaklers Jordan Belfort.
-                                            Der Film feierte seine Premiere am 17. Dezember 2013 in New York City.[2] In den Vereinigten Staaten startete er am 25. Dezember 2013, im deutschsprachigen Raum lief er am 16. Januar 2014 an.</p>
+                                        <p class="description">
+                                            <%if (titleDesc != null) 
+                                            {
+                                                out.println(titleDesc.get("Wolf of Wallstreet"));
+                                            }
+                                            %></p>
                                     </td>
                                 </tr>
                             </table>

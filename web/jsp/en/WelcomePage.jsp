@@ -50,7 +50,7 @@
             }
 
             body{
-                background-image: url("../../res/background2.jpg");
+                background-image: url("res/background2.jpg");
                 background-size: 1366px;
                 background-attachment: fixed;
                 background-repeat: no-repeat;
@@ -88,17 +88,17 @@
                     }
                 %>
             </select>
-            <div name="suggestions" class="suggestions" style='display: table'>
+            <div name="suggestions" id="divSuggestions" class="suggestions" style='display: table'>
                 <table border="1" class="table" style="width: 500px; height: 400px;" >
                     <tr><td align="center"><b>Movie</b></td><td align="center"><b>Description</b></td><td align="center"><b>Ranking</b></td></tr>
-                    <tr><td><img src="res/AllInclusive.jpg" alt="x" style="width:150px" onclick="click('res/AllInclusive.jpg')"/></td><td>blabla</td><td>Sterniiiis</td></tr>
+                    <tr><td><img src="res/AllInclusive.jpg" id="AllInclusive.jpg" alt="x" style="width:150px" onclick="click('res/AllInclusive.jpg')"/></td><td>blabla</td><td>Sterniiiis</td></tr>
                     <tr><td><img src="res/ShesTheMan.jpg" alt="x" style="width:150px" onclick="click()"/></td><td>blabla</td><td>Sterniiiis</td></tr>
                     <tr><td><img src="res/SilentHill.jpg" alt="x" style="width:150px" onclick="click()"/></td><td>blabla</td><td>Sterniiiis</td></tr>
                     <tr><td><img src="res/TheIsland.jpg" alt="x" style="width:150px" onclick="click()"/></td><td>blabla</td><td>Sterniiiis</td></tr>
                 </table>
             </div>
 
-            <div name="results" class='table' style='display: none'>
+            <div name="results" id="divResults" class='table' style='display: none'>
                 <table border="1" style="width: 500px; height: 400px;">
                     <tr><td align="center"><b>Title</b></td><td align="center"><b>Length</b></td><td align="center"><b>Language</b></td></tr>
                     <tr><td>blabla</td><td>Minutiiiiiis</td><td>GER</td></tr>
