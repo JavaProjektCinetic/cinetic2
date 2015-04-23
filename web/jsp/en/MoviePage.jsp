@@ -19,7 +19,6 @@
                 height: 150px;
                 margin-left: -8px;
                 margin-top: -8px;
-
             }
 
             div.logo{
