@@ -8,6 +8,7 @@ package servlet;
 import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +28,8 @@ public class CineticServlet extends HttpServlet {
 
     DB_Access dba = null;
     LinkedList<String> genreListE = null;
+    HashMap<Integer,String> desc = null;
+    HashMap<Integer,String> title = null;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -35,6 +38,8 @@ public class CineticServlet extends HttpServlet {
             
             dba = DB_Access.getTheInstance();
             genreListE = dba.getGenres("e");
+            desc = dba.getDesc();
+            title = dba.getTitle();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CineticServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -42,8 +47,6 @@ public class CineticServlet extends HttpServlet {
         }
         
     }
-    
-    
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,10 +61,13 @@ public class CineticServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String path = this.getServletContext().getRealPath("jsp/en/WelcomePage.jsp");
+            //String path = this.getServletContext().getRealPath("jsp/en/WelcomePage.jsp");
             request.setAttribute("genreListE", genreListE);
-            //request.getRequestDispatcher("/jsp/en/WelcomePage.jsp").forward(request, response);
-            request.getRequestDispatcher(path).forward(request, response);
+            request.setAttribute("desc", desc);
+            request.setAttribute("title", title);
+            
+            request.getRequestDispatcher("/jsp/en/MoviePage.jsp").forward(request, response);
+            //request.getRequestDispatcher(path).forward(request, response);
             
         }
     } 

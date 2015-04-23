@@ -16,12 +16,10 @@
             div.header {
                 width: 1366px;
                 height: 150px;
-                
                 margin-left: -8px;
                 margin-top: -8px;
-                
             }
-            
+
             div.logo{
                 width: 220px;
                 background-color: white;
@@ -30,7 +28,7 @@
                 margin-left: 20px;
                 margin-top: 20px;
             }
-            
+
             div.lang{
                 height:150px;
                 margin-top: 20px;
@@ -42,61 +40,65 @@
                 width:600px;
                 height:480px;
                 background-color: white;
-                opacity: 0.7;                
+                opacity: 0.8;                
             }
             
-            div.table{
+            table.table
+            {
                 height:400px;
                 width:500px;
             }
-            
+
             body{
-                background-image: url("../res/background2.jpg");
+                background-image: url("res/background2.jpg");
+                background-size: 1366px;
                 background-attachment: fixed;
                 background-repeat: no-repeat;
-                
+
             }
         </style>
 
     </head>
-    <body  style="background-image: url('../res/background2.jpg'); background-size: 1366px;">
+    <body>
         <div name="cinetic_header" class="header">
             <div name="logo" style="text-align:left; float:left" class='logo'>
                 <table>
-                    <tr><td><img src="../res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
+                    <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
                 </table>
             </div>
-                <div name="checkbox" style="text-align:right; float:right;" class="lang">
-                    <select>
-                        <option>German</option>
-                        <option>English</option>
-                    </select>
-                </div>
+            <div name="checkbox" style="text-align:right; float:right;" class="lang">
+                <select>
+                    <option>German</option>
+                    <option>English</option>
+                </select>
+            </div>
         </div>
     <center>
         <div class='suggestions'>
             Search: <input type="text" name="search" style='margin-top: 20px'/>
             <select>
                 <% LinkedList<String> genreList = (LinkedList<String>) request.getAttribute("genreListE");
-                    for (int i = 0; i < genreList.size(); i++)
+                    if (genreList != null) 
                     {
-                        out.println("<option>");
-                        out.println(genreList.get(i));
-                        out.println("</option>");
+                        for (int i = 0; i < genreList.size(); i++) {
+                            out.println("<option>");
+                            out.println(genreList.get(i));
+                            out.println("</option>");
+                        }
                     }
                 %>
             </select>
-            <div name="suggestions" class="table" style='display: table'>
-                <table border="1" style="width: 500px; height: 400px;" >
+            <div name="suggestions" id="divSuggestions" class="suggestions" style='display: table'>
+                <table border="1" class="table" style="width: 500px; height: 400px;" >
                     <tr><td align="center"><b>Movie</b></td><td align="center"><b>Description</b></td><td align="center"><b>Ranking</b></td></tr>
-                    <tr><td>Bild</td><td>blabla</td><td>Sterniiiis</td></tr>
-                    <tr><td>Bild</td><td>blabla</td><td>Sterniiiis</td></tr>
-                    <tr><td>Bild</td><td>blabla</td><td>Sterniiiis</td></tr>
-                    <tr><td>Bild</td><td>blabla</td><td>Sterniiiis</td></tr>
+                    <tr><td><img src="res/AllInclusive.jpg" id="AllInclusive.jpg" alt="x" style="width:150px" onclick="click('res/AllInclusive.jpg')"/></td><td>blabla</td><td>Sterniiiis</td></tr>
+                    <tr><td><img src="res/ShesTheMan.jpg" alt="x" style="width:150px" onclick="click()"/></td><td>blabla</td><td>Sterniiiis</td></tr>
+                    <tr><td><img src="res/SilentHill.jpg" alt="x" style="width:150px" onclick="click()"/></td><td>blabla</td><td>Sterniiiis</td></tr>
+                    <tr><td><img src="res/TheIsland.jpg" alt="x" style="width:150px" onclick="click()"/></td><td>blabla</td><td>Sterniiiis</td></tr>
                 </table>
             </div>
-            
-            <div name="results" class='table' style='display: none'>
+
+            <div name="results" id="divResults" class='table' style='display: none'>
                 <table border="1" style="width: 500px; height: 400px;">
                     <tr><td align="center"><b>Title</b></td><td align="center"><b>Length</b></td><td align="center"><b>Language</b></td></tr>
                     <tr><td>blabla</td><td>Minutiiiiiis</td><td>GER</td></tr>
