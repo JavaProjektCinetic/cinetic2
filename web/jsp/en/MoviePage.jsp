@@ -90,7 +90,7 @@
         </div>
         <table style="float:right" cellpadding="15">
             <tr><td>
-                    <div name<% %>" class="movie">
+                    <div name"<%title.get(1);%>" class="movie">
                         <center>
                             <table>
                                 <tr>
@@ -99,9 +99,9 @@
                                     </td>
                                     <td>
                                         <p class="description">
-                                            <%if (titleDesc != null) 
+                                            <%if (desc != null) 
                                             {
-                                                out.println(titleDesc.get("Wolf of Wallstreet"));
+                                                out.println(desc.get(1));
                                             }
                                             %></p>
                                     </td>

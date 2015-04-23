@@ -4,6 +4,7 @@
     Author     : Laura
 --%>
 
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.LinkedList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -60,6 +61,11 @@
 
     </head>
     <body>
+        <% 
+            HashMap<Integer, String> desc = (HashMap<Integer,String>) request.getAttribute("desc");
+            HashMap<Integer, String> title = (HashMap<Integer,String>) request.getAttribute("title");
+            LinkedList<String> genreList = (LinkedList<String>) request.getAttribute("genreListE");
+         %>
         <div name="cinetic_header" class="header">
             <div name="logo" style="text-align:left; float:left" class='logo'>
                 <table>
@@ -75,9 +81,9 @@
         </div>
     <center>
         <div class='suggestions'>
-            Search: <input type="text" name="search" style='margin-top: 20px'/>
+            Title: <input type="text" name="search" style='margin-top: 20px'/>
             <select>
-                <% LinkedList<String> genreList = (LinkedList<String>) request.getAttribute("genreListE");
+                <% 
                     if (genreList != null) 
                     {
                         for (int i = 0; i < genreList.size(); i++) {
@@ -88,10 +94,16 @@
                     }
                 %>
             </select>
+            <input type="submit" value="Search"/>
+            <%
+                    out.println(title.get(1));
+                    out.println(title.get(2));
+                    out.println(title.get(3));
+            %>
             <div name="suggestions" id="divSuggestions" class="suggestions" style='display: table'>
                 <table border="1" class="table" style="width: 500px; height: 400px;" >
                     <tr><td align="center"><b>Movie</b></td><td align="center"><b>Description</b></td><td align="center"><b>Ranking</b></td></tr>
-                    <tr><td><img src="res/AllInclusive.jpg" id="AllInclusive.jpg" alt="x" style="width:150px" onclick="click('res/AllInclusive.jpg')"/></td><td>blabla</td><td>Sterniiiis</td></tr>
+                    <tr><td><img src="res/AllInclusive.jpg" id="1" alt="1" style="width:150px" onclick="click('res/AllInclusive.jpg')"/></td><td>blabla</td><td>Sterniiiis</td></tr>
                     <tr><td><img src="res/ShesTheMan.jpg" alt="x" style="width:150px" onclick="click()"/></td><td>blabla</td><td>Sterniiiis</td></tr>
                     <tr><td><img src="res/SilentHill.jpg" alt="x" style="width:150px" onclick="click()"/></td><td>blabla</td><td>Sterniiiis</td></tr>
                     <tr><td><img src="res/TheIsland.jpg" alt="x" style="width:150px" onclick="click()"/></td><td>blabla</td><td>Sterniiiis</td></tr>

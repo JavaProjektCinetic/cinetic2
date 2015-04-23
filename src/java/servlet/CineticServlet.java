@@ -28,6 +28,7 @@ public class CineticServlet extends HttpServlet {
 
     DB_Access dba = null;
     LinkedList<String> genreListE = null;
+    LinkedList<String> genreListD = null;
     HashMap<Integer,String> desc = null;
     HashMap<Integer,String> title = null;
 
@@ -38,6 +39,7 @@ public class CineticServlet extends HttpServlet {
             
             dba = DB_Access.getTheInstance();
             genreListE = dba.getGenres("e");
+            genreListD = dba.getGenres("d");
             desc = dba.getDesc();
             title = dba.getTitle();
         } catch (ClassNotFoundException ex) {
@@ -63,10 +65,11 @@ public class CineticServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             //String path = this.getServletContext().getRealPath("jsp/en/WelcomePage.jsp");
             request.setAttribute("genreListE", genreListE);
+            request.setAttribute("genreListD", genreListD);
             request.setAttribute("desc", desc);
             request.setAttribute("title", title);
             
-            request.getRequestDispatcher("/jsp/en/MoviePage.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/en/WelcomePage.jsp").forward(request, response);
             //request.getRequestDispatcher(path).forward(request, response);
             
         }
