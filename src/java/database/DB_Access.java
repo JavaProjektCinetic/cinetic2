@@ -147,7 +147,7 @@ public class DB_Access {
         ResultSet rs = stat.executeQuery(sqlString);
         String path;
         int id;
-        while (rs.next()) 
+        while (rs.next())
         {
             path = rs.getString("picture");
             id = rs.getInt("movieid");
