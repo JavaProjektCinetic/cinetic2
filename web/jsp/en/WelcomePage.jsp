@@ -43,7 +43,7 @@
                 background-color: white;
                 opacity: 0.8;                
             }
-            
+
             table.table
             {
                 height:400px;
@@ -58,14 +58,9 @@
 
             }
         </style>
-
     </head>
     <body>
-        <% 
-            HashMap<Integer, String> desc = (HashMap<Integer,String>) request.getAttribute("desc");
-            HashMap<Integer, String> title = (HashMap<Integer,String>) request.getAttribute("title");
-            LinkedList<String> genreList = (LinkedList<String>) request.getAttribute("genreListE");
-         %>
+        
         <div name="cinetic_header" class="header">
             <div name="logo" style="text-align:left; float:left" class='logo'>
                 <table>
@@ -79,13 +74,24 @@
                 </select>
             </div>
         </div>
+        <%
+            HashMap<Integer, String> desc = (HashMap<Integer, String>) request.getAttribute("desc");
+            HashMap<Integer, String> title = (HashMap<Integer, String>) request.getAttribute("title");
+            LinkedList<String> genreList = (LinkedList<String>) request.getAttribute("genreListE");
+        %>
     <center>
-        <div class='suggestions'>
+        <div class='suggestions' style="display: none">
+            <%
+                if (title != null) {
+                    out.println(title.get(1));
+                    out.println(title.get(2));
+                    out.println(title.get(3));
+                }
+            %>
             Title: <input type="text" name="search" style='margin-top: 20px'/>
             <select>
-                <% 
-                    if (genreList != null) 
-                    {
+                <%
+                    if (genreList != null) {
                         for (int i = 0; i < genreList.size(); i++) {
                             out.println("<option>");
                             out.println(genreList.get(i));
@@ -95,11 +101,7 @@
                 %>
             </select>
             <input type="submit" value="Search"/>
-            <%
-                    out.println(title.get(1));
-                    out.println(title.get(2));
-                    out.println(title.get(3));
-            %>
+
             <div name="suggestions" id="divSuggestions" class="suggestions" style='display: table'>
                 <table border="1" class="table" style="width: 500px; height: 400px;" >
                     <tr><td align="center"><b>Movie</b></td><td align="center"><b>Description</b></td><td align="center"><b>Ranking</b></td></tr>

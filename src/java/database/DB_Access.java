@@ -128,7 +128,7 @@ public class DB_Access {
         int id;
         while (rs.next()) 
         {
-            title = rs.getString("description");
+            title = rs.getString("title");
             id = rs.getInt("movieid");
             if (!idTitle.containsKey(title)) 
             {
@@ -137,5 +137,26 @@ public class DB_Access {
         }
         connPool.releaseConnection(conn);
         return idTitle;
+    }
+    
+    public HashMap<Integer,String> getPath() throws Exception {
+        Connection conn = connPool.getConnection();
+        Statement stat = conn.createStatement();
+        String sqlString = "SELECT movieid, picture FROM movie;";
+        HashMap<Integer, String> idPath = new HashMap<>();
+        ResultSet rs = stat.executeQuery(sqlString);
+        String path;
+        int id;
+        while (rs.next()) 
+        {
+            path = rs.getString("picture");
+            id = rs.getInt("movieid");
+            if (!idPath.containsKey(path)) 
+            {
+                idPath.put(id, path);
+            }
+        }
+        connPool.releaseConnection(conn);
+        return idPath;
     }
 }

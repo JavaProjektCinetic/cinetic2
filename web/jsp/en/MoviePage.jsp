@@ -71,10 +71,11 @@
         </style>
     </head>
     <body>
-         <% 
-            HashMap<Integer, String> desc = (HashMap<Integer,String>) request.getAttribute("desc");
-            HashMap<Integer, String> title = (HashMap<Integer,String>) request.getAttribute("title");
-         %>
+        <%
+            HashMap<Integer, String> desc = (HashMap<Integer, String>) request.getAttribute("desc");
+            HashMap<Integer, String> title = (HashMap<Integer, String>) request.getAttribute("title");
+            HashMap<Integer, String> path = (HashMap<Integer, String>) request.getAttribute("path");
+        %>
         <div name="cinetic_header" class="header">
             <div name="logo" style="text-align:left; float:left" class='logo'>
                 <table>
@@ -90,25 +91,41 @@
         </div>
         <table style="float:right" cellpadding="15">
             <tr><td>
-                    <div name"<%title.get(1);%>" class="movie">
-                        <center>
+                    <div name="<%=title.get(1)%>" class="movie">
+                         <center>
                             <table>
                                 <tr>
                                     <td>
-                                        <img src="res/WolfOfWallstreet.jpg" alt="Hangover" style="width:300px;"/>
+                                        <img src="res/<%=path.get(1)%>.jpg" alt="<%=title.get(1)%>" style="width:300px;"/>
                                     </td>
                                     <td>
                                         <p class="description">
-                                            <%if (desc != null) 
-                                            {
-                                                out.println(desc.get(1));
-                                            }
+                                            <%if (desc != null) {
+                                                    out.println(desc.get(1));
+                                                    out.println(desc.get(1));
+                                                } else {
+                                                    out.println("ERROR: No description found!");
+                                                }
                                             %></p>
                                     </td>
                                 </tr>
                             </table>
 
                             <div name="videoplatzhalter" style="width:500px; height:300px; background-color: blanchedalmond" ></div>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <table border="1">
+                                            <tr><td>18:00</td><td>Cozy Room</td></tr>
+                                            <tr><td>20:30</td><td>the Room</td></tr>
+                                            <tr><td>21:45</td><td>Cozy Room</td></tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <input type="submit" value="reserve"/>
+                                    </td>
+                                </tr>
+                            </table>
                         </center>
                     </div>
                 </td>
