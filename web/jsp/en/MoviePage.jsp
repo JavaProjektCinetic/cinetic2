@@ -101,7 +101,8 @@
                                     <td>
                                         <p class="description">
                                             <%if (desc != null) {
-                                                    out.println(desc.get(1));
+                                                    out.println("<h1 style='font-family:Playbill'>"+title.get(1)+"</h1>");
+                                                    out.println("<img src='res/stern.png'/>");
                                                     out.println(desc.get(1));
                                                 } else {
                                                     out.println("ERROR: No description found!");
@@ -133,9 +134,9 @@
 
                     <div name="suggestions" class="suggestions">
                         <table  align="center" cellpadding="13">
-                            <tr><td><img src="res/12YearsASlave.jpg" alt="x" style="width:150px" onclick="click()"</td></tr>
-                            <tr><td><img src="res/22JumpStreet.jpg" alt="x" style="width:150px" onclick="click()"</td></tr>
-                            <tr><td><img src="res/AllInclusive.jpg" alt="x" style="width:150px" onclick="click()"</td></tr>           
+                            <tr><td><img src="res/<%=path.get(6)%>.jpg" alt="<%=title.get(6)%>" style="width:150px" onclick="click()"</td></tr>
+                            <tr><td><img src="res/<%=path.get(4)%>.jpg" alt="<%=title.get(4)%>" style="width:150px" onclick="click()"</td></tr>
+                            <tr><td><img src="res/<%=path.get(9)%>.jpg" alt="<%=title.get(9)%>" style="width:150px" onclick="click()"</td></tr>           
                         </table>
                     </div>
                 </td>

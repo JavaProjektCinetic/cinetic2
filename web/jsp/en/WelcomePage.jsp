@@ -78,6 +78,7 @@
             HashMap<Integer, String> desc = (HashMap<Integer, String>) request.getAttribute("desc");
             HashMap<Integer, String> title = (HashMap<Integer, String>) request.getAttribute("title");
             LinkedList<String> genreList = (LinkedList<String>) request.getAttribute("genreListE");
+            HashMap<Integer, String> path = (HashMap<Integer, String>) request.getAttribute("path");
         %>
     <center>
         <div class='suggestions' style="display: none">
@@ -105,10 +106,10 @@
             <div name="suggestions" id="divSuggestions" class="suggestions" style='display: table'>
                 <table border="1" class="table" style="width: 500px; height: 400px;" >
                     <tr><td align="center"><b>Movie</b></td><td align="center"><b>Description</b></td><td align="center"><b>Ranking</b></td></tr>
-                    <tr><td><img src="res/AllInclusive.jpg" id="1" alt="1" style="width:150px" onclick="click('res/AllInclusive.jpg')"/></td><td>blabla</td><td>Sterniiiis</td></tr>
-                    <tr><td><img src="res/ShesTheMan.jpg" alt="x" style="width:150px" onclick="click()"/></td><td>blabla</td><td>Sterniiiis</td></tr>
-                    <tr><td><img src="res/SilentHill.jpg" alt="x" style="width:150px" onclick="click()"/></td><td>blabla</td><td>Sterniiiis</td></tr>
-                    <tr><td><img src="res/TheIsland.jpg" alt="x" style="width:150px" onclick="click()"/></td><td>blabla</td><td>Sterniiiis</td></tr>
+                    <tr><td><img src="res/<%=path.get(28)%>.jpg" alt="<%=title.get(28)%>" id="1"  style="width:150px" onclick="click('res/<%=path.get(28)%>.jpg')"/></td><td><%=desc.get(28)%></td><td>Sterniiiis</td></tr>
+                    <tr><td><img src="res/<%=path.get(29)%>.jpg" alt="<%=title.get(29)%>" style="width:150px" onclick="click()"/></td><td><%=desc.get(29)%></td><td><img src="res/stern.png"</td></tr>
+                    <tr><td><img src="res/<%=path.get(30)%>.jpg" alt="<%=title.get(30)%>" style="width:150px" onclick="click()"/></td><td><%=desc.get(30)%></td><td>Sterniiiis</td></tr>
+                    <tr><td><img src="res/<%=path.get(31)%>.jpg" alt="<%=title.get(31)%>" style="width:150px" onclick="click()"/></td><td><%=desc.get(31)%></td><td>Sterniiiis</td></tr>
                 </table>
             </div>
 
