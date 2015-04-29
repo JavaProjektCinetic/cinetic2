@@ -75,7 +75,7 @@
             HashMap<Integer, String> desc = (HashMap<Integer, String>) request.getAttribute("desc");
             HashMap<Integer, String> title = (HashMap<Integer, String>) request.getAttribute("title");
             HashMap<Integer, String> path = (HashMap<Integer, String>) request.getAttribute("path");
-            HashMap<Integer, String> rate = (HashMap<Integer, String>) request.getAttribute("rate");
+            HashMap<Integer, Integer> rate = (HashMap<Integer, Integer>) request.getAttribute("rate");
             
         %>
         <div name="cinetic_header" class="header">
@@ -104,8 +104,7 @@
                                         <p class="description">
                                             <%if (desc != null) {
                                                     out.println("<h1 style='font-family:Playbill'>"+title.get(1)+"</h1>");
-                                                    //schauen wie die bewertung ist
-                                                    out.println("<img src='res/stern.png' style='width:30px'/></br>");
+                                                    
                                                     out.println(desc.get(1));
                                                 } else {
                                                     out.println("ERROR: No description found!");

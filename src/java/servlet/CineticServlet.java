@@ -32,7 +32,7 @@ public class CineticServlet extends HttpServlet {
     HashMap<Integer,String> desc = null;
     HashMap<Integer,String> title = null;
     HashMap<Integer,String> path = null;
-    HashMap<Integer,String> rate = null;
+    HashMap<Integer,Integer> rate = null;
 
     @Override
     public void init(ServletConfig config) throws ServletException {

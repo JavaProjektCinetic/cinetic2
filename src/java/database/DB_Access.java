@@ -160,17 +160,17 @@ public class DB_Access {
         return idPath;
     }
     
-    public HashMap<Integer,String> getRate() throws Exception {
+    public HashMap<Integer,Integer> getRate() throws Exception {
         Connection conn = connPool.getConnection();
         Statement stat = conn.createStatement();
         String sqlString = "SELECT movieid, rating FROM movie;";
-        HashMap<Integer, String> idRate = new HashMap<>();
+        HashMap<Integer, Integer> idRate = new HashMap<>();
         ResultSet rs = stat.executeQuery(sqlString);
-        String rate;
+        int rate;
         int id;
         while (rs.next())
         {
-            rate = rs.getString("rating");
+            rate = rs.getInt("rating");
             id = rs.getInt("movieid");
             if (!idRate.containsKey(rate)) 
             {
