@@ -77,7 +77,8 @@
         <%
             HashMap<Integer, String> desc = (HashMap<Integer, String>) request.getAttribute("desc");
             HashMap<Integer, String> title = (HashMap<Integer, String>) request.getAttribute("title");
-            LinkedList<String> genreList = (LinkedList<String>) request.getAttribute("genreListE");
+            LinkedList<String> genreListE = (LinkedList<String>) request.getAttribute("genreListE");
+            LinkedList<String> genreListD = (LinkedList<String>) request.getAttribute("genreListD");
             HashMap<Integer, String> path = (HashMap<Integer, String>) request.getAttribute("path");
         %>
     <center>
@@ -92,10 +93,10 @@
             Title: <input type="text" name="search" style='margin-top: 20px'/>
             <select>
                 <%
-                    if (genreList != null) {
-                        for (int i = 0; i < genreList.size(); i++) {
+                    if (genreListE != null) {
+                        for (int i = 0; i < genreListE.size(); i++) {
                             out.println("<option>");
-                            out.println(genreList.get(i));
+                            out.println(genreListE.get(i));
                             out.println("</option>");
                         }
                     }

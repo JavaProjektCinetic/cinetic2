@@ -62,7 +62,7 @@ public class DB_Access {
 //        return filmList;
 //    }
 //
-
+    
     public LinkedList<String> getGenres(String lang) throws Exception {
         Connection conn = connPool.getConnection();
         LinkedList<String> genreList = new LinkedList<>();
@@ -158,5 +158,26 @@ public class DB_Access {
         }
         connPool.releaseConnection(conn);
         return idPath;
+    }
+    
+    public HashMap<Integer,String> getRate() throws Exception {
+        Connection conn = connPool.getConnection();
+        Statement stat = conn.createStatement();
+        String sqlString = "SELECT movieid, rating FROM movie;";
+        HashMap<Integer, String> idRate = new HashMap<>();
+        ResultSet rs = stat.executeQuery(sqlString);
+        String rate;
+        int id;
+        while (rs.next())
+        {
+            rate = rs.getString("rating");
+            id = rs.getInt("movieid");
+            if (!idRate.containsKey(rate)) 
+            {
+                idRate.put(id, rate);
+            }
+        }
+        connPool.releaseConnection(conn);
+        return idRate;
     }
 }

@@ -32,6 +32,7 @@ public class CineticServlet extends HttpServlet {
     HashMap<Integer,String> desc = null;
     HashMap<Integer,String> title = null;
     HashMap<Integer,String> path = null;
+    HashMap<Integer,String> rate = null;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -43,6 +44,7 @@ public class CineticServlet extends HttpServlet {
             desc = dba.getDesc();
             title = dba.getTitle();
             path = dba.getPath();
+            rate=dba.getRate();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CineticServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -70,6 +72,7 @@ public class CineticServlet extends HttpServlet {
             request.setAttribute("desc", desc);
             request.setAttribute("title", title);
             request.setAttribute("path", path);
+            request.setAttribute("rate", rate);
             
             request.getRequestDispatcher("/jsp/en/MoviePage.jsp").forward(request, response);
             //request.getRequestDispatcher(path).forward(request, response);
