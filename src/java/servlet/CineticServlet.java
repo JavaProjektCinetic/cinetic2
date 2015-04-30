@@ -74,7 +74,7 @@ public class CineticServlet extends HttpServlet {
             request.setAttribute("path", path);
             request.setAttribute("rate", rate);
             
-            request.getRequestDispatcher("/jsp/en/MoviePage.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/en/WelcomePage.jsp").forward(request, response);
             //request.getRequestDispatcher(path).forward(request, response);
             
         }

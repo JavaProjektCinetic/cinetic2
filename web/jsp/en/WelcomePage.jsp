@@ -12,7 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Welcome Page</title>
-        <script type="text/javascript" src="film.js"></script>
+        <script type="text/javascript" src="Cinetic.js"></script>
         <style>
             div.header {
                 width: 1366px;
@@ -80,9 +80,10 @@
             LinkedList<String> genreListE = (LinkedList<String>) request.getAttribute("genreListE");
             LinkedList<String> genreListD = (LinkedList<String>) request.getAttribute("genreListD");
             HashMap<Integer, String> path = (HashMap<Integer, String>) request.getAttribute("path");
+            HashMap<Integer, Integer> rate = (HashMap<Integer, Integer>) request.getAttribute("rate");
         %>
     <center>
-        <div class='suggestions' style="display: none">
+        <div class='suggestions' style="display: block">
             <%
                 if (title != null) {
                     out.println(title.get(1));
@@ -107,14 +108,14 @@
             <div name="suggestions" id="divSuggestions" class="suggestions" style='display: table'>
                 <table border="1" class="table" style="width: 500px; height: 400px;" >
                     <tr><td align="center"><b>Movie</b></td><td align="center"><b>Description</b></td><td align="center"><b>Ranking</b></td></tr>
-                    <tr><td><img src="res/<%=path.get(28)%>.jpg" alt="<%=title.get(28)%>" id="1"  style="width:150px" onclick="click('res/<%=path.get(28)%>.jpg')"/></td><td><%=desc.get(28)%></td><td>Sterniiiis</td></tr>
-                    <tr><td><img src="res/<%=path.get(29)%>.jpg" alt="<%=title.get(29)%>" style="width:150px" onclick="click()"/></td><td><%=desc.get(29)%></td><td><img src="res/stern.png"</td></tr>
-                    <tr><td><img src="res/<%=path.get(30)%>.jpg" alt="<%=title.get(30)%>" style="width:150px" onclick="click()"/></td><td><%=desc.get(30)%></td><td>Sterniiiis</td></tr>
-                    <tr><td><img src="res/<%=path.get(31)%>.jpg" alt="<%=title.get(31)%>" style="width:150px" onclick="click()"/></td><td><%=desc.get(31)%></td><td>Sterniiiis</td></tr>
+                    <tr><td><img src="res/<%=path.get(28)%>.jpg" alt="<%=title.get(28)%>" style="width:150px" onclick="click()"/></td><td><p style="font-size: 16px;"><b><%=title.get(28)%></b></p></td><td><% for(int i = 0; i < rate.get(28); i++){ out.println("<img src='res/stern.png' width='30px'/>"); }%></td></tr>
+                    <tr><td><img src="res/<%=path.get(29)%>.jpg" alt="<%=title.get(29)%>" style="width:150px" onclick="click();"/></td><td><p style="font-size: 16px;"><b><%=title.get(29)%></b></p></td><td><% for(int i = 0; i < rate.get(29); i++){ out.println("<img src='res/stern.png' width='30px'/>"); }%></td></tr>
+                    <tr><td><img src="res/<%=path.get(30)%>.jpg" alt="<%=title.get(30)%>" style="width:150px" onclick="click();"/></td><td><p style="font-size: 16px;"><b><%=title.get(30)%></b></p></td><td><% for(int i = 0; i < rate.get(30); i++){ out.println("<img src='res/stern.png' width='30px'/>"); }%></td></tr>
+                    <tr><td><img src="res/<%=path.get(31)%>.jpg" alt="<%=title.get(31)%>" style="width:150px" onclick="click();"/></td><td><p style="font-size: 16px;"><b><%=title.get(31)%></b></p></td><td><% for(int i = 0; i < rate.get(31); i++){ out.println("<img src='res/stern.png' width='30px'/>"); }%></td></tr>
                 </table>
             </div>
 
-            <div name="results" id="divResults" class='table' style='display: none'>
+            <div name="results" id="divResults" class='table' style='display: block'>
                 <table border="1" style="width: 500px; height: 400px;">
                     <tr><td align="center"><b>Title</b></td><td align="center"><b>Length</b></td><td align="center"><b>Language</b></td></tr>
                     <tr><td>blabla</td><td>Minutiiiiiis</td><td>GER</td></tr>

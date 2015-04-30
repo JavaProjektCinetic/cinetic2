@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-function click(picpath)
+//onLoad=click();
+function click()
 {
-    alert("lalala click function")
-    document.getElementById("divSuggestions").style.display.none;
-    document.getElementById("divResults").style.display.table;
+    
+    alert("lalala click function");
+    //document.getElementById("divSuggestions").style.display.none;
+    //document.getElementById("divResults").style.display.table;
 }
 
