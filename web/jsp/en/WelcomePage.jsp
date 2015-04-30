@@ -4,6 +4,8 @@
     Author     : Laura
 --%>
 
+<%@page import="java.util.Random"%>
+<%@page import="beans.Movie"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.LinkedList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -75,22 +77,18 @@
             </div>
         </div>
         <%
-            HashMap<Integer, String> desc = (HashMap<Integer, String>) request.getAttribute("desc");
-            HashMap<Integer, String> title = (HashMap<Integer, String>) request.getAttribute("title");
             LinkedList<String> genreListE = (LinkedList<String>) request.getAttribute("genreListE");
             LinkedList<String> genreListD = (LinkedList<String>) request.getAttribute("genreListD");
-            HashMap<Integer, String> path = (HashMap<Integer, String>) request.getAttribute("path");
-            HashMap<Integer, Integer> rate = (HashMap<Integer, Integer>) request.getAttribute("rate");
+            LinkedList<Movie> movieList = (LinkedList<Movie>) request.getAttribute("movieList");
+            Integer randiArray [] = new Integer[8];
+            Random randi = new Random();
+            for(int i = 0; i<randiArray.length; i++)
+            {
+                randiArray[i]= randi.nextInt(49)+1;
+            }
         %>
     <center>
         <div class='suggestions' style="display: block">
-            <%
-                if (title != null) {
-                    out.println(title.get(1));
-                    out.println(title.get(2));
-                    out.println(title.get(3));
-                }
-            %>
             Title: <input type="text" name="search" style='margin-top: 20px'/>
             <select>
                 <%
@@ -106,12 +104,12 @@
             <input type="submit" value="Search"/>
 
             <div name="suggestions" id="divSuggestions" class="suggestions" style='display: table'>
-                <table border="1" class="table" style="width: 500px; height: 400px;" >
-                    <tr><td align="center"><b>Movie</b></td><td align="center"><b>Description</b></td><td align="center"><b>Ranking</b></td></tr>
-                    <tr><td><img src="res/<%=path.get(28)%>.jpg" alt="<%=title.get(28)%>" style="width:150px" onclick="click()"/></td><td><p style="font-size: 16px;"><b><%=title.get(28)%></b></p></td><td><% for(int i = 0; i < rate.get(28); i++){ out.println("<img src='res/stern.png' width='30px'/>"); }%></td></tr>
-                    <tr><td><img src="res/<%=path.get(29)%>.jpg" alt="<%=title.get(29)%>" style="width:150px" onclick="click();"/></td><td><p style="font-size: 16px;"><b><%=title.get(29)%></b></p></td><td><% for(int i = 0; i < rate.get(29); i++){ out.println("<img src='res/stern.png' width='30px'/>"); }%></td></tr>
-                    <tr><td><img src="res/<%=path.get(30)%>.jpg" alt="<%=title.get(30)%>" style="width:150px" onclick="click();"/></td><td><p style="font-size: 16px;"><b><%=title.get(30)%></b></p></td><td><% for(int i = 0; i < rate.get(30); i++){ out.println("<img src='res/stern.png' width='30px'/>"); }%></td></tr>
-                    <tr><td><img src="res/<%=path.get(31)%>.jpg" alt="<%=title.get(31)%>" style="width:150px" onclick="click();"/></td><td><p style="font-size: 16px;"><b><%=title.get(31)%></b></p></td><td><% for(int i = 0; i < rate.get(31); i++){ out.println("<img src='res/stern.png' width='30px'/>"); }%></td></tr>
+                <table class="table" style="width: 500px; height: 400px;" >
+                    <tr><td align="center"><p style="font-size: 22px;"><b>Movie</b></p></td><td align="center"><p style="font-size: 22px;"><b>Movietitle</b></p></td><td align="center"><p style="font-size: 22px;"><b>Ranking</b></p></td></tr>
+                    <tr><td><img src="res/<%=movieList.get(randiArray[0]).getPicture()%>.jpg" alt="<%=movieList.get(randiArray[0]).getTitleEnglish()%>" style="width:150px" onclick="click()"/></td><td><p style="font-size: 16px;"><b><%=movieList.get(randiArray[0]).getTitleEnglish()%></b></p></br><% for(int i = 0; i < movieList.get(randiArray[0]).getRating(); i++){ out.println("<img src='res/stern.png' width='20px'/>"); }%></td></tr>
+                    <tr><td><img src="res/<%=movieList.get(randiArray[1]).getPicture()%>.jpg" alt="<%=movieList.get(randiArray[1]).getTitleEnglish()%>" style="width:150px" onclick="click();"/></td><td><p style="font-size: 16px;"><b><%=movieList.get(randiArray[1]).getTitleEnglish()%></b></p></br><% for(int i = 0; i < movieList.get(randiArray[1]).getRating(); i++){ out.println("<img src='res/stern.png' width='20px'/>"); }%></td></tr>
+                    <tr><td><img src="res/<%=movieList.get(randiArray[2]).getPicture()%>.jpg" alt="<%=movieList.get(randiArray[2]).getTitleEnglish()%>" style="width:150px" onclick="click();"/></td><td><p style="font-size: 16px;"><b><%=movieList.get(randiArray[2]).getTitleEnglish()%></b></p></br><% for(int i = 0; i < movieList.get(randiArray[2]).getRating(); i++){ out.println("<img src='res/stern.png' width='20px'/>"); }%></td></tr>
+                    <tr><td><img src="res/<%=movieList.get(randiArray[3]).getPicture()%>.jpg" alt="<%=movieList.get(randiArray[3]).getTitleEnglish()%>" style="width:150px" onclick="click();"/></td><td><p style="font-size: 16px;"><b><%=movieList.get(randiArray[3]).getTitleEnglish()%></b></p></br><% for(int i = 0; i < movieList.get(randiArray[3]).getRating(); i++){ out.println("<img src='res/stern.png' width='20px'/>"); }%></td></tr>
                 </table>
             </div>
 

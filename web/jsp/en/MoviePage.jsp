@@ -4,6 +4,7 @@
     Author     : Laura
 --%>
 
+<%@page import="beans.Movie"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.LinkedList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -73,11 +74,8 @@
     <body>
         <form action="LoginPage.jsp">
             <%
-                HashMap<Integer, String> desc = (HashMap<Integer, String>) request.getAttribute("desc");
-                HashMap<Integer, String> title = (HashMap<Integer, String>) request.getAttribute("title");
-                HashMap<Integer, String> path = (HashMap<Integer, String>) request.getAttribute("path");
-                HashMap<Integer, Integer> rate = (HashMap<Integer, Integer>) request.getAttribute("rate");
-
+                LinkedList<Movie> movieList = (LinkedList<Movie>) request.getAttribute("movieList");
+            
             %>
             <div name="cinetic_header" class="header">
                 <div name="logo" style="text-align:left; float:left" class='logo'>
@@ -94,21 +92,21 @@
             </div>
             <table style="float:right" cellpadding="15">
                 <tr><td>
-                        <div name="<%=title.get(1)%>" class="movie">
+                        <div name="<%=movieList.get(1).getTitleEnglish()%>" class="movie">
                             <center>
                                 <table>
                                     <tr>
                                         <td>
-                                            <img src="res/<%=path.get(1)%>.jpg" alt="<%=title.get(1)%>" style="width:300px;"/>
+                                            <img src="res/<%=movieList.get(1).getPicture()%>.jpg" alt="<%=movieList.get(1).getTitleEnglish()%>" style="width:300px;"/>
                                         </td>
                                         <td>
                                             <p class="description">
-                                                <%if (desc != null) {
-                                                        out.println("<h1 style='font-family:Playbill'>" + title.get(1) + "</h1>");
-                                                        for (int i = 0; i < rate.get(1); i++) {
+                                                <%if (movieList != null) {
+                                                        out.println("<h1 style='font-family:Playbill'>" + movieList.get(1).getTitleEnglish() + "</h1>");
+                                                        for (int i = 0; i < movieList.get(1).getRating(); i++) {
                                                             out.println("<img src='res/stern.png' style='width:30px'/></br>");
                                                         }
-                                                        out.println(desc.get(1));
+                                                        out.println(movieList.get(1).getDescription());
                                                     } else {
                                                         out.println("ERROR: No description found!");
                                                     }

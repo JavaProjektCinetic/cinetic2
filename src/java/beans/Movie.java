@@ -10,7 +10,6 @@ package beans;
  * @author Laura
  */
 public class Movie {
-    
    private String titleEnglish;
    private String picture;
    private String description;
