@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 //onLoad=click();
-function click()
+function lala()
 {
-    
-    alert("lalala click function");
+    document.getElementById("lala").innerHTML="BLABLABLA";
+    //alert("lalala click function");
     //document.getElementById("divSuggestions").style.display.none;
     //document.getElementById("divResults").style.display.table;
 }

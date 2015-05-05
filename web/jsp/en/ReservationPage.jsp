@@ -46,7 +46,7 @@
         </style>
     </head>
     <body>
-        <form>
+        <form action="jsp/en/ReservationPage.jsp">
             <%
                 LinkedList<Movie> movieList = (LinkedList<Movie>) request.getAttribute("movieList");
             %>
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <center>
-                <h1>Login</h1>
+                <input type="submit"/>
                 
             </center>
         </form>

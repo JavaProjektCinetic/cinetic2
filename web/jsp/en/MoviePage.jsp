@@ -4,6 +4,7 @@
     Author     : Laura
 --%>
 
+<%@page import="java.util.Random"%>
 <%@page import="beans.Movie"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.LinkedList"%>
@@ -43,14 +44,14 @@
                 border-color: #644030;
                 width:800px;
                 background-color: white;
-                opacity: 0.9;
+                //opacity: 0.9;
             }
 
             div.suggestions
             {
                 width:180px;
                 background-color: white;
-                opacity: 0.8;
+                //opacity: 0.8;
                 float: right;
                 border-style: inset;
                 border-width: 5px;
@@ -75,7 +76,15 @@
         <form action="LoginPage.jsp">
             <%
                 LinkedList<Movie> movieList = (LinkedList<Movie>) request.getAttribute("movieList");
-            
+                int movieNo = (int) request.getAttribute("movieNo");
+                LinkedList<Integer> randiList = new LinkedList<>();
+                Random randi = new Random();
+                do {
+                    int temp = randi.nextInt(49) + 1;
+                    if (!randiList.contains(temp)) {
+                        randiList.add(temp);
+                    }
+                } while (randiList.size() < 8);
             %>
             <div name="cinetic_header" class="header">
                 <div name="logo" style="text-align:left; float:left" class='logo'>
@@ -92,21 +101,21 @@
             </div>
             <table style="float:right" cellpadding="15">
                 <tr><td>
-                        <div name="<%=movieList.get(1).getTitleEnglish()%>" class="movie">
+                        <div name="<%=movieList.get(movieNo).getTitleEnglish()%>" class="movie">
                             <center>
                                 <table>
                                     <tr>
                                         <td>
-                                            <img src="res/<%=movieList.get(1).getPicture()%>.jpg" alt="<%=movieList.get(1).getTitleEnglish()%>" style="width:300px;"/>
+                                            <img src="res/<%=movieList.get(movieNo).getPicture()%>.jpg" alt="<%=movieList.get(movieNo).getTitleEnglish()%>" style="width:300px;"/>
                                         </td>
                                         <td>
                                             <p class="description">
                                                 <%if (movieList != null) {
-                                                        out.println("<h1 style='font-family:Playbill'>" + movieList.get(1).getTitleEnglish() + "</h1>");
-                                                        for (int i = 0; i < movieList.get(1).getRating(); i++) {
-                                                            out.println("<img src='res/stern.png' style='width:30px'/></br>");
+                                                        out.println("<h1 style='font-family:Playbill'>" + movieList.get(movieNo).getTitleEnglish() + "</h1>");
+                                                        for (int i = 0; i < movieList.get(movieNo).getRating(); i++) {
+                                                            out.println("<img src='res/stern.png' style='width:30px'/>");
                                                         }
-                                                        out.println(movieList.get(1).getDescription());
+                                                        out.println("</br>" + movieList.get(movieNo).getDescription());
                                                     } else {
                                                         out.println("ERROR: No description found!");
                                                     }
@@ -139,14 +148,22 @@
 
                         <div name="suggestions" class="suggestions">
                             <table  align="center" cellpadding="13">
-                                <tr><td><img src="res/<%=path.get(6)%>.jpg" alt="<%=title.get(6)%>" style="width:150px" </td></tr>
-                                <tr><td><img src="res/<%=path.get(4)%>.jpg" alt="<%=title.get(4)%>" style="width:150px" </td></tr>
-                                <tr><td><img src="res/<%=path.get(9)%>.jpg" alt="<%=title.get(9)%>" style="width:150px" </td></tr>           
+                                <tr><td><div onclick="bildAuswahl(1)"><img src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
+                                <tr><td><div onclick="bildAuswahl(2)"><img src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
+                                <tr><td><div onclick="bildAuswahl(3)"><img src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>           
                             </table>
                         </div>
                     </td>
                 </tr>
             </table>
+            <script>
+                function bildAuswahl(x) {
+                    alert("lala " + x);
+                    request.setAttribute("movieNo", randiList.get(x));
+
+                <% request.getRequestDispatcher("MoviePage.jsp").forward(request, response);%>
+                }
+            </script>
         </form>
     </body>
 </html>
