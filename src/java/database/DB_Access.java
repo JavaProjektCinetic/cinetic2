@@ -6,12 +6,16 @@
 package database;
 
 import beans.Movie;
+import beans.Room;
+import beans.Seat;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -62,7 +66,74 @@ public class DB_Access {
 //        return filmList;
 //    }
 //
-    
+
+    public void setSeats() throws Exception {
+        LinkedList<Room> roomL = getRooms();
+        LinkedList<Seat> seatList = new LinkedList<>();
+        Seat s;
+        Connection conn = connPool.getConnection();
+        for (int i = 0; i < roomL.size(); i++) {
+            Room r = roomL.get(i);
+            System.out.println(r.getRoomName());
+            if (r.getRoomName().equals("Cozy Room")) {
+                for (int row = 1; row <= 6; row++) {
+                    for (int column = 1; column <= 16; column++) {
+                        s = new Seat(column, row, r.getRoomName());
+                        seatList.add(s);
+                        if (row <= 5 && column == 12) {
+                            column = 17;
+                        }
+                    }
+                }
+            } else if (r.getRoomName().equals("Glamour Room")) {
+                for (int row = 1; row <= 7; row++) {
+                    for (int column = 1; column <= 10; column++) {            
+                        s = new Seat(column, row, r.getRoomName());
+                        seatList.add(s);                       
+                    }
+                }
+            } else if (r.getRoomName().equals("The Room")) {
+                for (int row = 1; row <= 13; row++) {
+                    for (int column = 1; column <= 20; column++) {
+                        s = new Seat(column, row, r.getRoomName());
+                        seatList.add(s);
+                        if (row <= 8 && column == 14) {
+                            column = 21;
+                        } else if (row <= 12 && column == 15) {
+                            column = 21;
+                        }
+                    }
+                }
+            }           
+        }
+        for (int i = 0; i < seatList.size(); i++) {
+            s = seatList.get(i);
+            System.out.println("Roomname: " + s.getRoomName() + " Reihe: " + s.getRow() + " Sitz: " + s.getColumn());
+            Statement stat = conn.createStatement();
+            String sqlString = "INSERT INTO seat VALUES ("+(i+1)+", "+s.getColumn()+", "+s.getRow()+", (SELECT roomid" +
+"                                     FROM room" +
+"                                     WHERE name = '"+s.getRoomName()+"'));";
+            stat.executeUpdate(sqlString);
+        }
+    }
+
+    public LinkedList<Room> getRooms() throws Exception {
+        Connection conn = connPool.getConnection();
+        LinkedList<Room> roomList = new LinkedList<>();
+        Statement stat = conn.createStatement();
+        String sqlString = "SELECT name, seats FROM room";
+        ResultSet rs = stat.executeQuery(sqlString);
+        String name;
+        String seats;
+        while (rs.next()) {
+            name = rs.getString(1);
+            seats = rs.getString(2);
+            Room r = new Room(name, Integer.parseInt(seats));
+            roomList.add(r);
+        }
+        return roomList;
+    }
+
     public LinkedList<String> getGenres(String lang) throws Exception {
         Connection conn = connPool.getConnection();
         LinkedList<String> genreList = new LinkedList<>();
@@ -97,7 +168,7 @@ public class DB_Access {
         return genreList;
     }
 
-    public HashMap<Integer,String> getDesc() throws Exception {
+    public HashMap<Integer, String> getDesc() throws Exception {
         Connection conn = connPool.getConnection();
         Statement stat = conn.createStatement();
         String sqlString = "SELECT movieid, description FROM movie;";
@@ -105,12 +176,10 @@ public class DB_Access {
         ResultSet rs = stat.executeQuery(sqlString);
         String desc;
         int id;
-        while (rs.next()) 
-        {
+        while (rs.next()) {
             desc = rs.getString("description");
             id = rs.getInt("movieid");
-            if (!idDesc.containsKey(desc)) 
-            {
+            if (!idDesc.containsKey(desc)) {
                 idDesc.put(id, desc);
             }
         }
@@ -118,7 +187,7 @@ public class DB_Access {
         return idDesc;
     }
 
-    public HashMap<Integer,String> getTitle() throws Exception {
+    public HashMap<Integer, String> getTitle() throws Exception {
         Connection conn = connPool.getConnection();
         Statement stat = conn.createStatement();
         String sqlString = "SELECT movieid, title FROM movie;";
@@ -126,20 +195,18 @@ public class DB_Access {
         ResultSet rs = stat.executeQuery(sqlString);
         String title;
         int id;
-        while (rs.next()) 
-        {
+        while (rs.next()) {
             title = rs.getString("title");
             id = rs.getInt("movieid");
-            if (!idTitle.containsKey(title)) 
-            {
+            if (!idTitle.containsKey(title)) {
                 idTitle.put(id, title);
             }
         }
         connPool.releaseConnection(conn);
         return idTitle;
     }
-    
-    public HashMap<Integer,String> getPath() throws Exception {
+
+    public HashMap<Integer, String> getPath() throws Exception {
         Connection conn = connPool.getConnection();
         Statement stat = conn.createStatement();
         String sqlString = "SELECT movieid, picture FROM movie;";
@@ -147,20 +214,18 @@ public class DB_Access {
         ResultSet rs = stat.executeQuery(sqlString);
         String path;
         int id;
-        while (rs.next())
-        {
+        while (rs.next()) {
             path = rs.getString("picture");
             id = rs.getInt("movieid");
-            if (!idPath.containsKey(path)) 
-            {
+            if (!idPath.containsKey(path)) {
                 idPath.put(id, path);
             }
         }
         connPool.releaseConnection(conn);
         return idPath;
     }
-    
-    public HashMap<Integer,String> getRate() throws Exception {
+
+    public HashMap<Integer, String> getRate() throws Exception {
         Connection conn = connPool.getConnection();
         Statement stat = conn.createStatement();
         String sqlString = "SELECT movieid, rating FROM movie;";
@@ -168,16 +233,26 @@ public class DB_Access {
         ResultSet rs = stat.executeQuery(sqlString);
         String rate;
         int id;
-        while (rs.next())
-        {
+        while (rs.next()) {
             rate = rs.getString("rating");
             id = rs.getInt("movieid");
-            if (!idRate.containsKey(rate)) 
-            {
+            if (!idRate.containsKey(rate)) {
                 idRate.put(id, rate);
             }
         }
         connPool.releaseConnection(conn);
         return idRate;
+    }
+
+    public static void main(String[] args) {
+        try {
+            DB_Access dba = new DB_Access();
+            dba.setSeats();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 }
