@@ -5,6 +5,7 @@
  */
 package servlet;
 
+import beans.Movie;
 import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -29,10 +30,12 @@ public class CineticServlet extends HttpServlet {
     DB_Access dba = null;
     LinkedList<String> genreListE = null;
     LinkedList<String> genreListD = null;
-    HashMap<Integer,String> desc = null;
-    HashMap<Integer,String> title = null;
-    HashMap<Integer,String> path = null;
-    HashMap<Integer,String> rate = null;
+//    HashMap<Integer,String> desc = null;
+//    HashMap<Integer,String> title = null;
+//    HashMap<Integer,String> path = null;
+//    HashMap<Integer,Integer> rate = null;
+    
+    LinkedList<Movie> movieList = null;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -41,10 +44,12 @@ public class CineticServlet extends HttpServlet {
             dba = DB_Access.getTheInstance();
             genreListE = dba.getGenres("e");
             genreListD = dba.getGenres("d");
-            desc = dba.getDesc();
-            title = dba.getTitle();
-            path = dba.getPath();
-            rate=dba.getRate();
+//            desc = dba.getDesc();
+//            title = dba.getTitle();
+//            path = dba.getPath();
+//            rate=dba.getRate();
+            
+            movieList = dba.getMovieList();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CineticServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -69,12 +74,14 @@ public class CineticServlet extends HttpServlet {
             //String path = this.getServletContext().getRealPath("jsp/en/WelcomePage.jsp");
             request.setAttribute("genreListE", genreListE);
             request.setAttribute("genreListD", genreListD);
-            request.setAttribute("desc", desc);
-            request.setAttribute("title", title);
-            request.setAttribute("path", path);
-            request.setAttribute("rate", rate);
+//            request.setAttribute("desc", desc);
+//            request.setAttribute("title", title);
+//            request.setAttribute("path", path);
+//            request.setAttribute("rate", rate);
             
-            request.getRequestDispatcher("/jsp/en/MoviePage.jsp").forward(request, response);
+            request.setAttribute("movieList",movieList);
+            
+            request.getRequestDispatcher("/jsp/en/WelcomePage.jsp").forward(request, response);
             //request.getRequestDispatcher(path).forward(request, response);
             
         }

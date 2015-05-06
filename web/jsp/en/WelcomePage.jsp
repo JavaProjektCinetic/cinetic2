@@ -4,6 +4,8 @@
     Author     : Laura
 --%>
 
+<%@page import="java.util.Random"%>
+<%@page import="beans.Movie"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.LinkedList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,7 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Welcome Page</title>
-        <script type="text/javascript" src="film.js"></script>
+
         <style>
             div.header {
                 width: 1366px;
@@ -41,7 +43,7 @@
                 width:600px;
                 height:480px;
                 background-color: white;
-                opacity: 0.8;                
+                //opacity: 0.8;                
             }
 
             table.table
@@ -58,72 +60,95 @@
 
             }
         </style>
+
     </head>
     <body>
         
-        <div name="cinetic_header" class="header">
-            <div name="logo" style="text-align:left; float:left" class='logo'>
-                <table>
-                    <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
-                </table>
+            <div name="cinetic_header" class="header">
+                <div name="logo" style="text-align:left; float:left" class='logo'>
+                    <table>
+                        <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
+                    </table>
+                </div>
+                <div name="checkbox" style="text-align:right; float:right;" class="lang">
+                    <select>
+                        <option>German</option>
+                        <option>English</option>
+                    </select>
+                </div>
             </div>
-            <div name="checkbox" style="text-align:right; float:right;" class="lang">
-                <select>
-                    <option>German</option>
-                    <option>English</option>
-                </select>
-            </div>
-        </div>
-        <%
-            HashMap<Integer, String> desc = (HashMap<Integer, String>) request.getAttribute("desc");
-            HashMap<Integer, String> title = (HashMap<Integer, String>) request.getAttribute("title");
-            LinkedList<String> genreListE = (LinkedList<String>) request.getAttribute("genreListE");
-            LinkedList<String> genreListD = (LinkedList<String>) request.getAttribute("genreListD");
-            HashMap<Integer, String> path = (HashMap<Integer, String>) request.getAttribute("path");
-        %>
-    <center>
-        <div class='suggestions' style="display: none">
             <%
-                if (title != null) {
-                    out.println(title.get(1));
-                    out.println(title.get(2));
-                    out.println(title.get(3));
-                }
-            %>
-            Title: <input type="text" name="search" style='margin-top: 20px'/>
-            <select>
-                <%
-                    if (genreListE != null) {
-                        for (int i = 0; i < genreListE.size(); i++) {
-                            out.println("<option>");
-                            out.println(genreListE.get(i));
-                            out.println("</option>");
-                        }
+                LinkedList<String> genreListE = (LinkedList<String>) request.getAttribute("genreListE");
+                LinkedList<String> genreListD = (LinkedList<String>) request.getAttribute("genreListD");
+                LinkedList<Movie> movieList = (LinkedList<Movie>) request.getAttribute("movieList");
+                LinkedList<Integer> randiList = new LinkedList<>();
+                Random randi = new Random();
+
+                do {
+                    int temp = randi.nextInt(49) + 1;
+                    if (!randiList.contains(temp)) {
+                        randiList.add(temp);
                     }
-                %>
-            </select>
-            <input type="submit" value="Search"/>
+                } while (randiList.size() < 8);
+            %>
+            <center>
+                <div class='suggestions' style="display: block">
+                    Title: <input type="text" name="search" style='margin-top: 20px'/>
+                    <select>
+                        <%                    if (genreListE != null) {
+                                for (int i = 0; i < genreListE.size(); i++) {
+                                    out.println("<option>");
+                                    out.println(genreListE.get(i));
+                                    out.println("</option>");
+                                }
+                            }
+                        %>
+                    </select>
+                    <input type="submit" value="Search"/>
 
-            <div name="suggestions" id="divSuggestions" class="suggestions" style='display: table'>
-                <table border="1" class="table" style="width: 500px; height: 400px;" >
-                    <tr><td align="center"><b>Movie</b></td><td align="center"><b>Description</b></td><td align="center"><b>Ranking</b></td></tr>
-                    <tr><td><img src="res/<%=path.get(28)%>.jpg" alt="<%=title.get(28)%>" id="1"  style="width:150px" onclick="click('res/<%=path.get(28)%>.jpg')"/></td><td><%=desc.get(28)%></td><td>Sterniiiis</td></tr>
-                    <tr><td><img src="res/<%=path.get(29)%>.jpg" alt="<%=title.get(29)%>" style="width:150px" onclick="click()"/></td><td><%=desc.get(29)%></td><td><img src="res/stern.png"</td></tr>
-                    <tr><td><img src="res/<%=path.get(30)%>.jpg" alt="<%=title.get(30)%>" style="width:150px" onclick="click()"/></td><td><%=desc.get(30)%></td><td>Sterniiiis</td></tr>
-                    <tr><td><img src="res/<%=path.get(31)%>.jpg" alt="<%=title.get(31)%>" style="width:150px" onclick="click()"/></td><td><%=desc.get(31)%></td><td>Sterniiiis</td></tr>
-                </table>
-            </div>
+                    <div name="suggestions" id="divSuggestions" class="suggestions" style='display: table'>
+                        <table class="table" style="width: 500px; height: 400px;" >
+                            <tr><td><b>Suggestions</b></td></tr>
+                            <tr>
+                                <td align="center"><div onclick="bildAuswahl(1)"><img border="1" src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:120px"/></div></td>
+                                <td align="center"><div onclick="bildAuswahl(2)"><img border="1" onclick="click()" src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:120px" /></div></td>
+                                <td align="center"><div onclick="bildAuswahl(3)"><img border="1" onclick="click(randiList.get(3))" src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:120px" /></div></td>
+                            </tr>
+                            <tr>
+                                <td align="center"><p style="font-size: 16px;"><b><%=movieList.get(randiList.get(1)).getTitleEnglish()%></b></p></br><% for (int i = 0; i < movieList.get(randiList.get(1)).getRating(); i++) {
+                                        out.println("<img src='res/stern.png' width='20px'/>");
+                                    }%></td>
+                                <td align="center"><p style="font-size: 16px;"><b><%=movieList.get(randiList.get(2)).getTitleEnglish()%></b></p></br><% for (int i = 0; i < movieList.get(randiList.get(2)).getRating(); i++) {
+                                        out.println("<img src='res/stern.png' width='20px'/>");
+                                    }%></td>
+                                <td align="center"><p style="font-size: 16px;"><b><%=movieList.get(randiList.get(3)).getTitleEnglish()%></b></p></br><% for (int i = 0; i < movieList.get(randiList.get(3)).getRating(); i++) {
+                                        out.println("<img src='res/stern.png' width='20px'/>");
+                                    }%></td>
+                            </tr>
+                        </table>
+                    </div>
 
-            <div name="results" id="divResults" class='table' style='display: none'>
-                <table border="1" style="width: 500px; height: 400px;">
-                    <tr><td align="center"><b>Title</b></td><td align="center"><b>Length</b></td><td align="center"><b>Language</b></td></tr>
-                    <tr><td>blabla</td><td>Minutiiiiiis</td><td>GER</td></tr>
-                    <tr><td>blabla</td><td>Minutiiiiiis</td><td>ENG</td></tr>
-                    <tr><td>blabla</td><td>Minutiiiiiis</td><td>GER</td></tr>
-                    <tr><td>blabla</td><td>Minutiiiiiis</td><td>GER</td></tr>
-                </table>
-            </div>
-        </div>
-    </center>
-</body>
+
+                    <div name="lala" id="demo" onclick="bildAuswahl()">Click me to change my text color.</div>
+                    <script>
+                        function bildAuswahl(x) {
+                            alert("lala " + x);
+                            request.setAttribute("movieNo", randiList.get(x));
+
+                        <% request.getRequestDispatcher("MoviePage.jsp").forward(request, response); %>
+                        }
+                    </script>
+
+                    <div name="results" id="divResults" class='table' style='display: none'>
+                        <table border="1" style="width: 500px; height: 400px;">
+                            <tr><td align="center"><b>Title</b></td><td align="center"><b>Length</b></td><td align="center"><b>Language</b></td></tr>
+                            <tr><td>blabla</td><td>Minutiiiiiis</td><td>GER</td></tr>
+                            <tr><td>blabla</td><td>Minutiiiiiis</td><td>ENG</td></tr>
+                            <tr><td>blabla</td><td>Minutiiiiiis</td><td>GER</td></tr>
+                            <tr><td>blabla</td><td>Minutiiiiiis</td><td>GER</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </center>
+    </body>
 </html>
