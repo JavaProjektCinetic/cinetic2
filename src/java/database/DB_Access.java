@@ -131,7 +131,7 @@ public class DB_Access {
             Room r = new Room(name, Integer.parseInt(seats));
             roomList.add(r);
         }
-        return roomList;
+        return roomList;}
 
 
     public LinkedList<Movie> getMovieList() throws Exception {
