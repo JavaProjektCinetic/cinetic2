@@ -12,67 +12,77 @@ import java.util.Date;
  * @author Sarah
  */
 public class Show {
-    private String roomName;
-    private String titleEn;
-    private Date startDate;
-    private Date endDate;
-    private int takenSeats;
-    private int freeSeats;
+    private int roomID;
+    private int movieID;
+    private Date date;
+    private int takenseats;
+    private int showid;
+    private Date time;
+    private int freeseats;
 
-    public Show(String roomName, String titleEn, Date startDate, Date endDate, int takenSeats, int freeSeats) {
-        this.roomName = roomName;
-        this.titleEn = titleEn;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.takenSeats = takenSeats;
-        this.freeSeats = freeSeats;
+    public Show(int roomID, int movieID, Date date, int takenseats, int showid, Date time, int freeseats) {
+        this.roomID = roomID;
+        this.movieID = movieID;
+        this.date = date;
+        this.takenseats = takenseats;
+        this.showid = showid;
+        this.time = time;
+        this.freeseats = freeseats;
     }
 
-    public String getRoomName() {
-        return roomName;
+    public int getRoomID() {
+        return roomID;
     }
 
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
     }
 
-    public String getTitleEn() {
-        return titleEn;
+    public int getMovieID() {
+        return movieID;
     }
 
-    public void setTitleEn(String titleEn) {
-        this.titleEn = titleEn;
+    public void setMovieID(int movieID) {
+        this.movieID = movieID;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public Date getDate() {
+        return date;
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public Date getEndDate() {
-        return endDate;
+    public int getTakenseats() {
+        return takenseats;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setTakenseats(int takenseats) {
+        this.takenseats = takenseats;
     }
 
-    public int getTakenSeats() {
-        return takenSeats;
+    public int getShowid() {
+        return showid;
     }
 
-    public void setTakenSeats(int takenSeats) {
-        this.takenSeats = takenSeats;
+    public void setShowid(int showid) {
+        this.showid = showid;
     }
 
-    public int getFreeSeats() {
-        return freeSeats;
+    public Date getTime() {
+        return time;
     }
 
-    public void setFreeSeats(int freeSeats) {
-        this.freeSeats = freeSeats;
+    public void setTime(Date time) {
+        this.time = time;
+    }
+
+    public int getFreeseats() {
+        return freeseats;
+    }
+
+    public void setFreeseats(int freeseats) {
+        this.freeseats = freeseats;
     }
 }

@@ -8,11 +8,15 @@ package database;
 import beans.Movie;
 import beans.Room;
 import beans.Seat;
+import beans.Show;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,6 +71,164 @@ public class DB_Access {
 //    }
 //
 
+    public void setShows() throws Exception {
+        LinkedList<Show> showList = new LinkedList<>();
+        SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat forTime = new SimpleDateFormat("hh:MM:ss");
+        LinkedList<Room> rooms = getRooms();
+        LinkedList<String> time = new LinkedList<>();
+        time.add("15:00:00");
+        time.add("18:00:00");
+        time.add("21:00:00");
+        time.add("24:00:00");
+        Connection conn = connPool.getConnection();
+        Statement stat = conn.createStatement();
+        String sqlString = "SELECT MAX(date)"
+                + "FROM show";
+        ResultSet rs = stat.executeQuery(sqlString);
+        Date dmax;
+        String str = "";
+        while (rs.next()) {
+            str = rs.getString(1);
+        }
+        dmax = forDate.parse(str);
+        int day = dmax.getDate();
+        int month = dmax.getMonth();
+        int year = 2015;
+        stat = conn.createStatement();
+        sqlString = "SELECT MAX(showid)"
+                + "FROM show";
+        rs = stat.executeQuery(sqlString);
+        int showID;
+        str = "";
+        while (rs.next()) {
+            str = rs.getString(1);
+        }
+        showID = Integer.parseInt(str);
+
+        for (int i = 1; i <= 7; i++) {
+            switch (month) {
+                case 0:
+                    if (day == 31) {
+                        month++;
+                        day = 1;
+                    } else {
+                        day++;
+                    }
+                    break;
+                case 1:
+                    if (day == 28) {
+                        month++;
+                        day = 1;
+                    } else {
+                        day++;
+                    }
+                    break;
+                case 2:
+                    if (day == 31) {
+                        month++;
+                        day = 1;
+                    } else {
+                        day++;
+                    }
+                    break;
+                case 3:
+                    if (day == 30) {
+                        month++;
+                        day = 1;
+                    } else {
+                        day++;
+                    }
+                    break;
+                case 4:
+                    if (day == 31) {
+                        month++;
+                        day = 1;
+                    } else {
+                        day++;
+                    }
+                    break;
+                case 5:
+                    if (day == 30) {
+                        month++;
+                        day = 1;
+                    } else {
+                        day++;
+                    }
+                    break;
+                case 6:
+                    if (day == 31) {
+                        month++;
+                        day = 1;
+                    } else {
+                        day++;
+                    }
+                    break;
+                case 7:
+                    if (day == 31) {
+                        month++;
+                        day = 1;
+                    } else {
+                        day++;
+                    }
+                    break;
+                case 8:
+                    if (day == 30) {
+                        month++;
+                        day = 1;
+                    } else {
+                        day++;
+                    }
+                    break;
+                case 9:
+                    if (day == 31) {
+                        month++;
+                        day = 1;
+                    } else {
+                        day++;
+                    }
+                    break;
+                case 10:
+                    if (day == 30) {
+                        month++;
+                        day = 1;
+                    } else {
+                        day++;
+                    }
+                    break;
+                case 11:
+                    if (day == 31) {
+                        month = 0;
+                        day = 1;
+                        year++;
+                    } else {
+                        day++;
+                    }
+                    break;
+            }
+            Random randi = new Random();  
+            String dDate = year + "-" + month + "-" + day;
+            Date d = forDate.parse(dDate);
+
+            for (int roomID = 1; roomID <= 3; roomID++) {
+                for (int j = 0; j < time.size(); j++) {
+                    showID++;
+                    int movieID = randi.nextInt(getCountMovies());
+                    String t = time.get(j);
+                    Date ti = forTime.parse(t);
+                    Show s = new Show(roomID, (movieID+1), d, 0, showID, ti, rooms.get(roomID-1).getSeats());
+                    showList.add(s);                  
+                }
+            }
+        }
+        for (int i = 0; i < showList.size(); i++) {
+            Show s = showList.get(i);
+            stat = conn.createStatement(); //roomID, movieID, date, showID, takenseats, time, freeseats
+            sqlString = "INSERT INTO show VALUES ("+s.getRoomID()+", "+s.getMovieID()+", '"+forDate.format(s.getDate())+"', "+s.getShowid()+", 0, '"+forTime.format(s.getDate())+"', "+rooms.get(s.getRoomID()-1).getSeats()+")";
+            stat.executeUpdate(sqlString);
+        }
+    }
+
     public void setSeats() throws Exception {
         LinkedList<Room> roomL = getRooms();
         LinkedList<Seat> seatList = new LinkedList<>();
@@ -87,9 +249,9 @@ public class DB_Access {
                 }
             } else if (r.getRoomName().equals("Glamour Room")) {
                 for (int row = 1; row <= 7; row++) {
-                    for (int column = 1; column <= 10; column++) {            
+                    for (int column = 1; column <= 10; column++) {
                         s = new Seat(column, row, r.getRoomName());
-                        seatList.add(s);                       
+                        seatList.add(s);
                     }
                 }
             } else if (r.getRoomName().equals("The Room")) {
@@ -104,15 +266,15 @@ public class DB_Access {
                         }
                     }
                 }
-            }           
+            }
         }
         for (int i = 0; i < seatList.size(); i++) {
             s = seatList.get(i);
             System.out.println("Roomname: " + s.getRoomName() + " Reihe: " + s.getRow() + " Sitz: " + s.getColumn());
             Statement stat = conn.createStatement();
-            String sqlString = "INSERT INTO seat VALUES ("+(i+1)+", "+s.getColumn()+", "+s.getRow()+", (SELECT roomid" +
-"                                     FROM room" +
-"                                     WHERE name = '"+s.getRoomName()+"'));";
+            String sqlString = "INSERT INTO seat VALUES (" + (i + 1) + ", " + s.getColumn() + ", " + s.getRow() + ", (SELECT roomid"
+                    + "                                     FROM room"
+                    + "                                     WHERE name = '" + s.getRoomName() + "'));";
             stat.executeUpdate(sqlString);
         }
     }
@@ -131,8 +293,8 @@ public class DB_Access {
             Room r = new Room(name, Integer.parseInt(seats));
             roomList.add(r);
         }
-        return roomList;}
-
+        return roomList;
+    }
 
     public LinkedList<Movie> getMovieList() throws Exception {
         //Int id, String titleEnglish, String picture, String description, String trailer, String music, String titleGerman, int rating, String genreEnglish, String genreGerman, int length
@@ -140,18 +302,23 @@ public class DB_Access {
         LinkedList<Movie> movieList = new LinkedList<>();
         Statement stat = conn.createStatement();
 
-        String sqlString = "SELECT title, picture, description, trailer, music, titlegerman, rating, genre, genregerman, length\n"
+        String sqlString = "SELECT movieid, title, picture, description, trailer, music, titlegerman, rating, genre, genregerman, length\n"
                 + "FROM movie;";
 
         ResultSet rs = stat.executeQuery(sqlString);
         while (rs.next()) {
-            Movie m = new Movie(rs.getString("title"), rs.getString("picture"), rs.getString("description"),rs.getString("trailer"),rs.getString("music"),rs.getString("titlegerman"),rs.getInt("rating"),rs.getString("genre"),rs.getString("genregerman"),rs.getInt("length"));
+            Movie m = new Movie(rs.getString("title"), rs.getString("picture"), rs.getString("description"), rs.getString("trailer"), rs.getString("music"), rs.getString("titlegerman"), rs.getInt("rating"), rs.getString("genre"), rs.getString("genregerman"), rs.getInt("length"), rs.getInt("movieid"));
             if (!movieList.contains(m)) {
                 movieList.add(m);
             }
         }
         connPool.releaseConnection(conn);
         return movieList;
+    }
+
+    public int getCountMovies() throws Exception {
+        int count = getMovieList().size();
+        return count;
     }
 
     public LinkedList<String> getGenres(String lang) throws Exception {
@@ -263,4 +430,15 @@ public class DB_Access {
 //        connPool.releaseConnection(conn);
 //        return idRate;
 //    }
+    public static void main(String[] args) {
+        try {
+            DB_Access dba = new DB_Access();
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }
