@@ -9,10 +9,10 @@ import beans.Movie;
 import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,39 +24,27 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Laura
  */
-@WebServlet(name = "CineticServlet", urlPatterns = {"/CineticServlet"})
-public class CineticServlet extends HttpServlet {
+@WebServlet(name = "CineticServlet2", urlPatterns = {"/CineticServlet2"})
+public class CineticServlet2 extends HttpServlet {
 
-    DB_Access dba = null;
-    LinkedList<String> genreListE = null;
-    LinkedList<String> genreListD = null;
-//    HashMap<Integer,String> desc = null;
-//    HashMap<Integer,String> title = null;
-//    HashMap<Integer,String> path = null;
-//    HashMap<Integer,Integer> rate = null;
-    
     LinkedList<Movie> movieList = null;
+    DB_Access dba = null;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         try {
             dba = DB_Access.getTheInstance();
-            genreListE = dba.getGenres("e");
-            genreListD = dba.getGenres("d");
-//            desc = dba.getDesc();
-//            title = dba.getTitle();
-//            path = dba.getPath();
-//            rate=dba.getRate();
-            
             movieList = dba.getMovieList();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CineticServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CineticServlet2.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(CineticServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CineticServlet2.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
+    
+    
+    
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -71,22 +59,13 @@ public class CineticServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            //String path = this.getServletContext().getRealPath("jsp/en/WelcomePage.jsp");
-            request.setAttribute("genreListE", genreListE);
-            request.setAttribute("genreListD", genreListD);
-//            request.setAttribute("desc", desc);
-//            request.setAttribute("title", title);
-//            request.setAttribute("path", path);
-//            request.setAttribute("rate", rate);
-            
+            /* TODO output your page here. You may use following sample code. */
             request.setAttribute("movieList",movieList);
-            //response.sendRedirect("/jsp/en/WelcomePage.jsp");
-            request.getRequestDispatcher("/jsp/en/WelcomePage.jsp").forward(request, response);
-            //request.getRequestDispatcher("/jsp/en/MoviePage.jsp").forward(request, response);
-            //request.getRequestDispatcher(path).forward(request, response);
-            
+            //movieList = (LinkedList<Movie>) request.getAttribute("movieList");
+            //out.println("bbblalala");
+            request.getRequestDispatcher("/jsp/en/MoviePage2.jsp").forward(request, response);
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

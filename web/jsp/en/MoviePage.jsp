@@ -14,7 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Movie Page</title>
-        <script type="text/javascript" src="Cinetic.js"></script>
+        <script type="text/javascript"></script>
         <style>
             div.header {
                 width: 1366px;
@@ -73,10 +73,10 @@
         </style>
     </head>
     <body>
-        <form action="LoginPage.jsp">
             <%
                 LinkedList<Movie> movieList = (LinkedList<Movie>) request.getAttribute("movieList");
-                int movieNo = (int) request.getAttribute("movieNo");
+                //int movieNo = (int) request.getAttribute("movieNo");
+                int movieNo=1;
                 LinkedList<Integer> randiList = new LinkedList<>();
                 Random randi = new Random();
                 do {
@@ -156,14 +156,6 @@
                     </td>
                 </tr>
             </table>
-            <script>
-                function bildAuswahl(x) {
-                    alert("lala " + x);
-                    request.setAttribute("movieNo", randiList.get(x));
-
-                <% request.getRequestDispatcher("MoviePage.jsp").forward(request, response);%>
-                }
-            </script>
-        </form>
+           
     </body>
 </html>
