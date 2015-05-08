@@ -20,8 +20,9 @@ public class Movie {
    private String genreEnglish;
    private String genreGerman;
    private int length;
+   private int movieID;
 
-    public Movie(String titleEnglish, String picture, String description, String trailer, String music, String titleGerman, int rating, String genreEnglish, String genreGerman, int length) {
+    public Movie(String titleEnglish, String picture, String description, String trailer, String music, String titleGerman, int rating, String genreEnglish, String genreGerman, int length, int movieID) {
         this.titleEnglish = titleEnglish;
         this.picture = picture;
         this.description = description;
@@ -32,6 +33,7 @@ public class Movie {
         this.genreEnglish = genreEnglish;
         this.genreGerman = genreGerman;
         this.length = length;
+        this.movieID = movieID;
     }
 
     public String getTitleEnglish() {
@@ -88,6 +90,14 @@ public class Movie {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+    
+    public int getMovieID() {
+        return movieID;
+    }
+
+    public void setMovieID(int movieID) {
+        this.movieID = movieID;
     }
 
     public String getGenreEnglish() {
