@@ -36,9 +36,9 @@ public class CineticServlet3 extends HttpServlet {
             dba = DB_Access.getTheInstance();
             movieList = dba.getMovieList();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CineticServlet2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CineticServlet3.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            Logger.getLogger(CineticServlet2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CineticServlet3.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -56,7 +56,7 @@ public class CineticServlet3 extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            request.setAttribute("movieList",movieList);
+            
             request.getRequestDispatcher("/jsp/en/LoginPage.jsp").forward(request, response);
         }
     }

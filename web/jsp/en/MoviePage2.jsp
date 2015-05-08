@@ -81,7 +81,6 @@
     <body>
         <%
             LinkedList<Movie> movieList = (LinkedList<Movie>) request.getAttribute("movieList");
-            //int movieNo = (int) request.getAttribute("movieNo");
             int param = Integer.parseInt(request.getParameter("name"));
             LinkedList<Integer> randiList = new LinkedList<>();
             Random randi = new Random();
@@ -147,13 +146,14 @@
                                             </table>
                                         </td>
                                         <td>
-                                            <input type="submit" value="reserve" onclick="submit()"/>
+                                            <input type="submit" value="reserve"/>
                                         </td>
                                     </tr>
                                 </table>
                             </form>
                         </center>
                     </div>
+                    
                 </td>
                 <td>
 
@@ -167,7 +167,7 @@
                         </form>
                     </div>
                     <script>
-                        function schicken(name)
+                                                function schicken(name)
                         {
                             document.forms[1].action = "CineticServlet2?name=" + name;
                             document.forms[1].submit();
