@@ -12,7 +12,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
-        <script type="text/javascript" src="Cinetic.js"></script>
         <style>
             div.header {
                 width: 1366px;
@@ -46,11 +45,6 @@
         </style>
     </head>
     <body>
-        <form action="ReservationPage.jsp">
-            <%
-                LinkedList<Movie> movieList = (LinkedList<Movie>) request.getAttribute("movieList");
-            
-            %>
             <div name="cinetic_header" class="header">
                 <div name="logo" style="text-align:left; float:left" class='logo'>
                     <table>
@@ -64,13 +58,16 @@
                     </select>
                 </div>
             </div>
+        
             <center>
+                
                 <h1>Login</h1>
                 <h4>Please log in before reservating a seat!</h4>
                 Name<input type="text" id="username" name="username"/></br>
                 Telephone number<input type="text" id="tel" name="tel"/>
                 <input type="submit" value="Login"/>
+               
             </center>
-        </form>
+        
     </body>
 </html>
