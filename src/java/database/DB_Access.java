@@ -207,7 +207,7 @@ public class DB_Access {
                     break;
             }
             Random randi = new Random();  
-            String dDate = year + "-" + month + "-" + day;
+            String dDate = year + "-" + (month+1) + "-" + day;
             Date d = forDate.parse(dDate);
 
             for (int roomID = 1; roomID <= 3; roomID++) {
@@ -430,15 +430,4 @@ public class DB_Access {
 //        connPool.releaseConnection(conn);
 //        return idRate;
 //    }
-    public static void main(String[] args) {
-        try {
-            DB_Access dba = new DB_Access();
-            
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
 }
