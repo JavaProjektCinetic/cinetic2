@@ -49,7 +49,7 @@ public class CineticServlet extends HttpServlet {
 //            path = dba.getPath();
 //            rate=dba.getRate();
             
-            movieList = dba.getMovieList();
+            movieList = dba.getMovieList("","");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CineticServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {

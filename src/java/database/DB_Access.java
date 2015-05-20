@@ -40,36 +40,7 @@ public class DB_Access {
     private DB_Access() throws ClassNotFoundException {
         connPool = DB_ConnectionPool.getTheInstance();
     }
-//
-//    public LinkedList<Film> getList(String t, String s, String g) throws Exception {
-//        Connection conn = connPool.getConnection();
-//        LinkedList<Film> filmList = new LinkedList<>();
-//        Statement stat = conn.createStatement();
-//        t = t.toUpperCase();
-//        s = s.toUpperCase();
-//        if(g.equals("Alle Filme"))
-//        {
-//            g="";
-//        }
-//        String sqlString = "SELECT title, description, category, length, actors, price "
-//                         + "FROM film_list "
-//                         + "WHERE title LIKE '%"+t+"%' AND actors LIKE '%"+s+"%' AND category LIKE '%"+g+"%';";
-//        
-//        ResultSet rs = stat.executeQuery(sqlString);
-//
-//        Film f;
-//
-//        while (rs.next()) {
-//            f = new Film(rs.getString("title"), rs.getString("description"), rs.getString("category"), Integer.parseInt(rs.getString("length")), rs.getString("actors"), Double.parseDouble(rs.getString("price")));
-//            if(!filmList.contains(f))
-//            {
-//                filmList.add(f);
-//            }
-//        }
-//        connPool.releaseConnection(conn);
-//        return filmList;
-//    }
-//
+
 
     public void setShows() throws Exception {
         LinkedList<Show> showList = new LinkedList<>();
@@ -296,15 +267,22 @@ public class DB_Access {
         return roomList;
     }
 
-    public LinkedList<Movie> getMovieList() throws Exception {
+    public LinkedList<Movie> getMovieList(String t, String g) throws Exception {
         //Int id, String titleEnglish, String picture, String description, String trailer, String music, String titleGerman, int rating, String genreEnglish, String genreGerman, int length
         Connection conn = connPool.getConnection();
         LinkedList<Movie> movieList = new LinkedList<>();
         Statement stat = conn.createStatement();
-
-        String sqlString = "SELECT movieid, title, picture, description, trailer, music, titlegerman, rating, genre, genregerman, length\n"
-                + "FROM movie;";
-
+        t = t.toUpperCase();
+        
+        
+        if(g.equals("All Movies"))
+        {
+            g="";
+        }
+        String sqlString = "SELECT movieid, title, picture, description, trailer, music, titlegerman, rating, genre, genregerman, length "
+                         + "FROM movie "
+                         + "WHERE title LIKE '%"+t+"%' AND genre LIKE '%"+g+"%';";
+        
         ResultSet rs = stat.executeQuery(sqlString);
         while (rs.next()) {
             Movie m = new Movie(rs.getString("title"), rs.getString("picture"), rs.getString("description"), rs.getString("trailer"), rs.getString("music"), rs.getString("titlegerman"), rs.getInt("rating"), rs.getString("genre"), rs.getString("genregerman"), rs.getInt("length"), rs.getInt("movieid"));
@@ -313,11 +291,45 @@ public class DB_Access {
             }
         }
         connPool.releaseConnection(conn);
+        
+        
         return movieList;
     }
 
+
+//    public LinkedList<Film> getList(String t, String s, String g) throws Exception {
+//        Connection conn = connPool.getConnection();
+//        LinkedList<Film> filmList = new LinkedList<>();
+//        Statement stat = conn.createStatement();
+//        t = t.toUpperCase();
+//        s = s.toUpperCase();
+//        if(g.equals("Alle Filme"))
+//        {
+//            g="";
+//        }
+//        String sqlString = "SELECT title, description, category, length, actors, price "
+//                         + "FROM film_list "
+//                         + "WHERE title LIKE '%"+t+"%' AND actors LIKE '%"+s+"%' AND category LIKE '%"+g+"%';";
+//        
+//        ResultSet rs = stat.executeQuery(sqlString);
+//
+//        Film f;
+//
+//        while (rs.next()) {
+//            f = new Film(rs.getString("title"), rs.getString("description"), rs.getString("category"), Integer.parseInt(rs.getString("length")), rs.getString("actors"), Double.parseDouble(rs.getString("price")));
+//            if(!filmList.contains(f))
+//            {
+//                filmList.add(f);
+//            }
+//        }
+//        connPool.releaseConnection(conn);
+//        return filmList;
+//    }
+//
+    
+
     public int getCountMovies() throws Exception {
-        int count = getMovieList().size();
+        int count = getMovieList("","").size();
         return count;
     }
 
