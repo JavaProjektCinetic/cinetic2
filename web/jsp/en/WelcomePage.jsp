@@ -112,8 +112,8 @@
                         <tr><td><b>Suggestions</b></td></tr>
                         <tr>
                             <td align="center"><div onclick="schicken(''+<%=randiList.get(1)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:120px"/></div></td>
-                            <td align="center"><div onclick="schicken(''+<%=randiList.get(2)%>)"><img border="1" onclick="schicken()" src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:120px" /></div></td>
-                            <td align="center"><div onclick="schicken(''+<%=randiList.get(2)%>)"><img border="1" onclick="click(randiList.get(3))" src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:120px" /></div></td>
+                            <td align="center"><div onclick="schicken(''+<%=randiList.get(2)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:120px" /></div></td>
+                            <td align="center"><div onclick="schicken(''+<%=randiList.get(3)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:120px" /></div></td>
                         </tr>
                         <tr>
                             <td align="center"><p style="font-size: 16px;"><b><%=movieList.get(randiList.get(1)).getTitleEnglish()%></b></p></br><% for (int i = 0; i < movieList.get(randiList.get(1)).getRating(); i++) {
