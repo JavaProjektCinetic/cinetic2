@@ -35,7 +35,7 @@ public class CineticServlet2 extends HttpServlet {
         super.init(config);
         try {
             dba = DB_Access.getTheInstance();
-            movieList = dba.getMovieList();
+            movieList = dba.getMovieList("","");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CineticServlet2.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {

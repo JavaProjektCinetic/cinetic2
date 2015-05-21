@@ -17,7 +17,7 @@
 
         <style>
             div.header {
-                width: 1366px;
+                width: 100%;
                 height: 150px;
                 margin-left: -8px;
                 margin-top: -8px;
@@ -51,13 +51,20 @@
                 height:400px;
                 width:500px;
             }
-
+            
+            table.table2
+            {
+                width:100%;
+            }
+            
             body{
                 background-image: url("res/background2.jpg");
-                background-size: 1366px;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover; 
                 background-attachment: fixed;
                 background-repeat: no-repeat;
-
             }
         </style>
 
@@ -65,18 +72,24 @@
     <body>
 
         <div name="cinetic_header" class="header">
+            <table class="table2"><tr><td><left>
             <div name="logo" style="text-align:left; float:left" class='logo'>
                 <table>
                     <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
                 </table>
             </div>
-            <div name="checkbox" style="text-align:right; float:right;" class="lang">
+                </left></td>
+                <td><right>
+            <div name="checkbox" style="text-align:right;" class="lang">
+                
                 <select>
                     <option>German</option>
                     <option>English</option>
                 </select>
             </div>
+                </right> </td></tr></table>
         </div>
+        
         <%
             LinkedList<String> genreListE = (LinkedList<String>) request.getAttribute("genreListE");
             LinkedList<String> genreListD = (LinkedList<String>) request.getAttribute("genreListD");
@@ -113,7 +126,7 @@
                         <tr>
                             <td align="center"><div onclick="schicken(''+<%=randiList.get(1)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:120px"/></div></td>
                             <td align="center"><div onclick="schicken(''+<%=randiList.get(2)%>)"><img border="1" onclick="schicken()" src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:120px" /></div></td>
-                            <td align="center"><div onclick="schicken(''+<%=randiList.get(2)%>)"><img border="1" onclick="click(randiList.get(3))" src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:120px" /></div></td>
+                            <td align="center"><div onclick="schicken(''+<%=randiList.get(3)%>)"><img border="1" onclick="click(randiList.get(3))" src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:120px" /></div></td>
                         </tr>
                         <tr>
                             <td align="center"><p style="font-size: 16px;"><b><%=movieList.get(randiList.get(1)).getTitleEnglish()%></b></p></br><% for (int i = 0; i < movieList.get(randiList.get(1)).getRating(); i++) {

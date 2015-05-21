@@ -34,7 +34,7 @@ public class CineticServlet3 extends HttpServlet {
         super.init(config);
         try {
             dba = DB_Access.getTheInstance();
-            movieList = dba.getMovieList();
+            movieList = dba.getMovieList("","");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CineticServlet3.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -87,7 +87,9 @@ public class CineticServlet3 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         processRequest(request, response);
+        
     }
 
     /**

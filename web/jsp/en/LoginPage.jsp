@@ -14,7 +14,7 @@
         <title>Login Page</title>
         <style>
             div.header {
-                width: 1366px;
+                width: 100%;
                 height: 150px;
                 margin-left: -8px;
                 margin-top: -8px;
@@ -35,10 +35,18 @@
                 margin-right: 20px;
             }
 
+            table.table2
+            {
+                width:100%;
+            }
+            
             body
             {
                 background-image: url("res/background2.jpg");
-                background-size: 1366px;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover; 
                 background-attachment: fixed;
                 background-repeat: no-repeat;
             }
@@ -46,18 +54,23 @@
     </head>
     <body>
             <div name="cinetic_header" class="header">
-                <div name="logo" style="text-align:left; float:left" class='logo'>
-                    <table>
-                        <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
-                    </table>
-                </div>
-                <div name="checkbox" style="text-align:right; float:right;" class="lang">
-                    <select>
-                        <option>German</option>
-                        <option>English</option>
-                    </select>
-                </div>
+            <table class="table2"><tr><td><left>
+            <div name="logo" style="text-align:left; float:left" class='logo'>
+                <table>
+                    <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
+                </table>
             </div>
+                </left></td>
+                <td><right>
+            <div name="checkbox" style="text-align:right;" class="lang">
+                
+                <select>
+                    <option>German</option>
+                    <option>English</option>
+                </select>
+            </div>
+                </right> </td></tr></table>
+        </div>
         
             <center>
                 

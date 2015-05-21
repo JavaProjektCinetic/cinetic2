@@ -29,6 +29,7 @@ public class DB_Access {
 
     private DB_ConnectionPool connPool;
     private static DB_Access theInstance = null;
+    private LinkedList<Show> showList = new LinkedList<>();
 
     public static DB_Access getTheInstance() throws ClassNotFoundException {
         if (theInstance == null) {
@@ -41,6 +42,33 @@ public class DB_Access {
         connPool = DB_ConnectionPool.getTheInstance();
     }
 
+    public LinkedList<Show> getShows() throws Exception
+    {
+        LinkedList<Show> shows = new LinkedList<>();
+        SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat forTime = new SimpleDateFormat("hh:MM:ss");
+        Connection conn = connPool.getConnection();
+        Statement stat = conn.createStatement();
+        String sqlString = "SELECT roomid, movieid, date, takenseats, showid, time, freeseats" +
+                            "FROM show";
+        ResultSet rs = stat.executeQuery(sqlString);
+        int roomid, movieid, takenseats, showid, freeseats;
+        Date d, time;
+        while(rs.next())
+        {
+            roomid = Integer.parseInt(rs.getString(1));
+            movieid = Integer.parseInt(rs.getString(2));
+            d = forDate.parse(rs.getString(3));
+            takenseats = Integer.parseInt(rs.getString(4));
+            showid = Integer.parseInt(rs.getString(5));
+            time = forTime.parse(rs.getString(6));
+            freeseats = Integer.parseInt(rs.getString(7));
+            
+            Show s = new Show(roomid, movieid, d, takenseats, showid, time, freeseats);
+            shows.add(s);
+        }  
+        return shows;
+    }
 
     public void setShows() throws Exception {
         LinkedList<Show> showList = new LinkedList<>();
