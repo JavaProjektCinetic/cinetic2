@@ -4,6 +4,10 @@
     Author     : Laura
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="beans.Room"%>
+<%@page import="beans.Show"%>
+<%@page import="java.util.Date"%>
 <%@page import="database.DB_Access"%>
 <%@page import="java.util.Random"%>
 <%@page import="java.util.LinkedList"%>
@@ -69,7 +73,7 @@
                 border-width: 5px;
                 border-color: #644030;
             }
-            
+
             table.table2
             {
                 width:100%;
@@ -102,24 +106,24 @@
         %>
         <div name="cinetic_header" class="header">
             <table class="table2"><tr><td><left>
-            <div name="logo" style="text-align:left; float:left" class='logo'>
-                <table>
-                    <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
-                </table>
-            </div>
+                    <div name="logo" style="text-align:left; float:left" class='logo'>
+                        <table>
+                            <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
+                        </table>
+                    </div>
                 </left></td>
                 <td><right>
-            <div name="checkbox" style="text-align:right;" class="lang">
-                
-                <select>
-                    <option>German</option>
-                    <option>English</option>
-                </select>
-            </div>
+                    <div name="checkbox" style="text-align:right;" class="lang">
+
+                        <select>
+                            <option>German</option>
+                            <option>English</option>
+                        </select>
+                    </div>
                 </right> </td></tr></table>
         </div>
 
-    
+
         <table style="float:right" cellpadding="15">
             <tr><td>
                     <div name="<%=movieList.get(param).getTitleEnglish()%>" class="movie">
@@ -152,13 +156,32 @@
                                     <tr>
                                         <td>
                                             <select name="Show">
-                                            <%
-                                            
-                                            
-                                            
-                                            %>
-                                                <option></option>
-                                                <option></option>
+                                                <%       
+                                            LinkedList<Show> showList = (LinkedList<Show>) request.getAttribute("showList");
+                                                    LinkedList<Room> roomList = (LinkedList<Room>) request.getAttribute("roomList");
+                                                    String room = "";
+                                                    SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
+                                                    SimpleDateFormat forTime = new SimpleDateFormat("hh:MM:ss");
+                                                    for(int i = 0; i<showList.size(); i++)
+                                                    {
+                                                        if(movieList.get(param).getMovieID() == showList.get(i).getMovieID())
+                                                        {
+                                                            for(int j = 0; j<roomList.size(); j++)
+                                                            {
+                                                                System.out.println("id" + roomList.get(j).getRoomID());
+                                                                if(showList.get(i).getRoomID() == roomList.get(j).getRoomID())
+                                                                {
+                                                                    
+                                                                    room = roomList.get(j).getRoomName();
+                                                                    System.out.println(room);
+                                                                }
+                                                            }
+                                                            out.println("<option>"+ room+" "+forDate.format(showList.get(i).getDate())+" " + forTime.format(showList.get(i).getTime())+"</option>");
+                                                        }     
+                                                    }
+                                                    
+                                                %>
+                                                
                                             </select>
                                             <input type="text" id="datepicker" name="reservationdate"/>
                                             <table border="1">
@@ -176,21 +199,21 @@
                             </form>
                         </center>
                     </div>
-                    
+
                 </td>
                 <td>
 
                     <div name="suggestions" class="suggestions">
                         <form name="1" method="post">
                             <table  align="center" cellpadding="13">
-                                <tr><td><div  onclick="schicken(''+<%=randiList.get(1)%>)"><img src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
-                                <tr><td><div  onclick="schicken(''+<%=randiList.get(2)%>)"><img src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
-                                <tr><td><div  onclick="schicken(''+<%=randiList.get(3)%>)"><img src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>           
+                                <tr><td><div  onclick="schicken('' +<%=randiList.get(1)%>)"><img src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
+                                <tr><td><div  onclick="schicken('' +<%=randiList.get(2)%>)"><img src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
+                                <tr><td><div  onclick="schicken('' +<%=randiList.get(3)%>)"><img src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>           
                             </table>
                         </form>
                     </div>
                     <script>
-                                                function schicken(name)
+                        function schicken(name)
                         {
                             document.forms[1].action = "CineticServlet2?name=" + name;
                             document.forms[1].submit();
@@ -199,6 +222,6 @@
                 </td>
             </tr>
         </table>              
-    
+
     </body>
 </html>

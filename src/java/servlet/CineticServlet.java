@@ -6,6 +6,8 @@
 package servlet;
 
 import beans.Movie;
+import beans.Room;
+import beans.Show;
 import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,6 +38,8 @@ public class CineticServlet extends HttpServlet {
 //    HashMap<Integer,Integer> rate = null;
     
     LinkedList<Movie> movieList = null;
+    LinkedList<Show> showList = null;
+    LinkedList<Room> roomList = null;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -50,10 +54,12 @@ public class CineticServlet extends HttpServlet {
 //            rate=dba.getRate();
             
             movieList = dba.getMovieList("","");
+            showList = dba.getShows();     
+            roomList = dba.getRooms();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CineticServlet.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.toString());
         } catch (Exception ex) {
-            Logger.getLogger(CineticServlet.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.toString());
         }
         
     }
@@ -80,6 +86,8 @@ public class CineticServlet extends HttpServlet {
 //            request.setAttribute("rate", rate);
             
             request.setAttribute("movieList",movieList);
+            request.setAttribute("showList", showList);
+            request.setAttribute("roomList", roomList);
             //response.sendRedirect("/jsp/en/WelcomePage.jsp");
             request.getRequestDispatcher("/jsp/en/WelcomePage.jsp").forward(request, response);
             //request.getRequestDispatcher("/jsp/en/MoviePage.jsp").forward(request, response);

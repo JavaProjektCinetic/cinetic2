@@ -6,6 +6,8 @@
 package servlet;
 
 import beans.Movie;
+import beans.Room;
+import beans.Show;
 import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,6 +30,8 @@ import javax.servlet.http.HttpServletResponse;
 public class CineticServlet2 extends HttpServlet {
 
     LinkedList<Movie> movieList = null;
+    LinkedList<Show> showList = null;
+    LinkedList<Room> roomList = null;
     DB_Access dba = null;
 
     @Override
@@ -36,6 +40,9 @@ public class CineticServlet2 extends HttpServlet {
         try {
             dba = DB_Access.getTheInstance();
             movieList = dba.getMovieList("","");
+            showList = dba.getShows();     
+            roomList = dba.getRooms();
+            System.out.println(roomList.get(1).getRoomID());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CineticServlet2.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -61,6 +68,8 @@ public class CineticServlet2 extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             request.setAttribute("movieList",movieList);
+            request.setAttribute("showList", showList);
+            request.setAttribute("roomList", roomList);
             //movieList = (LinkedList<Movie>) request.getAttribute("movieList");
             //out.println("bbblalala");
             request.getRequestDispatcher("/jsp/en/MoviePage2.jsp").forward(request, response);

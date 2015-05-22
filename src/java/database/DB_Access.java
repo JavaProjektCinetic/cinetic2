@@ -49,7 +49,7 @@ public class DB_Access {
         SimpleDateFormat forTime = new SimpleDateFormat("hh:MM:ss");
         Connection conn = connPool.getConnection();
         Statement stat = conn.createStatement();
-        String sqlString = "SELECT roomid, movieid, date, takenseats, showid, time, freeseats" +
+        String sqlString = "SELECT roomid, movieid, date, takenseats, showid, time, freeseats " +
                             "FROM show";
         ResultSet rs = stat.executeQuery(sqlString);
         int roomid, movieid, takenseats, showid, freeseats;
@@ -67,6 +67,7 @@ public class DB_Access {
             Show s = new Show(roomid, movieid, d, takenseats, showid, time, freeseats);
             shows.add(s);
         }  
+        System.out.println(shows.get(3).getFreeseats());
         return shows;
     }
 
@@ -226,6 +227,7 @@ public class DB_Access {
             sqlString = "INSERT INTO show VALUES ("+s.getRoomID()+", "+s.getMovieID()+", '"+forDate.format(s.getDate())+"', "+s.getShowid()+", 0, '"+forTime.format(s.getDate())+"', "+rooms.get(s.getRoomID()-1).getSeats()+")";
             stat.executeUpdate(sqlString);
         }
+        connPool.releaseConnection(conn);
     }
 
     public void setSeats() throws Exception {
@@ -276,22 +278,27 @@ public class DB_Access {
                     + "                                     WHERE name = '" + s.getRoomName() + "'));";
             stat.executeUpdate(sqlString);
         }
+        connPool.releaseConnection(conn);
     }
 
     public LinkedList<Room> getRooms() throws Exception {
         Connection conn = connPool.getConnection();
         LinkedList<Room> roomList = new LinkedList<>();
         Statement stat = conn.createStatement();
-        String sqlString = "SELECT name, seats FROM room";
+        String sqlString = "SELECT name, seats, roomid FROM room";
         ResultSet rs = stat.executeQuery(sqlString);
         String name;
         String seats;
+        int id;
         while (rs.next()) {
             name = rs.getString(1);
             seats = rs.getString(2);
-            Room r = new Room(name, Integer.parseInt(seats));
-            roomList.add(r);
-        }
+            id = Integer.parseInt(rs.getString(3));    
+            System.out.println("ertzuio " + id);
+            Room r = new Room(name, Integer.parseInt(seats), id);
+            roomList.add(r);       
+        }    
+        connPool.releaseConnection(conn);
         return roomList;
     }
 
