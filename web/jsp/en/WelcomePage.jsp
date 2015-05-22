@@ -48,7 +48,6 @@
 
             table.table
             {
-                height:400px;
                 width:500px;
             }
 
@@ -58,6 +57,70 @@
                 background-attachment: fixed;
                 background-repeat: no-repeat;
 
+            }
+
+            .datagrid table 
+            { border-collapse: collapse; 
+              text-align: left; width: 100%;
+              width:500px;
+            } 
+
+            .datagrid 
+            {font: normal 12px/150% Georgia, Times New Roman, Times, serif; 
+             background: #fff; 
+             overflow: hidden; 
+             -webkit-border-radius: 7px; 
+             -moz-border-radius: 7px; 
+             
+            }
+
+            .datagrid table td, .datagrid table th 
+            { 
+                padding: 5px 14px;
+            }
+
+            .datagrid table thead th 
+            {
+                background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #AD866F), color-stop(1, #644030) );
+                background:-moz-linear-gradient( center top, #AD866F 5%, #644030 100% );
+                filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#AD866F', endColorstr='#644030');
+                background-color:#AD866F; 
+                color:#FFFFFF; 
+                font-size: 15px; 
+                font-weight: bold; 
+            } 
+
+            .datagrid table thead th:first-child 
+            { 
+                border: none; 
+            }
+
+            .datagrid table tbody td
+            { 
+                color: #AD866F; 
+                border-left: 1px solid #AD866F;
+                font-size: 13px;
+                font-weight: normal; 
+            }
+
+            .datagrid table tbody .alt td 
+            { background: #AD866F;
+              color: #644030; 
+            }
+
+            .datagrid table tbody td:first-child 
+            { 
+                border-left: none; 
+            }
+
+            .datagrid table tbody tr:last-child td 
+            { 
+                border-bottom: none; 
+            }
+
+            div.dhtmlx_window_active, div.dhx_modal_cover_dv 
+            { 
+                position: fixed !important; 
             }
         </style>
 
@@ -81,6 +144,7 @@
             LinkedList<String> genreListE = (LinkedList<String>) request.getAttribute("genreListE");
             LinkedList<String> genreListD = (LinkedList<String>) request.getAttribute("genreListD");
             LinkedList<Movie> movieList = (LinkedList<Movie>) request.getAttribute("movieList");
+            LinkedList<Movie> actualList = (LinkedList<Movie>) request.getAttribute("actualList");
             LinkedList<Integer> randiList = new LinkedList<>();
             Random randi = new Random();
 
@@ -93,27 +157,46 @@
         %>
     <center>
         <div class='suggestions' style="display: block">
-            Title: <input type="text" name="search" style='margin-top: 20px'/>
-            <select>
-                <%                    if (genreListE != null) {
-                        for (int i = 0; i < genreListE.size(); i++) {
-                            out.println("<option>");
-                            out.println(genreListE.get(i));
-                            out.println("</option>");
+            <form action="CineticServlet" method="get">
+                Title: <input type="text" name="titlefilter" style='margin-top: 20px'/>
+                <select name="genrefilter">
+                    <% if (genreListE != null) {
+                            for (int i = 0; i < genreListE.size(); i++) {
+                                out.println("<option>");
+                                out.println(genreListE.get(i));
+                                out.println("</option>");
+                            }
                         }
-                    }
-                %>
-            </select>
-            <input type="submit" value="Search"/>
+                    %>
+                </select>
+                <input type="submit" value="Search"/>
+                </br>
+                </br>
+
+
+                <div class="datagrid">
+                    <table>
+                        <thead><tr><th>Title</th><th>Genre</th><th>Length</th></tr></thead>
+                        <tbody>
+                            <%
+                                for (Movie m : actualList) {
+                                    out.println("<tr><td>" + m.getTitleEnglish() + "</td><td>" + m.getGenreEnglish() + "</td><td>" + m.getLength() / 60 + ":" + String.format("%02d", m.getLength() % 60) + "</td></tr>");
+                                }
+                            %>
+                        </tbody>
+                    </table>
+                </div>
+
+            </form>
 
             <div name="suggestions" id="divSuggestions" class="suggestions" style='display: table'>
                 <form action="CineticServlet2" name="1" method="post">
                     <table class="table" style="width: 500px; height: 400px;" >
                         <tr><td><b>Suggestions</b></td></tr>
                         <tr>
-                            <td align="center"><div onclick="schicken(''+<%=randiList.get(1)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:120px"/></div></td>
-                            <td align="center"><div onclick="schicken(''+<%=randiList.get(2)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:120px" /></div></td>
-                            <td align="center"><div onclick="schicken(''+<%=randiList.get(3)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:120px" /></div></td>
+                            <td align="center"><div onclick="schicken('' +<%=randiList.get(1)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:120px"/></div></td>
+                            <td align="center"><div onclick="schicken('' +<%=randiList.get(2)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:120px" /></div></td>
+                            <td align="center"><div onclick="schicken('' +<%=randiList.get(3)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:120px" /></div></td>
                         </tr>
                         <tr>
                             <td align="center"><p style="font-size: 16px;"><b><%=movieList.get(randiList.get(1)).getTitleEnglish()%></b></p></br><% for (int i = 0; i < movieList.get(randiList.get(1)).getRating(); i++) {
@@ -132,24 +215,12 @@
             <script>
                 function schicken(name)
                 {
-                    document.forms[0].action = "CineticServlet2?name="+name;
-                    document.forms[0].submit();
+                    document.forms[1].action = "CineticServlet2?name=" + name;
+                    document.forms[1].submit();
 
                 }
             </script>
 
-            <div name="lala" id="demo" onclick="bildAuswahl()">Click me to change my text color.</div>
-
-
-            <div name="results" id="divResults" class='table' style='display: none'>
-                <table border="1" style="width: 500px; height: 400px;">
-                    <tr><td align="center"><b>Title</b></td><td align="center"><b>Length</b></td><td align="center"><b>Language</b></td></tr>
-                    <tr><td>blabla</td><td>Minutiiiiiis</td><td>GER</td></tr>
-                    <tr><td>blabla</td><td>Minutiiiiiis</td><td>ENG</td></tr>
-                    <tr><td>blabla</td><td>Minutiiiiiis</td><td>GER</td></tr>
-                    <tr><td>blabla</td><td>Minutiiiiiis</td><td>GER</td></tr>
-                </table>
-            </div>
         </div>
     </center>
 </body>

@@ -36,6 +36,7 @@ public class CineticServlet extends HttpServlet {
 //    HashMap<Integer,Integer> rate = null;
     
     LinkedList<Movie> movieList = null;
+    LinkedList<Movie> actualList = null;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -50,6 +51,7 @@ public class CineticServlet extends HttpServlet {
 //            rate=dba.getRate();
             
             movieList = dba.getMovieList("","");
+            actualList = dba.getMovieList("","");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CineticServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -72,14 +74,32 @@ public class CineticServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             //String path = this.getServletContext().getRealPath("jsp/en/WelcomePage.jsp");
+            
+            String t = request.getParameter("titlefilter");
+            String g = request.getParameter("genrefilter");
+            if (t == null) {
+                t = "";
+            }
+            if (g == null) {
+                g = "";
+            }
+            try {
+                actualList.clear();
+                actualList = dba.getMovieList(t, g);
+            } catch (Exception ex) {
+                System.out.println(ex.toString());
+            }
+            
+            System.out.println("######## \nt: " + t + "\ng: " + g+"\n");
+            for (Movie m : actualList) {
+                System.out.println(m.getTitleEnglish());
+            }
+            System.out.println("Filtered List size: " + actualList.size());
+            request.setAttribute("movieList", movieList);
+            request.setAttribute("actualList", actualList);
             request.setAttribute("genreListE", genreListE);
             request.setAttribute("genreListD", genreListD);
-//            request.setAttribute("desc", desc);
-//            request.setAttribute("title", title);
-//            request.setAttribute("path", path);
-//            request.setAttribute("rate", rate);
-            
-            request.setAttribute("movieList",movieList);
+            //request.setAttribute("movieList",movieList);
             //response.sendRedirect("/jsp/en/WelcomePage.jsp");
             request.getRequestDispatcher("/jsp/en/WelcomePage.jsp").forward(request, response);
             //request.getRequestDispatcher("/jsp/en/MoviePage.jsp").forward(request, response);
@@ -100,6 +120,7 @@ public class CineticServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         processRequest(request, response);
     }
 
