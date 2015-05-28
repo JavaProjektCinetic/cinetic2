@@ -141,10 +141,13 @@
             </div>
         </div>
         <%
-            LinkedList<String> genreListE = (LinkedList<String>) request.getAttribute("genreListE");
-            LinkedList<String> genreListD = (LinkedList<String>) request.getAttribute("genreListD");
-            LinkedList<Movie> movieList = (LinkedList<Movie>) request.getAttribute("movieList");
-            LinkedList<Movie> actualList = (LinkedList<Movie>) request.getAttribute("actualList");
+            HttpSession s = request.getSession();
+            LinkedList<String> genreListE = (LinkedList<String>) s.getAttribute("genreListE");
+            LinkedList<String> genreListD = (LinkedList<String>) s.getAttribute("genreListD");
+            LinkedList<Movie> movieList = (LinkedList<Movie>) s.getAttribute("movieList");
+            LinkedList<Movie> actualList = (LinkedList<Movie>) s.getAttribute("actualList");
+            
+            s.setAttribute("al", actualList);
             LinkedList<Integer> randiList = new LinkedList<>();
             Random randi = new Random();
 
@@ -172,15 +175,15 @@
                 <input type="submit" value="Search"/>
                 </br>
                 </br>
-
-
+                
                 <div class="datagrid">
                     <table>
                         <thead><tr><th>Title</th><th>Genre</th><th>Length</th></tr></thead>
                         <tbody>
                             <%
-                                for (Movie m : actualList) {
-                                    out.println("<tr><td>" + m.getTitleEnglish() + "</td><td>" + m.getGenreEnglish() + "</td><td>" + m.getLength() / 60 + ":" + String.format("%02d", m.getLength() % 60) + "</td></tr>");
+                                for(int i = 0; i<actualList.size(); i++)
+                                {
+                                    out.println("<tr><td><p onclick='schicken("+i+")'>" + actualList.get(i).getTitleEnglish() + "</p></td><td>" + actualList.get(i).getGenreEnglish() + "</td><td>" + actualList.get(i).getLength() / 60 + ":" + String.format("%02d", actualList.get(i).getLength() % 60) + "</td></tr>");
                                 }
                             %>
                         </tbody>
@@ -194,9 +197,9 @@
                     <table class="table" style="width: 500px; height: 400px;" >
                         <tr><td><b>Suggestions</b></td></tr>
                         <tr>
-                            <td align="center"><div onclick="schicken('' +<%=randiList.get(1)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:120px"/></div></td>
-                            <td align="center"><div onclick="schicken('' +<%=randiList.get(2)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:120px" /></div></td>
-                            <td align="center"><div onclick="schicken('' +<%=randiList.get(3)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:120px" /></div></td>
+                            <td align="center"><div onclick="schickenX(<%=randiList.get(1)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:120px"/></div></td>
+                            <td align="center"><div onclick="schickenX(<%=randiList.get(2)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:120px" /></div></td>
+                            <td align="center"><div onclick="schickenX(<%=randiList.get(3)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:120px" /></div></td>
                         </tr>
                         <tr>
                             <td align="center"><p style="font-size: 16px;"><b><%=movieList.get(randiList.get(1)).getTitleEnglish()%></b></p></br><% for (int i = 0; i < movieList.get(randiList.get(1)).getRating(); i++) {
@@ -216,6 +219,14 @@
                 function schicken(name)
                 {
                     document.forms[1].action = "CineticServlet2?name=" + name;
+                    document.forms[1].submit();
+
+                }
+            </script>
+            <script>
+                function schickenX(name)
+                {
+                    document.forms[1].action = "CineticServlet2?name=" + name+"";
                     document.forms[1].submit();
 
                 }

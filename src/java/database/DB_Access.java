@@ -267,21 +267,27 @@ public class DB_Access {
         return roomList;
     }
 
-    public LinkedList<Movie> getMovieList(String t, String g) throws Exception {
+    public LinkedList<Movie> getMovieList(String t, String g) throws Exception //parameter upper case
+    {
         //Int id, String titleEnglish, String picture, String description, String trailer, String music, String titleGerman, int rating, String genreEnglish, String genreGerman, int length
         Connection conn = connPool.getConnection();
         LinkedList<Movie> movieList = new LinkedList<>();
         Statement stat = conn.createStatement();
         t = t.toUpperCase();
         
-        
         if(g.equals("All Movies"))
         {
             g="";
         }
+        if(t==null || t.equals(""))
+        {
+            t="";
+        }
         String sqlString = "SELECT movieid, title, picture, description, trailer, music, titlegerman, rating, genre, genregerman, length "
                          + "FROM movie "
-                         + "WHERE title LIKE '%"+t+"%' AND genre LIKE '%"+g+"%';";
+                         + "WHERE upper(title) LIKE '%"+t+"%' AND genre LIKE '%"+g+"%';";
+        
+        System.out.println("################################## "+sqlString);
         
         ResultSet rs = stat.executeQuery(sqlString);
         while (rs.next()) {
@@ -295,37 +301,6 @@ public class DB_Access {
         
         return movieList;
     }
-
-
-//    public LinkedList<Film> getList(String t, String s, String g) throws Exception {
-//        Connection conn = connPool.getConnection();
-//        LinkedList<Film> filmList = new LinkedList<>();
-//        Statement stat = conn.createStatement();
-//        t = t.toUpperCase();
-//        s = s.toUpperCase();
-//        if(g.equals("Alle Filme"))
-//        {
-//            g="";
-//        }
-//        String sqlString = "SELECT title, description, category, length, actors, price "
-//                         + "FROM film_list "
-//                         + "WHERE title LIKE '%"+t+"%' AND actors LIKE '%"+s+"%' AND category LIKE '%"+g+"%';";
-//        
-//        ResultSet rs = stat.executeQuery(sqlString);
-//
-//        Film f;
-//
-//        while (rs.next()) {
-//            f = new Film(rs.getString("title"), rs.getString("description"), rs.getString("category"), Integer.parseInt(rs.getString("length")), rs.getString("actors"), Double.parseDouble(rs.getString("price")));
-//            if(!filmList.contains(f))
-//            {
-//                filmList.add(f);
-//            }
-//        }
-//        connPool.releaseConnection(conn);
-//        return filmList;
-//    }
-//
     
 
     public int getCountMovies() throws Exception {

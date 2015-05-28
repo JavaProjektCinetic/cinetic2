@@ -80,13 +80,34 @@
     </head>
     <body>
         <%
-            LinkedList<Movie> movieList = (LinkedList<Movie>) request.getAttribute("movieList");
-            int param = Integer.parseInt(request.getParameter("name"));
+            HttpSession s = request.getSession();
+            LinkedList<Movie> movieList = (LinkedList<Movie>) s.getAttribute("movieList");
+            LinkedList<Movie> actualList = (LinkedList<Movie>) s.getAttribute("al");
+            
+            /*if(actualList!=null)
+            {
+                for(Movie m : actualList)
+                {
+                    out.println(m.getTitleEnglish()+"</br>");
+                }
+            }*/
+            
+            Movie actMovie = null;
+            if(request.getParameter("name").endsWith("X"))
+            {
+                actMovie = movieList.get(Integer.parseInt(request.getParameter("name").substring(0,request.getParameter("name").lastIndexOf('X'))));
+            }
+            else
+            {
+            actMovie = actualList.get(Integer.parseInt(request.getParameter("name")));
+            }
+            //out.println(actMovie.getTitleEnglish());
+            
             LinkedList<Integer> randiList = new LinkedList<>();
             Random randi = new Random();
             do {
                 int temp = randi.nextInt(49) + 1;
-                if (!randiList.contains(temp)) {
+                if (!randiList.contains(temp) && movieList.get(temp)!=null) {
                     randiList.add(temp);
                 }
             } while (randiList.size() < 8);
@@ -105,24 +126,23 @@
             </div>
         </div>
 
-
         <table style="float:right" cellpadding="15">
             <tr><td>
-                    <div name="<%=movieList.get(param).getTitleEnglish()%>" class="movie">
+                    <div name="<%=actMovie.getTitleEnglish()%>" class="movie">
                         <center>
                             <table>
                                 <tr>
                                     <td>
-                                        <img src="res/<%=movieList.get(param).getPicture()%>.jpg" alt="<%=movieList.get(param).getTitleEnglish()%>" style="width:300px;"/>
+                                        <img src="res/<%=actMovie.getPicture()%>.jpg" alt="<%=actMovie.getTitleEnglish()%>" style="width:300px;"/>
                                     </td>
                                     <td>
                                         <p>
                                             <%if (movieList != null) {
-                                                    out.println("<h1 style='font-family:Playbill'>" + movieList.get(param).getTitleEnglish() + "</h1>");
-                                                    for (int i = 0; i < movieList.get(param).getRating(); i++) {
+                                                    out.println("<h1 style='font-family:Playbill'>" + actMovie.getTitleEnglish() + "</h1>");
+                                                    for (int i = 0; i < actMovie.getRating(); i++) {
                                                         out.println("<img src='res/stern.png' style='width:30px'/>");
                                                     }
-                                                    out.println("</br>" + movieList.get(param).getDescription());
+                                                    out.println("</br>" + actMovie.getDescription());
                                                 } else {
                                                     out.println("ERROR: No description found!");
                                                 }
@@ -160,16 +180,16 @@
                     <div name="suggestions" class="suggestions">
                         <form name="1" method="post">
                             <table  align="center" cellpadding="13">
-                                <tr><td><div  onclick="schicken(''+<%=randiList.get(1)%>)"><img src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
-                                <tr><td><div  onclick="schicken(''+<%=randiList.get(2)%>)"><img src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
-                                <tr><td><div  onclick="schicken(''+<%=randiList.get(3)%>)"><img src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>           
+                                <tr><td><div  onclick="schickenX(''+<%=randiList.get(1)%>)"><img src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
+                                <tr><td><div  onclick="schickenX(''+<%=randiList.get(2)%>)"><img src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
+                                <tr><td><div  onclick="schickenX(''+<%=randiList.get(3)%>)"><img src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>           
                             </table>
                         </form>
                     </div>
                     <script>
-                                                function schicken(name)
+                    function schickenX(name)
                         {
-                            document.forms[1].action = "CineticServlet2?name=" + name;
+                            document.forms[1].action = "CineticServlet2?name=" + name+"X";
                             document.forms[1].submit();
                         }
                     </script>

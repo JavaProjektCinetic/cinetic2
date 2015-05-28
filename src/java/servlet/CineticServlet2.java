@@ -28,6 +28,8 @@ import javax.servlet.http.HttpServletResponse;
 public class CineticServlet2 extends HttpServlet {
 
     LinkedList<Movie> movieList = null;
+    LinkedList<Movie> actualList = null;
+
     DB_Access dba = null;
 
     @Override
@@ -36,6 +38,7 @@ public class CineticServlet2 extends HttpServlet {
         try {
             dba = DB_Access.getTheInstance();
             movieList = dba.getMovieList("","");
+            actualList = dba.getMovieList("","");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CineticServlet2.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {

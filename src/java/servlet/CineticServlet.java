@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,12 +31,7 @@ public class CineticServlet extends HttpServlet {
     DB_Access dba = null;
     LinkedList<String> genreListE = null;
     LinkedList<String> genreListD = null;
-//    HashMap<Integer,String> desc = null;
-//    HashMap<Integer,String> title = null;
-//    HashMap<Integer,String> path = null;
-//    HashMap<Integer,Integer> rate = null;
-    
-    LinkedList<Movie> movieList = null;
+    LinkedList<Movie> movieList  = null;
     LinkedList<Movie> actualList = null;
 
     @Override
@@ -45,10 +41,6 @@ public class CineticServlet extends HttpServlet {
             dba = DB_Access.getTheInstance();
             genreListE = dba.getGenres("e");
             genreListD = dba.getGenres("d");
-//            desc = dba.getDesc();
-//            title = dba.getTitle();
-//            path = dba.getPath();
-//            rate=dba.getRate();
             
             movieList = dba.getMovieList("","");
             actualList = dba.getMovieList("","");
@@ -73,7 +65,6 @@ public class CineticServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            //String path = this.getServletContext().getRealPath("jsp/en/WelcomePage.jsp");
             
             String t = request.getParameter("titlefilter");
             String g = request.getParameter("genrefilter");
@@ -95,10 +86,11 @@ public class CineticServlet extends HttpServlet {
                 System.out.println(m.getTitleEnglish());
             }
             System.out.println("Filtered List size: " + actualList.size());
-            request.setAttribute("movieList", movieList);
-            request.setAttribute("actualList", actualList);
-            request.setAttribute("genreListE", genreListE);
-            request.setAttribute("genreListD", genreListD);
+            HttpSession s = request.getSession();
+            s.setAttribute("movieList", movieList);
+            s.setAttribute("actualList", actualList);
+            s.setAttribute("genreListE", genreListE);
+            s.setAttribute("genreListD", genreListD);
             //request.setAttribute("movieList",movieList);
             //response.sendRedirect("/jsp/en/WelcomePage.jsp");
             request.getRequestDispatcher("/jsp/en/WelcomePage.jsp").forward(request, response);
