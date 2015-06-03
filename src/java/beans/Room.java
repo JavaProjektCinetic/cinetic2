@@ -13,6 +13,9 @@ public class Room {
     private String roomName;
     private int seats;
     private int roomID;
+    
+    
+    
 
     public Room(String roomName, int seats, int roomID) {
         this.roomName = roomName;
