@@ -53,7 +53,10 @@
 
             body{
                 background-image: url("res/background2.jpg");
-                background-size: 1366px;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover; 
                 background-attachment: fixed;
                 background-repeat: no-repeat;
 
