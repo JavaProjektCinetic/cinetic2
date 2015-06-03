@@ -157,18 +157,18 @@
                                         <td>
                                             <select name="Show">
                                                 <%       
-                                            LinkedList<Show> showList = (LinkedList<Show>) request.getAttribute("showList");
+                                                    LinkedList<Show> showList = (LinkedList<Show>) request.getAttribute("showList");
                                                     LinkedList<Room> roomList = (LinkedList<Room>) request.getAttribute("roomList");
                                                     String room = "";
                                                     SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
                                                     SimpleDateFormat forTime = new SimpleDateFormat("hh:MM:ss");
+                                                    System.out.println("RoomList moviepage2 roomID: "+roomList.get(2).getRoomID());
                                                     for(int i = 0; i<showList.size(); i++)
                                                     {
                                                         if(movieList.get(param).getMovieID() == showList.get(i).getMovieID())
                                                         {
                                                             for(int j = 0; j<roomList.size(); j++)
                                                             {
-                                                                System.out.println("id" + roomList.get(j).getRoomID());
                                                                 if(showList.get(i).getRoomID() == roomList.get(j).getRoomID())
                                                                 {
                                                                     

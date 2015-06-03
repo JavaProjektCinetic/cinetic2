@@ -42,7 +42,11 @@ public class CineticServlet2 extends HttpServlet {
             movieList = dba.getMovieList("","");
             showList = dba.getShows();     
             roomList = dba.getRooms();
-            System.out.println(roomList.get(1).getRoomID());
+            for (int i = 0; i < roomList.size(); i++) 
+            {
+                System.out.println("Servlet2 roomList: "+roomList.get(i).getRoomID());            
+            }
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CineticServlet2.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {

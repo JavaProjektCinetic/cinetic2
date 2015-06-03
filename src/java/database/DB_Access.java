@@ -62,12 +62,10 @@ public class DB_Access {
             takenseats = Integer.parseInt(rs.getString(4));
             showid = Integer.parseInt(rs.getString(5));
             time = forTime.parse(rs.getString(6));
-            freeseats = Integer.parseInt(rs.getString(7));
-            
+            freeseats = Integer.parseInt(rs.getString(7));           
             Show s = new Show(roomid, movieid, d, takenseats, showid, time, freeseats);
             shows.add(s);
         }  
-        System.out.println(shows.get(3).getFreeseats());
         return shows;
     }
 
@@ -293,9 +291,10 @@ public class DB_Access {
         while (rs.next()) {
             name = rs.getString(1);
             seats = rs.getString(2);
-            id = Integer.parseInt(rs.getString(3));    
-            System.out.println("ertzuio " + id);
+            id = Integer.parseInt(rs.getString(3));  
+            System.out.println("DB_Access getRooms roomID bevor es hinzugefügt wird: "+id);
             Room r = new Room(name, Integer.parseInt(seats), id);
+            System.out.println("DB_Access getRooms roomID: "+r.getRoomID());
             roomList.add(r);       
         }    
         connPool.releaseConnection(conn);

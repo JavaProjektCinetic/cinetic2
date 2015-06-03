@@ -11,10 +11,7 @@ import beans.Show;
 import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -60,8 +57,7 @@ public class CineticServlet extends HttpServlet {
             System.out.println(ex.toString());
         } catch (Exception ex) {
             System.out.println(ex.toString());
-        }
-        
+        }      
     }
     
     /**
