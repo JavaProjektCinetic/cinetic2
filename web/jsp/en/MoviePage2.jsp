@@ -4,6 +4,11 @@
     Author     : Laura
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="beans.Room"%>
+<%@page import="beans.Show"%>
+<%@page import="java.util.Date"%>
+<%@page import="database.DB_Access"%>
 <%@page import="java.util.Random"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="beans.Movie"%>
@@ -26,7 +31,7 @@
         <style>
             div.header 
             {
-                width: 1366px;
+                width: 100%;
                 height: 150px;
                 margin-left: -8px;
                 margin-top: -8px;
@@ -69,10 +74,18 @@
                 border-color: #644030;
             }
 
+            table.table2
+            {
+                width:100%;
+            }
+
             body
             {
                 background-image: url("res/background2.jpg");
-                background-size: 1366px;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover; 
                 background-attachment: fixed;
                 background-repeat: no-repeat;
             }
@@ -114,17 +127,22 @@
             } while (randiList.size() < 8);
         %>
         <div name="cinetic_header" class="header">
-            <div name="logo" style="text-align:left; float:left" class='logo'>
-                <table>
-                    <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
-                </table>
-            </div>
-            <div name="checkbox" style="text-align:right; float:right;" class="lang">
-                <select>
-                    <option>German</option>
-                    <option>English</option>
-                </select>
-            </div>
+            <table class="table2"><tr><td><left>
+                    <div name="logo" style="text-align:left; float:left" class='logo'>
+                        <table>
+                            <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
+                        </table>
+                    </div>
+                </left></td>
+                <td><right>
+                    <div name="checkbox" style="text-align:right;" class="lang">
+
+                        <select>
+                            <option>German</option>
+                            <option>English</option>
+                        </select>
+                    </div>
+                </right> </td></tr></table>
         </div>
 
         <table style="float:right" cellpadding="15">
@@ -158,7 +176,35 @@
                                 <table>
                                     <tr>
                                         <td>
-                                            <input type="text" id="datepicker" name="date"/>
+                                            <select name="Show">
+                                                <%       
+                                                    LinkedList<Show> showList = (LinkedList<Show>) request.getAttribute("showList");
+                                                    LinkedList<Room> roomList = (LinkedList<Room>) request.getAttribute("roomList");
+                                                    String room = "";
+                                                    SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
+                                                    SimpleDateFormat forTime = new SimpleDateFormat("hh:MM:ss");
+                                                    System.out.println("RoomList moviepage2 roomID: "+roomList.get(2).getRoomID());
+                                                    for(int i = 0; i<showList.size(); i++)
+                                                    {
+                                                        if(movieList.get(0).getMovieID() == showList.get(i).getMovieID())
+                                                        {
+                                                            for(int j = 0; j<roomList.size(); j++)
+                                                            {
+                                                                if(showList.get(i).getRoomID() == roomList.get(j).getRoomID())
+                                                                {
+                                                                    
+                                                                    room = roomList.get(j).getRoomName();
+                                                                    System.out.println(room);
+                                                                }
+                                                            }
+                                                            out.println("<option>"+ room+" "+forDate.format(showList.get(i).getDate())+" " + forTime.format(showList.get(i).getTime())+"</option>");
+                                                        }     
+                                                    }
+                                                    
+                                                %>
+                                                
+                                            </select>
+                                            <input type="text" id="datepicker" name="reservationdate"/>
                                             <table border="1">
                                                 <tr><td>Time</td><td>Room</td>
                                                 <tr><td>18:00</td><td>Cozy Room</td></tr>
@@ -174,13 +220,17 @@
                             </form>
                         </center>
                     </div>
-                    
+
                 </td>
                 <td>
 
                     <div name="suggestions" class="suggestions">
                         <form name="1" method="post">
                             <table  align="center" cellpadding="13">
+                                <tr><td><div  onclick="schicken('' +<%=randiList.get(1)%>)"><img src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
+                                <tr><td><div  onclick="schicken('' +<%=randiList.get(2)%>)"><img src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
+                                <tr><td><div  onclick="schicken('' +<%=randiList.get(3)%>)"><img src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>           
+
                                 <tr><td><div  onclick="schickenX(''+<%=randiList.get(1)%>)"><img src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
                                 <tr><td><div  onclick="schickenX(''+<%=randiList.get(2)%>)"><img src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
                                 <tr><td><div  onclick="schickenX(''+<%=randiList.get(3)%>)"><img src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>           
@@ -188,7 +238,6 @@
                         </form>
                     </div>
                     <script>
-                    function schickenX(name)
                         {
                             document.forms[1].action = "CineticServlet2?name=" + name+"X";
                             document.forms[1].submit();
@@ -200,3 +249,4 @@
 
     </body>
 </html>
+

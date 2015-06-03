@@ -6,13 +6,12 @@
 package servlet;
 
 import beans.Movie;
+import beans.Room;
+import beans.Show;
 import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,11 +44,10 @@ public class CineticServlet extends HttpServlet {
             movieList = dba.getMovieList("","");
             actualList = dba.getMovieList("","");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CineticServlet.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.toString());
         } catch (Exception ex) {
-            Logger.getLogger(CineticServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+            System.out.println(ex.toString());
+        }      
     }
     
     /**

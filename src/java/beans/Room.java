@@ -13,6 +13,10 @@ public class Room {
     private int roomId;
     private String roomName;
     private int seats;
+    private int roomID;
+    
+    
+    
 
     public Room(int roomId, String roomName, int seats) {
         this.roomId=roomId;
@@ -34,6 +38,14 @@ public class Room {
 
     public void setRoomName(String roomName) {
         this.roomName = roomName;
+    }
+    
+    public int getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
     }
 
     public int getSeats() {
