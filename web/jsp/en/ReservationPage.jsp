@@ -142,15 +142,9 @@
                             if (roomid2 == 2) {//the room
                                 for (int i = 0; i < 15; i++) {
                                     out.println("<tr>");
-                                    if (i == 0) {
-                                        for (int j = 0; j < 17; j++) {
-                                            out.println("<td><div class='seats2'/></td>");
-                                        }
-
-                                    } else {
                                         for (int j = 0; j < 16; j++) {
                                             
-                                            if (j == 7 && i > 7) {
+                                            if ((j == 7 || j==8) && i > 7) {
                                                 out.println("<td><div class='aisle2'/></td>");
                                             } else if (i == 7 || i == 2) {
                                                 out.println("<td><div class='aisle2'/></td>");
