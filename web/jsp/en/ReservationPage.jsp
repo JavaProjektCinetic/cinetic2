@@ -120,7 +120,7 @@
                 LinkedList<Integer> randiList = new LinkedList<>();
                 Random randi = new Random();
                 do {
-                    int temp = randi.nextInt(49) + 1;
+                    int temp = randi.nextInt(46) + 1;
                     if (!randiList.contains(temp) && movieList.get(temp) != null) {
                         randiList.add(temp);
                     }

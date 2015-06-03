@@ -61,8 +61,6 @@
                 //opacity: 0.9;
             }
 
-
-
             div.suggestions
             {
                 width:180px;
@@ -112,15 +110,15 @@
             }
             else
             {
-            actMovie = actualList.get(Integer.parseInt(request.getParameter("name")));
+                actMovie = actualList.get(Integer.parseInt(request.getParameter("name")));
             }
             s.setAttribute("actMovie", actMovie);
-            //out.println(actMovie.getTitleEnglish());
+            out.println(actMovie.getTitleEnglish());
             
             LinkedList<Integer> randiList = new LinkedList<>();
             Random randi = new Random();
             do {
-                int temp = randi.nextInt(49) + 1;
+                int temp = randi.nextInt(46) + 1;
                 if (!randiList.contains(temp) && movieList.get(temp)!=null) {
                     randiList.add(temp);
                 }
@@ -227,10 +225,6 @@
                     <div name="suggestions" class="suggestions">
                         <form name="1" method="post">
                             <table  align="center" cellpadding="13">
-                                <tr><td><div  onclick="schicken('' +<%=randiList.get(1)%>)"><img src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
-                                <tr><td><div  onclick="schicken('' +<%=randiList.get(2)%>)"><img src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
-                                <tr><td><div  onclick="schicken('' +<%=randiList.get(3)%>)"><img src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>           
-
                                 <tr><td><div  onclick="schickenX(''+<%=randiList.get(1)%>)"><img src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
                                 <tr><td><div  onclick="schickenX(''+<%=randiList.get(2)%>)"><img src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
                                 <tr><td><div  onclick="schickenX(''+<%=randiList.get(3)%>)"><img src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>           
@@ -238,15 +232,26 @@
                         </form>
                     </div>
                     <script>
-                        {
-                            document.forms[1].action = "CineticServlet2?name=" + name+"X";
-                            document.forms[1].submit();
-                        }
-                    </script>
+                function schicken(name)
+                {
+                    document.forms[1].action = "CineticServlet2?name=" + name;
+                    document.forms[1].submit();
+
+                }
+            </script>
+            <script>
+                function schickenX(name)
+                {
+                    document.forms[1].action = "CineticServlet2?name=" + name+"X";
+                    document.forms[1].submit();
+
+                }
+            </script>
                 </td>
             </tr>
         </table>              
 
+        
     </body>
 </html>
 
