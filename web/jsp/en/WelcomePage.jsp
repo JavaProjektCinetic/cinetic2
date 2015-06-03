@@ -17,7 +17,7 @@
 
         <style>
             div.header {
-                width: 100%;
+                width: 1366px;
                 height: 150px;
                 margin-left: -8px;
                 margin-top: -8px;
@@ -53,7 +53,10 @@
 
             body{
                 background-image: url("res/background2.jpg");
-                background-size: 1366px;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover; 
                 background-attachment: fixed;
                 background-repeat: no-repeat;
 
@@ -152,7 +155,7 @@
             Random randi = new Random();
 
             do {
-                int temp = randi.nextInt(46) + 1;
+                int temp = randi.nextInt(49) + 1;
                 if (!randiList.contains(temp)) {
                     randiList.add(temp);
                 }
@@ -226,7 +229,7 @@
             <script>
                 function schickenX(name)
                 {
-                    document.forms[1].action = "CineticServlet2?name=" + name+"X";
+                    document.forms[1].action = "CineticServlet2?name=" + name+"";
                     document.forms[1].submit();
 
                 }
