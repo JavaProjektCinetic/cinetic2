@@ -7,11 +7,12 @@ package servlet;
 
 import beans.Movie;
 import beans.Room;
-import beans.Show;
 import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,30 +25,25 @@ import javax.servlet.http.HttpSession;
  *
  * @author Laura
  */
-@WebServlet(name = "CineticServlet", urlPatterns = {"/CineticServlet"})
-public class CineticServlet extends HttpServlet {
+@WebServlet(name = "CineticServlet4", urlPatterns = {"/CineticServlet4"})
+public class CineticServlet4 extends HttpServlet {
 
+    LinkedList<Movie> movieList = null;
+    LinkedList<Room> roomList = null;
     DB_Access dba = null;
-    LinkedList<String> genreListE = null;
-    LinkedList<String> genreListD = null;
-    LinkedList<Movie> movieList  = null;
-    LinkedList<Movie> actualList = null;
-
+    
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         try {
             dba = DB_Access.getTheInstance();
-            genreListE = dba.getGenres("e");
-            genreListD = dba.getGenres("d");
-            
             movieList = dba.getMovieList("","");
-            actualList = dba.getMovieList("","");
+            roomList = dba.getRoomList();
         } catch (ClassNotFoundException ex) {
-            System.out.println(ex.toString());
+            Logger.getLogger(CineticServlet3.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
-            System.out.println(ex.toString());
-        }      
+            Logger.getLogger(CineticServlet3.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**
@@ -63,40 +59,13 @@ public class CineticServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
-            String t = request.getParameter("titlefilter");
-            String g = request.getParameter("genrefilter");
-            if (t == null) {
-                t = "";
-            }
-            if (g == null) {
-                g = "";
-            }
-            try {
-                actualList.clear();
-                actualList = dba.getMovieList(t, g);
-            } catch (Exception ex) {
-                System.out.println(ex.toString());
-            }
-            
-            System.out.println("######## \nt: " + t + "\ng: " + g+"\n");
-            for (Movie m : actualList) {
-                System.out.println(m.getTitleEnglish());
-            }
-            System.out.println("Filtered List size: " + actualList.size());
+            /* TODO output your page here. You may use following sample code. */
             HttpSession s = request.getSession();
             s.setAttribute("movieList", movieList);
-            s.setAttribute("actualList", actualList);
-            s.setAttribute("genreListE", genreListE);
-            s.setAttribute("genreListD", genreListD);
-            //request.setAttribute("movieList",movieList);
-            //response.sendRedirect("/jsp/en/WelcomePage.jsp");
-            request.getRequestDispatcher("/jsp/en/WelcomePage.jsp").forward(request, response);
-            //request.getRequestDispatcher("/jsp/en/MoviePage.jsp").forward(request, response);
-            //request.getRequestDispatcher(path).forward(request, response);
-            
+            s.setAttribute("roomList", roomList);
+            request.getRequestDispatcher("/jsp/en/ReservationPage.jsp").forward(request, response);
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -110,7 +79,6 @@ public class CineticServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         processRequest(request, response);
     }
 

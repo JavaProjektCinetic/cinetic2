@@ -73,7 +73,7 @@ public class DB_Access {
         LinkedList<Show> showList = new LinkedList<>();
         SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat forTime = new SimpleDateFormat("hh:MM:ss");
-        LinkedList<Room> rooms = getRooms();
+        LinkedList<Room> rooms = getRoomList();
         LinkedList<String> time = new LinkedList<>();
         time.add("15:00:00");
         time.add("18:00:00");
@@ -229,7 +229,7 @@ public class DB_Access {
     }
 
     public void setSeats() throws Exception {
-        LinkedList<Room> roomL = getRooms();
+        LinkedList<Room> roomL = getRoomList();
         LinkedList<Seat> seatList = new LinkedList<>();
         Seat s;
         Connection conn = connPool.getConnection();
@@ -279,44 +279,44 @@ public class DB_Access {
         connPool.releaseConnection(conn);
     }
 
-    public LinkedList<Room> getRooms() throws Exception {
+    public LinkedList<Room> getRoomList() throws Exception {
         Connection conn = connPool.getConnection();
         LinkedList<Room> roomList = new LinkedList<>();
         Statement stat = conn.createStatement();
-        String sqlString = "SELECT name, seats, roomid FROM room";
+        String sqlString = "SELECT roomid, name, seats FROM room";
         ResultSet rs = stat.executeQuery(sqlString);
-        String name;
-        String seats;
         int id;
+        String name;
+        int seats;
         while (rs.next()) {
-            name = rs.getString(1);
-            seats = rs.getString(2);
-            id = Integer.parseInt(rs.getString(3));  
-            System.out.println("DB_Access getRooms roomID bevor es hinzugefügt wird: "+id);
-            Room r = new Room(name, Integer.parseInt(seats), id);
-            System.out.println("DB_Access getRooms roomID: "+r.getRoomID());
-            roomList.add(r);       
-        }    
-        connPool.releaseConnection(conn);
+            id = rs.getInt("roomid");
+            name = rs.getString("name");
+            seats = rs.getInt("seats");
+            Room r = new Room(id,name,seats);
+            roomList.add(r);
+        }
         return roomList;
     }
 
-    public LinkedList<Movie> getMovieList(String t, String g) throws Exception {
+    public LinkedList<Movie> getMovieList(String t, String g) throws Exception //parameter upper case
+    {
         //Int id, String titleEnglish, String picture, String description, String trailer, String music, String titleGerman, int rating, String genreEnglish, String genreGerman, int length
         Connection conn = connPool.getConnection();
         LinkedList<Movie> movieList = new LinkedList<>();
         Statement stat = conn.createStatement();
         t = t.toUpperCase();
         
-        
         if(g.equals("All Movies"))
         {
             g="";
         }
+        if(t==null || t.equals(""))
+        {
+            t="";
+        }
         String sqlString = "SELECT movieid, title, picture, description, trailer, music, titlegerman, rating, genre, genregerman, length "
                          + "FROM movie "
-                         + "WHERE title LIKE '%"+t+"%' AND genre LIKE '%"+g+"%';";
-        
+                         + "WHERE upper(title) LIKE '%"+t+"%' AND genre LIKE '%"+g+"%';";
         ResultSet rs = stat.executeQuery(sqlString);
         while (rs.next()) {
             Movie m = new Movie(rs.getString("title"), rs.getString("picture"), rs.getString("description"), rs.getString("trailer"), rs.getString("music"), rs.getString("titlegerman"), rs.getInt("rating"), rs.getString("genre"), rs.getString("genregerman"), rs.getInt("length"), rs.getInt("movieid"));
@@ -325,43 +325,9 @@ public class DB_Access {
             }
         }
         connPool.releaseConnection(conn);
-        
-        
         return movieList;
     }
-
-
-//    public LinkedList<Film> getList(String t, String s, String g) throws Exception {
-//        Connection conn = connPool.getConnection();
-//        LinkedList<Film> filmList = new LinkedList<>();
-//        Statement stat = conn.createStatement();
-//        t = t.toUpperCase();
-//        s = s.toUpperCase();
-//        if(g.equals("Alle Filme"))
-//        {
-//            g="";
-//        }
-//        String sqlString = "SELECT title, description, category, length, actors, price "
-//                         + "FROM film_list "
-//                         + "WHERE title LIKE '%"+t+"%' AND actors LIKE '%"+s+"%' AND category LIKE '%"+g+"%';";
-//        
-//        ResultSet rs = stat.executeQuery(sqlString);
-//
-//        Film f;
-//
-//        while (rs.next()) {
-//            f = new Film(rs.getString("title"), rs.getString("description"), rs.getString("category"), Integer.parseInt(rs.getString("length")), rs.getString("actors"), Double.parseDouble(rs.getString("price")));
-//            if(!filmList.contains(f))
-//            {
-//                filmList.add(f);
-//            }
-//        }
-//        connPool.releaseConnection(conn);
-//        return filmList;
-//    }
-//
     
-
     public int getCountMovies() throws Exception {
         int count = getMovieList("","").size();
         return count;
@@ -400,80 +366,4 @@ public class DB_Access {
         connPool.releaseConnection(conn);
         return genreList;
     }
-
-//    public HashMap<Integer, String> getDesc() throws Exception {
-//        Connection conn = connPool.getConnection();
-//        Statement stat = conn.createStatement();
-//        String sqlString = "SELECT movieid, description FROM movie;";
-//        HashMap<Integer, String> idDesc = new HashMap<>();
-//        ResultSet rs = stat.executeQuery(sqlString);
-//        String desc;
-//        int id;
-//        while (rs.next()) {
-//            desc = rs.getString("description");
-//            id = rs.getInt("movieid");
-//            if (!idDesc.containsKey(desc)) {
-//                idDesc.put(id, desc);
-//            }
-//        }
-//        connPool.releaseConnection(conn);
-//        return idDesc;
-//    }
-//
-//    public HashMap<Integer, String> getTitle() throws Exception {
-//        Connection conn = connPool.getConnection();
-//        Statement stat = conn.createStatement();
-//        String sqlString = "SELECT movieid, title FROM movie;";
-//        HashMap<Integer, String> idTitle = new HashMap<>();
-//        ResultSet rs = stat.executeQuery(sqlString);
-//        String title;
-//        int id;
-//        while (rs.next()) {
-//            title = rs.getString("title");
-//            id = rs.getInt("movieid");
-//            if (!idTitle.containsKey(title)) {
-//                idTitle.put(id, title);
-//            }
-//        }
-//        connPool.releaseConnection(conn);
-//        return idTitle;
-//    }
-//
-//    public HashMap<Integer, String> getPath() throws Exception {
-//        Connection conn = connPool.getConnection();
-//        Statement stat = conn.createStatement();
-//        String sqlString = "SELECT movieid, picture FROM movie;";
-//        HashMap<Integer, String> idPath = new HashMap<>();
-//        ResultSet rs = stat.executeQuery(sqlString);
-//        String path;
-//        int id;
-//        while (rs.next()) {
-//            path = rs.getString("picture");
-//            id = rs.getInt("movieid");
-//            if (!idPath.containsKey(path)) {
-//                idPath.put(id, path);
-//            }
-//        }
-//        connPool.releaseConnection(conn);
-//        return idPath;
-//    }
-//
-//    public HashMap<Integer, Integer> getRate() throws Exception {
-//        Connection conn = connPool.getConnection();
-//        Statement stat = conn.createStatement();
-//        String sqlString = "SELECT movieid, rating FROM movie;";
-//        HashMap<Integer, Integer> idRate = new HashMap<>();
-//        ResultSet rs = stat.executeQuery(sqlString);
-//        int rate;
-//        int id;
-//        while (rs.next()) {
-//            rate = rs.getInt("rating");
-//            id = rs.getInt("movieid");
-//            if (!idRate.containsKey(rate)) {
-//                idRate.put(id, rate);
-//            }
-//        }
-//        connPool.releaseConnection(conn);
-//        return idRate;
-//    }
 }

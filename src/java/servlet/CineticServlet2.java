@@ -21,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -30,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CineticServlet2 extends HttpServlet {
 
     LinkedList<Movie> movieList = null;
+    //LinkedList<Movie> actualList = null;
     LinkedList<Show> showList = null;
     LinkedList<Room> roomList = null;
     DB_Access dba = null;
@@ -41,7 +43,7 @@ public class CineticServlet2 extends HttpServlet {
             dba = DB_Access.getTheInstance();
             movieList = dba.getMovieList("","");
             showList = dba.getShows();     
-            roomList = dba.getRooms();
+            roomList = dba.getRoomList();
             for (int i = 0; i < roomList.size(); i++) 
             {
                 System.out.println("Servlet2 roomList: "+roomList.get(i).getRoomID());            
@@ -71,9 +73,15 @@ public class CineticServlet2 extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+
             request.setAttribute("movieList",movieList);
             request.setAttribute("showList", showList);
             request.setAttribute("roomList", roomList);
+
+            HttpSession s = request.getSession();
+            s.setAttribute("movieList",movieList);
+            
+
             //movieList = (LinkedList<Movie>) request.getAttribute("movieList");
             //out.println("bbblalala");
             request.getRequestDispatcher("/jsp/en/MoviePage2.jsp").forward(request, response);

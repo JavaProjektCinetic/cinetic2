@@ -10,6 +10,7 @@ package beans;
  * @author Sarah
  */
 public class Room {
+    private int roomId;
     private String roomName;
     private int seats;
     private int roomID;
@@ -17,9 +18,18 @@ public class Room {
     
     
 
-    public Room(String roomName, int seats, int roomID) {
+    public Room(int roomId, String roomName, int seats) {
+        this.roomId=roomId;
         this.roomName = roomName;
         this.seats = seats;
+    }
+
+    public int getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
     }
 
     public String getRoomName() {

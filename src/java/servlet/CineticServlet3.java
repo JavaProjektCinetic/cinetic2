@@ -6,6 +6,7 @@
 package servlet;
 
 import beans.Movie;
+import beans.Room;
 import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -27,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CineticServlet3 extends HttpServlet {
 
     LinkedList<Movie> movieList = null;
+    LinkedList<Room> roomList = null;
     DB_Access dba = null;
 
     @Override
@@ -35,6 +38,7 @@ public class CineticServlet3 extends HttpServlet {
         try {
             dba = DB_Access.getTheInstance();
             movieList = dba.getMovieList("","");
+            roomList = dba.getRoomList();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CineticServlet3.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -55,7 +59,9 @@ public class CineticServlet3 extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            HttpSession s = request.getSession();
+            s.setAttribute("movieList", movieList);
+            s.setAttribute("roomList", roomList);
             
             request.getRequestDispatcher("/jsp/en/LoginPage.jsp").forward(request, response);
         }
