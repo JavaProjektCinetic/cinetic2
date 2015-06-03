@@ -46,7 +46,7 @@ public class DB_Access {
         LinkedList<Show> showList = new LinkedList<>();
         SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
         SimpleDateFormat forTime = new SimpleDateFormat("hh:MM:ss");
-        LinkedList<Room> rooms = getRooms();
+        LinkedList<Room> rooms = getRoomList();
         LinkedList<String> time = new LinkedList<>();
         time.add("15:00:00");
         time.add("18:00:00");
@@ -201,7 +201,7 @@ public class DB_Access {
     }
 
     public void setSeats() throws Exception {
-        LinkedList<Room> roomL = getRooms();
+        LinkedList<Room> roomL = getRoomList();
         LinkedList<Seat> seatList = new LinkedList<>();
         Seat s;
         Connection conn = connPool.getConnection();
@@ -250,18 +250,20 @@ public class DB_Access {
         }
     }
 
-    public LinkedList<Room> getRooms() throws Exception {
+    public LinkedList<Room> getRoomList() throws Exception {
         Connection conn = connPool.getConnection();
         LinkedList<Room> roomList = new LinkedList<>();
         Statement stat = conn.createStatement();
-        String sqlString = "SELECT name, seats FROM room";
+        String sqlString = "SELECT roomid, name, seats FROM room";
         ResultSet rs = stat.executeQuery(sqlString);
+        int id;
         String name;
-        String seats;
+        int seats;
         while (rs.next()) {
-            name = rs.getString(1);
-            seats = rs.getString(2);
-            Room r = new Room(name, Integer.parseInt(seats));
+            id = rs.getInt("roomid");
+            name = rs.getString("name");
+            seats = rs.getInt("seats");
+            Room r = new Room(id,name,seats);
             roomList.add(r);
         }
         return roomList;
@@ -286,9 +288,6 @@ public class DB_Access {
         String sqlString = "SELECT movieid, title, picture, description, trailer, music, titlegerman, rating, genre, genregerman, length "
                          + "FROM movie "
                          + "WHERE upper(title) LIKE '%"+t+"%' AND genre LIKE '%"+g+"%';";
-        
-        System.out.println("################################## "+sqlString);
-        
         ResultSet rs = stat.executeQuery(sqlString);
         while (rs.next()) {
             Movie m = new Movie(rs.getString("title"), rs.getString("picture"), rs.getString("description"), rs.getString("trailer"), rs.getString("music"), rs.getString("titlegerman"), rs.getInt("rating"), rs.getString("genre"), rs.getString("genregerman"), rs.getInt("length"), rs.getInt("movieid"));
@@ -297,12 +296,9 @@ public class DB_Access {
             }
         }
         connPool.releaseConnection(conn);
-        
-        
         return movieList;
     }
     
-
     public int getCountMovies() throws Exception {
         int count = getMovieList("","").size();
         return count;
@@ -341,80 +337,4 @@ public class DB_Access {
         connPool.releaseConnection(conn);
         return genreList;
     }
-
-//    public HashMap<Integer, String> getDesc() throws Exception {
-//        Connection conn = connPool.getConnection();
-//        Statement stat = conn.createStatement();
-//        String sqlString = "SELECT movieid, description FROM movie;";
-//        HashMap<Integer, String> idDesc = new HashMap<>();
-//        ResultSet rs = stat.executeQuery(sqlString);
-//        String desc;
-//        int id;
-//        while (rs.next()) {
-//            desc = rs.getString("description");
-//            id = rs.getInt("movieid");
-//            if (!idDesc.containsKey(desc)) {
-//                idDesc.put(id, desc);
-//            }
-//        }
-//        connPool.releaseConnection(conn);
-//        return idDesc;
-//    }
-//
-//    public HashMap<Integer, String> getTitle() throws Exception {
-//        Connection conn = connPool.getConnection();
-//        Statement stat = conn.createStatement();
-//        String sqlString = "SELECT movieid, title FROM movie;";
-//        HashMap<Integer, String> idTitle = new HashMap<>();
-//        ResultSet rs = stat.executeQuery(sqlString);
-//        String title;
-//        int id;
-//        while (rs.next()) {
-//            title = rs.getString("title");
-//            id = rs.getInt("movieid");
-//            if (!idTitle.containsKey(title)) {
-//                idTitle.put(id, title);
-//            }
-//        }
-//        connPool.releaseConnection(conn);
-//        return idTitle;
-//    }
-//
-//    public HashMap<Integer, String> getPath() throws Exception {
-//        Connection conn = connPool.getConnection();
-//        Statement stat = conn.createStatement();
-//        String sqlString = "SELECT movieid, picture FROM movie;";
-//        HashMap<Integer, String> idPath = new HashMap<>();
-//        ResultSet rs = stat.executeQuery(sqlString);
-//        String path;
-//        int id;
-//        while (rs.next()) {
-//            path = rs.getString("picture");
-//            id = rs.getInt("movieid");
-//            if (!idPath.containsKey(path)) {
-//                idPath.put(id, path);
-//            }
-//        }
-//        connPool.releaseConnection(conn);
-//        return idPath;
-//    }
-//
-//    public HashMap<Integer, Integer> getRate() throws Exception {
-//        Connection conn = connPool.getConnection();
-//        Statement stat = conn.createStatement();
-//        String sqlString = "SELECT movieid, rating FROM movie;";
-//        HashMap<Integer, Integer> idRate = new HashMap<>();
-//        ResultSet rs = stat.executeQuery(sqlString);
-//        int rate;
-//        int id;
-//        while (rs.next()) {
-//            rate = rs.getInt("rating");
-//            id = rs.getInt("movieid");
-//            if (!idRate.containsKey(rate)) {
-//                idRate.put(id, rate);
-//            }
-//        }
-//        connPool.releaseConnection(conn);
-//        return idRate;
-//    }
 }

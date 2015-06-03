@@ -25,13 +25,13 @@ import javax.servlet.http.HttpSession;
  *
  * @author Laura
  */
-@WebServlet(name = "CineticServlet_aufLogin", urlPatterns = {"/CineticServlet_aufLogin"})
-public class CineticServlet3 extends HttpServlet {
+@WebServlet(name = "CineticServlet4", urlPatterns = {"/CineticServlet4"})
+public class CineticServlet4 extends HttpServlet {
 
     LinkedList<Movie> movieList = null;
     LinkedList<Room> roomList = null;
     DB_Access dba = null;
-
+    
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -59,11 +59,11 @@ public class CineticServlet3 extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
             HttpSession s = request.getSession();
             s.setAttribute("movieList", movieList);
             s.setAttribute("roomList", roomList);
-            
-            request.getRequestDispatcher("/jsp/en/LoginPage.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/en/ReservationPage.jsp").forward(request, response);
         }
     }
 

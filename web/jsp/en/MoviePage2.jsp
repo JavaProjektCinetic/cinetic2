@@ -101,6 +101,7 @@
             {
             actMovie = actualList.get(Integer.parseInt(request.getParameter("name")));
             }
+            s.setAttribute("actMovie", actMovie);
             //out.println(actMovie.getTitleEnglish());
             
             LinkedList<Integer> randiList = new LinkedList<>();
@@ -153,11 +154,11 @@
                             </table>
 
                             <div name="videoplatzhalter" style="width:500px; height:300px; background-color: blanchedalmond" ></div>
-                            <form action="CineticServlet3" method="post">
+                            <form action="CineticServlet3">
                                 <table>
                                     <tr>
                                         <td>
-                                            <input type="text" id="datepicker" name="reservationdate"/>
+                                            <input type="text" id="datepicker" name="date"/>
                                             <table border="1">
                                                 <tr><td>Time</td><td>Room</td>
                                                 <tr><td>18:00</td><td>Cozy Room</td></tr>
