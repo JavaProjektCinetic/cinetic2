@@ -114,7 +114,7 @@
                 Movie actMovie2 = movieList.get(1);
                 out.println(actMovie2.getTitleEnglish());
                 //int roomid = Integer.parseInt(request.getParameter("room"));
-                int roomid2 = 2;
+                int roomid2 = 1;
 
                 //Date time = (Date) request.getParameter("time");
                 LinkedList<Integer> randiList = new LinkedList<>();
@@ -169,11 +169,8 @@
 
                                     out.println("</tr>");
                                 }
-                            }
-                            /*
-                             if (roomid2 == 2) {
-                                
-                             }
+                            
+                            
                              
                              if (roomid2 == 1) {//glamour
                              for (int i = 0; i < 7; i++) {
@@ -188,7 +185,7 @@
                              out.println("</tr>");
                              }
                              }
-                             */
+                             
                         %>
                     </table>
                     </br>

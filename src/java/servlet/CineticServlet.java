@@ -78,12 +78,7 @@ public class CineticServlet extends HttpServlet {
             } catch (Exception ex) {
                 System.out.println(ex.toString());
             }
-            
-            System.out.println("######## \nt: " + t + "\ng: " + g+"\n");
-            for (Movie m : actualList) {
-                System.out.println(m.getTitleEnglish());
-            }
-            System.out.println("Filtered List size: " + actualList.size());
+                      
             HttpSession s = request.getSession();
             s.setAttribute("movieList", movieList);
             s.setAttribute("actualList", actualList);
