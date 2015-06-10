@@ -17,10 +17,10 @@ public class Show {
     private Date date;
     private int takenseats;
     private int showid;
-    private Date time;
+    private String time;
     private int freeseats;
 
-    public Show(int roomID, int movieID, Date date, int takenseats, int showid, Date time, int freeseats) {
+    public Show(int roomID, int movieID, Date date, int takenseats, int showid, String time, int freeseats) {
         this.roomID = roomID;
         this.movieID = movieID;
         this.date = date;
@@ -70,11 +70,11 @@ public class Show {
         this.showid = showid;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
