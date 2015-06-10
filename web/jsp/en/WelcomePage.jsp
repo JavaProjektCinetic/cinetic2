@@ -17,7 +17,7 @@
 
         <style>
             div.header {
-                width: 1366px;
+                width: 100%;
                 height: 150px;
                 margin-left: -8px;
                 margin-top: -8px;
@@ -223,15 +223,12 @@
                 {
                     document.forms[1].action = "CineticServlet2?name=" + name;
                     document.forms[1].submit();
-
                 }
-            </script>
-            <script>
+                
                 function schickenX(name)
                 {
-                    document.forms[1].action = "CineticServlet2?name=" + name+"";
+                    document.forms[1].action = "CineticServlet2?name=" + name+"X";
                     document.forms[1].submit();
-
                 }
             </script>
 

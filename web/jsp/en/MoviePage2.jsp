@@ -94,32 +94,28 @@
             HttpSession s = request.getSession();
             LinkedList<Movie> movieList = (LinkedList<Movie>) s.getAttribute("movieList");
             LinkedList<Movie> actualList = (LinkedList<Movie>) s.getAttribute("al");
-            
+
             /*if(actualList!=null)
-            {
-                for(Movie m : actualList)
-                {
-                    out.println(m.getTitleEnglish()+"</br>");
-                }
-            }*/
-            
+             {
+             for(Movie m : actualList)
+             {
+             out.println(m.getTitleEnglish()+"</br>");
+             }
+             }*/
             Movie actMovie = null;
-            if(request.getParameter("name").endsWith("X"))
-            {
-                actMovie = movieList.get(Integer.parseInt(request.getParameter("name").substring(0,request.getParameter("name").lastIndexOf('X'))));
-            }
-            else
-            {
+            if (request.getParameter("name").endsWith("X")) {
+                actMovie = movieList.get(Integer.parseInt(request.getParameter("name").substring(0, request.getParameter("name").lastIndexOf('X'))));
+            } else {
                 actMovie = actualList.get(Integer.parseInt(request.getParameter("name")));
             }
             s.setAttribute("actMovie", actMovie);
-            out.println(actMovie.getTitleEnglish());
-            
+            out.println(actMovie.getTrailer());
+
             LinkedList<Integer> randiList = new LinkedList<>();
             Random randi = new Random();
             do {
                 int temp = randi.nextInt(46) + 1;
-                if (!randiList.contains(temp) && movieList.get(temp)!=null) {
+                if (!randiList.contains(temp) && movieList.get(temp) != null) {
                     randiList.add(temp);
                 }
             } while (randiList.size() < 8);
@@ -169,38 +165,36 @@
                                 </tr>
                             </table>
 
-                            <div name="videoplatzhalter" style="width:500px; height:300px; background-color: blanchedalmond" ></div>
+                                <iframe width="500" height="300"
+                                        src="https://www.youtube.com/embed/<%=actMovie.getTrailer()%>?autoplay=1">
+                                </iframe>
                             <form action="CineticServlet3">
                                 <table>
                                     <tr>
                                         <td>
                                             <select name="Show">
-                                                <%       
+                                                <%
                                                     LinkedList<Show> showList = (LinkedList<Show>) request.getAttribute("showList");
                                                     LinkedList<Room> roomList = (LinkedList<Room>) request.getAttribute("roomList");
                                                     String room = "";
                                                     SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
                                                     SimpleDateFormat forTime = new SimpleDateFormat("hh:MM:ss");
-                                                    System.out.println("RoomList moviepage2 roomID: "+roomList.get(2).getRoomID());
-                                                    for(int i = 0; i<showList.size(); i++)
-                                                    {
-                                                        if(movieList.get(0).getMovieID() == showList.get(i).getMovieID())
-                                                        {
-                                                            for(int j = 0; j<roomList.size(); j++)
-                                                            {
-                                                                if(showList.get(i).getRoomID() == roomList.get(j).getRoomID())
-                                                                {
-                                                                    
+                                                    System.out.println("RoomList moviepage2 roomID: " + roomList.get(2).getRoomID());
+                                                    for (int i = 0; i < showList.size(); i++) {
+                                                        if (movieList.get(0).getMovieID() == showList.get(i).getMovieID()) {
+                                                            for (int j = 0; j < roomList.size(); j++) {
+                                                                if (showList.get(i).getRoomID() == roomList.get(j).getRoomID()) {
+
                                                                     room = roomList.get(j).getRoomName();
                                                                     System.out.println(room);
                                                                 }
                                                             }
-                                                            out.println("<option>"+ room+" "+forDate.format(showList.get(i).getDate())+" " + forTime.format(showList.get(i).getTime())+"</option>");
-                                                        }     
+                                                            out.println("<option>" + room + " " + forDate.format(showList.get(i).getDate()) + " " + forTime.format(showList.get(i).getTime()) + "</option>");
+                                                        }
                                                     }
-                                                    
+
                                                 %>
-                                                
+
                                             </select>
                                             <input type="text" id="datepicker" name="reservationdate"/>
                                             <table border="1">
@@ -225,33 +219,33 @@
                     <div name="suggestions" class="suggestions">
                         <form name="1" method="post">
                             <table  align="center" cellpadding="13">
-                                <tr><td><div  onclick="schickenX(''+<%=randiList.get(1)%>)"><img src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
-                                <tr><td><div  onclick="schickenX(''+<%=randiList.get(2)%>)"><img src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
-                                <tr><td><div  onclick="schickenX(''+<%=randiList.get(3)%>)"><img src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>           
+                                <tr><td><div  onclick="schickenX('' +<%=randiList.get(1)%>)"><img src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
+                                <tr><td><div  onclick="schickenX('' +<%=randiList.get(2)%>)"><img src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
+                                <tr><td><div  onclick="schickenX('' +<%=randiList.get(3)%>)"><img src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>           
                             </table>
                         </form>
                     </div>
                     <script>
-                function schicken(name)
-                {
-                    document.forms[1].action = "CineticServlet2?name=" + name;
-                    document.forms[1].submit();
+                        function schicken(name)
+                        {
+                            document.forms[1].action = "CineticServlet2?name=" + name;
+                            document.forms[1].submit();
 
-                }
-            </script>
-            <script>
-                function schickenX(name)
-                {
-                    document.forms[1].action = "CineticServlet2?name=" + name+"X";
-                    document.forms[1].submit();
+                        }
+                    </script>
+                    <script>
+                        function schickenX(name)
+                        {
+                            document.forms[1].action = "CineticServlet2?name=" + name + "X";
+                            document.forms[1].submit();
 
-                }
-            </script>
+                        }
+                    </script>
                 </td>
             </tr>
         </table>              
 
-        
+
     </body>
 </html>
 
