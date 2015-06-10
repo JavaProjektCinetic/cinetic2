@@ -139,7 +139,7 @@
                 </right> </td></tr></table>
         </div>
 
-        <table style="float:right" cellpadding="15">
+        <table align="center" cellpadding="50">
             <tr><td>
                     <div name="<%=actMovie.getTitleEnglish()%>" class="movie">
                         <center>
@@ -179,15 +179,21 @@
                                                     String room = "";
                                                     SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
                                                     SimpleDateFormat forTime = new SimpleDateFormat("hh:MM:ss");
-                                                    System.out.println("RoomList moviepage2 roomID: " + roomList.get(2).getRoomID());
-                                                    for (int i = 0; i < showList.size(); i++) {
-                                                        if (movieList.get(0).getMovieID() == showList.get(i).getMovieID()) {
-                                                            for (int j = 0; j < roomList.size(); j++) {
-                                                                if (showList.get(i).getRoomID() == roomList.get(j).getRoomID()) {
-
-                                                                    room = roomList.get(j).getRoomName();
-                                                                    System.out.println(room);
+                                                    for(int i = 0; i<showList.size(); i++)
+                                                    {
+                                                        room = "";
+                                                        if(movieList.get(0).getMovieID() == showList.get(i).getMovieID())
+                                                        {
+                                                            for(int j = 0; j<roomList.size(); j++)
+                                                            {
+                                                                System.out.println("Moviepage2 roomID from showList: "+showList.get(i).getRoomID());
+                                                                System.out.println("Moviepage2 roomID from roomList "+roomList.get(j).getRoomId());
+                                                                if(roomList.get(j).getRoomId() == showList.get(i).getRoomID())
+                                                                {                                                               
+                                                                    room = roomList.get(j).getRoomName();  
+                                                                    System.out.println("Moviepage2: "+room);
                                                                 }
+                                                                
                                                             }
                                                             out.println("<option>" + room + " " + forDate.format(showList.get(i).getDate()) + " " + forTime.format(showList.get(i).getTime()) + "</option>");
                                                         }
@@ -196,13 +202,7 @@
                                                 %>
 
                                             </select>
-                                            <input type="text" id="datepicker" name="reservationdate"/>
-                                            <table border="1">
-                                                <tr><td>Time</td><td>Room</td>
-                                                <tr><td>18:00</td><td>Cozy Room</td></tr>
-                                                <tr><td>20:30</td><td>the Room</td></tr>
-                                                <tr><td>21:45</td><td>Cozy Room</td></tr>
-                                            </table>
+                                            <input type="text" id="datepicker" name="reservationdate"/>                                          
                                         </td>
                                         <td>
                                             <input type="submit" value="reserve"/>

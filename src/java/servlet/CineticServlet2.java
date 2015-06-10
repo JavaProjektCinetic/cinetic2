@@ -46,7 +46,7 @@ public class CineticServlet2 extends HttpServlet {
             roomList = dba.getRoomList();
             for (int i = 0; i < roomList.size(); i++) 
             {
-                System.out.println("Servlet2 roomList: "+roomList.get(i).getRoomID());            
+                System.out.println("Servlet2 roomList: "+roomList.get(i).getRoomId());            
             }
             
         } catch (ClassNotFoundException ex) {
@@ -55,10 +55,6 @@ public class CineticServlet2 extends HttpServlet {
             Logger.getLogger(CineticServlet2.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-    
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.

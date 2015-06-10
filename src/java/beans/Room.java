@@ -13,9 +13,6 @@ public class Room {
     private int roomId;
     private String roomName;
     private int seats;
-    private int roomID;
-    
-    
     
 
     public Room(int roomId, String roomName, int seats) {
@@ -40,14 +37,6 @@ public class Room {
         this.roomName = roomName;
     }
     
-    public int getRoomID() {
-        return roomID;
-    }
-
-    public void setRoomID(int roomID) {
-        this.roomID = roomID;
-    }
-
     public int getSeats() {
         return seats;
     }
@@ -55,7 +44,5 @@ public class Room {
     public void setSeats(int seats) {
         this.seats = seats;
     }
-    
-    
-    
+  
 }

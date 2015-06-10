@@ -295,6 +295,7 @@ public class DB_Access {
             Room r = new Room(id,name,seats);
             roomList.add(r);
         }
+        System.out.println("DBAccess roomlist: "+roomList.get(1).getRoomId());
         return roomList;
     }
 
@@ -365,5 +366,17 @@ public class DB_Access {
         }
         connPool.releaseConnection(conn);
         return genreList;
+    }
+    
+    public static void main(String[] args) {
+        try {
+            DB_Access dba = new DB_Access();
+            dba.setShows();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }
