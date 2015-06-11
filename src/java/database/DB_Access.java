@@ -370,7 +370,8 @@ public class DB_Access {
 //    public static void main(String[] args) {
 //        try {
 //            DB_Access dba = new DB_Access();
-//            dba.setShows();
+//            LinkedList<Room> r = dba.getRoomList();
+//            
 //        } catch (ClassNotFoundException ex) {
 //            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
 //        } catch (Exception ex) {

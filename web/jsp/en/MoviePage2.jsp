@@ -190,9 +190,11 @@
                                                             {
                                                                 
                                                                 if(roomList.get(j).getRoomId() == showList.get(i).getRoomID())
-                                                                {                                                               
+                                                                {        
+                                                                    System.out.println("roomlist roomid: "+ roomList.get(j).getRoomId()+"showlist roomid: "+showList.get(i).getRoomID());
                                                                     room = roomList.get(j).getRoomName();  
-                                                                    
+                                                                    System.out.println(room);
+                                                          
                                                                 }
                                                                 
                                                             }
