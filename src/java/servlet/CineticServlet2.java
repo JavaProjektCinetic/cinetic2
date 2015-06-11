@@ -70,13 +70,10 @@ public class CineticServlet2 extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 
-            request.setAttribute("movieList",movieList);
-            request.setAttribute("showList", showList);
-            request.setAttribute("roomList", roomList);
-
             HttpSession s = request.getSession();
             s.setAttribute("movieList",movieList);
-            
+            s.setAttribute("showList", showList);
+            s.setAttribute("roomList", roomList);
 
             //movieList = (LinkedList<Movie>) request.getAttribute("movieList");
             //out.println("bbblalala");

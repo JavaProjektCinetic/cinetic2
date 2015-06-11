@@ -178,7 +178,8 @@
                 <input type="submit" value="Search"/>
                 </br>
                 </br>
-                
+            </form>
+            <form>
                 <div class="datagrid">
                     <table>
                         <thead><tr><th>Title</th><th>Genre</th><th>Length</th></tr></thead>
@@ -221,14 +222,14 @@
             <script>
                 function schicken(name)
                 {
-                    document.forms[1].action = "CineticServlet2?name=" + name;
-                    document.forms[1].submit();
+                    document.forms[2].action = "CineticServlet2?name=" + name;
+                    document.forms[2].submit();
                 }
                 
                 function schickenX(name)
                 {
-                    document.forms[1].action = "CineticServlet2?name=" + name+"X";
-                    document.forms[1].submit();
+                    document.forms[2].action = "CineticServlet2?name=" + name+"X";
+                    document.forms[2].submit();
                 }
             </script>
 

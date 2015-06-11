@@ -109,8 +109,7 @@
                 actMovie = actualList.get(Integer.parseInt(request.getParameter("name")));
             }
             s.setAttribute("actMovie", actMovie);
-            out.println(actMovie.getTrailer());
-
+            
             LinkedList<Integer> randiList = new LinkedList<>();
             Random randi = new Random();
             do {
@@ -168,11 +167,11 @@
                                 <iframe width="500" height="300"
                                         src="https://www.youtube.com/embed/<%=actMovie.getTrailer()%>?autoplay=1">
                                 </iframe>
-                            <form action="CineticServlet3">
+                            <form action="CineticServlet3" method="get">
                                 <table>
                                     <tr>
                                         <td>
-                                            <select name="Show">
+                                            <select name="show">
                                                 <%
                                                     LinkedList<Show> showList = (LinkedList<Show>) request.getAttribute("showList");
                                                     LinkedList<Room> roomList = (LinkedList<Room>) request.getAttribute("roomList");
@@ -201,15 +200,18 @@
 
                                                 %>
 
-                                            </select>
-                                            <input type="text" id="datepicker" name="reservationdate"/>                                          
+                                            </select>                                 
                                         </td>
                                         <td>
                                             <input type="submit" value="reserve"/>
                                         </td>
                                     </tr>
-                                </table>
+                                </table>   
+                                                
                             </form>
+                                                
+                                                
+                                                
                         </center>
                     </div>
 
@@ -232,8 +234,7 @@
                             document.forms[1].submit();
 
                         }
-                    </script>
-                    <script>
+                    
                         function schickenX(name)
                         {
                             document.forms[1].action = "CineticServlet2?name=" + name + "X";

@@ -7,6 +7,7 @@ package servlet;
 
 import beans.Movie;
 import beans.Room;
+import beans.Show;
 import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,11 +26,12 @@ import javax.servlet.http.HttpSession;
  *
  * @author Laura
  */
-@WebServlet(name = "CineticServlet_aufLogin", urlPatterns = {"/CineticServlet_aufLogin"})
+@WebServlet(name = "CineticServlet3", urlPatterns = {"/CineticServlet3"})
 public class CineticServlet3 extends HttpServlet {
 
     LinkedList<Movie> movieList = null;
     LinkedList<Room> roomList = null;
+    LinkedList<Show> showList = null;
     DB_Access dba = null;
 
     @Override
@@ -39,6 +41,7 @@ public class CineticServlet3 extends HttpServlet {
             dba = DB_Access.getTheInstance();
             movieList = dba.getMovieList("","");
             roomList = dba.getRoomList();
+            showList = dba.getShows();  
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CineticServlet3.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -62,6 +65,10 @@ public class CineticServlet3 extends HttpServlet {
             HttpSession s = request.getSession();
             s.setAttribute("movieList", movieList);
             s.setAttribute("roomList", roomList);
+            s.setAttribute("showList", showList);
+            
+            System.out.println("########## Datum: "+request.getParameter("reservationdate"));
+            System.out.println("########## Show: "+request.getParameter("show"));
             
             request.getRequestDispatcher("/jsp/en/LoginPage.jsp").forward(request, response);
         }

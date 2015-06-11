@@ -372,6 +372,7 @@ public class DB_Access {
         try {
             DB_Access dba = new DB_Access();
             dba.setShows();
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
