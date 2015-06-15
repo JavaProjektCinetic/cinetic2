@@ -229,7 +229,7 @@
             <script>
                 function schickenX(name)
                 {
-                    document.forms[1].action = "CineticServlet2?name=" + name+"";
+                    document.forms[1].action = "CineticServlet2?name=" + name+"X";
                     document.forms[1].submit();
 
                 }

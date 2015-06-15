@@ -8,6 +8,7 @@ package servlet;
 import beans.Movie;
 import beans.Room;
 import beans.Show;
+import beans.ShowAnzeige;
 import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,7 +32,7 @@ public class CineticServlet3 extends HttpServlet {
 
     LinkedList<Movie> movieList = null;
     LinkedList<Room> roomList = null;
-    LinkedList<Show> showList = null;
+    LinkedList<ShowAnzeige> showList = null;
     DB_Access dba = null;
 
     @Override

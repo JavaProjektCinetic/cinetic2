@@ -4,6 +4,7 @@
     Author     : Laura
 --%>
 
+<%@page import="beans.ShowAnzeige"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="beans.Room"%>
 <%@page import="beans.Show"%>
@@ -173,32 +174,10 @@
                                         <td>
                                             <select name="show">
                                                 <%
-                                                    LinkedList<Show> showList = (LinkedList<Show>) request.getAttribute("showList");
+                                                    LinkedList<ShowAnzeige> showList = (LinkedList<ShowAnzeige>) request.getAttribute("showList");
                                                     LinkedList<Room> roomList = (LinkedList<Room>) request.getAttribute("roomList");
-                                                    String room = "";
-                                                    SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
                                                     
-                                                    for(int i = 0; i<showList.size(); i++)
-                                                    {
-                                                        room = "";
-                                                        if(movieList.get(0).getMovieID() == showList.get(i).getMovieID())
-                                                        {
-                                                            for(int j = 0; j<roomList.size(); j++)
-                                                            {
-                                                                
-                                                                if(roomList.get(j).getRoomId() == showList.get(i).getRoomID())
-                                                                {        
-                                                                    System.out.println("roomlist roomid: "+ roomList.get(j).getRoomId()+"showlist roomid: "+showList.get(i).getRoomID());
-                                                                    room = roomList.get(j).getRoomName();  
-                                                                    System.out.println(room);
-                                                          
-                                                                }
-                                                                
-                                                            }
-                                                            out.println("<option>"+ room+" "+forDate.format(showList.get(i).getDate())+" " + showList.get(i).getTime()+"</option>");
-                                                        }     
-                                                    }
-
+                                                    
                                                 %>
 
                                             </select>                                 
