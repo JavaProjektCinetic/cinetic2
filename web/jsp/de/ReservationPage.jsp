@@ -144,8 +144,8 @@
                     <form action="#" method="get">
             <div name="checkbox" style="text-align:right; float:right;" class="lang">
                 <select name="lang" onchange="submit();">
-                    <option value="en">English</option>
-                    <option value="de">German</option>
+                    <option value="de">Deutsch</option>
+                    <option value="en">Englisch</option>
                 </select>
             </div>
             </form>
@@ -212,8 +212,8 @@
         </br>
         <form action="ReservationPage.jsp">
             <table>
-                <tr><td><p>Price: €12,00</p></td><td></td></tr>
-                <tr><td><p>Reservation Number: 214</p></td><td><input type="submit" value="reservate"/></td></tr>            
+                <tr><td><p>Preis: </p></td><td></td></tr>
+                <tr><td><p>Reservierungs Nummer: </p></td><td><input type="submit" value="reservieren"/></td></tr>            
             </table>
         </form>
     </center>

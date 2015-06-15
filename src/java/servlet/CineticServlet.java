@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.LanguageSelector;
 
 /**
  *
@@ -32,7 +33,8 @@ public class CineticServlet extends HttpServlet {
     LinkedList<String> genreListD = null;
     LinkedList<Movie> movieList  = null;
     LinkedList<Movie> actualList = null;
-
+    String lang;
+    
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -64,6 +66,8 @@ public class CineticServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) 
         {
+            lang = LanguageSelector.selectLang(request, response);
+            System.out.println("*** CineticServlet processRequest lang:" + lang);
             
             String t = request.getParameter("titlefilter");
             String g = request.getParameter("genrefilter");
@@ -85,7 +89,7 @@ public class CineticServlet extends HttpServlet {
             s.setAttribute("actualList", actualList);
             s.setAttribute("genreListE", genreListE);
             s.setAttribute("genreListD", genreListD);
-            request.getRequestDispatcher("/jsp/en/WelcomePage.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/"+lang+"/WelcomePage.jsp").forward(request, response);
             
         }
     } 

@@ -62,6 +62,7 @@ public class CineticServlet3 extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            String lang = "en";
             HttpSession s = request.getSession();
             s.setAttribute("movieList", movieList);
             s.setAttribute("roomList", roomList);
@@ -73,7 +74,7 @@ public class CineticServlet3 extends HttpServlet {
             System.out.println("########## Room: "+request.getParameter("room"));
             
             
-            request.getRequestDispatcher("/jsp/en/LoginPage.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/"+lang+"/LoginPage.jsp").forward(request, response);
         }
     }
 

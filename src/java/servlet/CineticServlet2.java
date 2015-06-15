@@ -29,7 +29,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "CineticServlet2", urlPatterns = {"/CineticServlet2"})
 public class CineticServlet2 extends HttpServlet {
-
+    String lang = "en";
     LinkedList<Movie> movieList = null;
     //LinkedList<Movie> actualList = null;
     LinkedList<Show> showList = null;
@@ -77,7 +77,7 @@ public class CineticServlet2 extends HttpServlet {
 
             //movieList = (LinkedList<Movie>) request.getAttribute("movieList");
             //out.println("bbblalala");
-            request.getRequestDispatcher("/jsp/en/MoviePage2.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/"+lang+"/MoviePage2.jsp").forward(request, response);
         }
     }
 

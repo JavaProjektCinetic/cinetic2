@@ -65,8 +65,8 @@
             <form action="#" method="get">
             <div name="checkbox" style="text-align:right; float:right;" class="lang">
                 <select name="lang" onchange="submit();">
-                    <option value="en">English</option>
-                    <option value="de">German</option>
+                    <option value="de">Deutsch</option>
+                    <option value="en">Englisch</option>
                 </select>
             </div>
             </form>
@@ -75,11 +75,11 @@
         
             <center>
                 <form action="CineticServlet4">
-                <h1>Login</h1>
-                <h4>Please log in before reservating a seat!</h4>
+                <h1>Anmelden</h1>
+                <h4>Bitte melde dich zuerst an bevor du einen Platz reservierst!</h4>
                 Name: <input type="text" id="username" name="username"/></br>
-                Telephone number: <input type="text" id="tel" name="tel"/>
-                <input type="submit" value="Login"/>
+                Telefonnummer: <input type="text" id="tel" name="tel"/>
+                <input type="submit" value="Anmelden"/>
                 </form>
             </center>
         

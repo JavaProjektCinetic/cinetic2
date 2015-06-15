@@ -124,8 +124,8 @@
                     <form action="#" method="get">
             <div name="checkbox" style="text-align:right; float:right;" class="lang">
                 <select name="lang" onchange="submit();">
-                    <option value="en">English</option>
-                    <option value="de">German</option>
+                    <option value="de">Deutsch</option>
+                    <option value="en">Englisch</option>
                 </select>
             </div>
             </form>
@@ -139,12 +139,12 @@
                             <table>
                                 <tr>
                                     <td>
-                                        <img src="res/<%=actMovie.getPicture()%>.jpg" alt="<%=actMovie.getTitleEnglish()%>" style="width:300px;"/>
+                                        <img src="res/<%=actMovie.getPicture()%>.jpg" alt="<%=actMovie.getTitleGerman()%>" style="width:300px;"/>
                                     </td>
                                     <td>
                                         <p>
                                             <%if (movieList != null) {
-                                                    out.println("<h1 style='font-family:Playbill'>" + actMovie.getTitleEnglish() + "</h1>");
+                                                    out.println("<h1 style='font-family:Playbill'>" + actMovie.getTitleGerman()+ "</h1>");
                                                     for (int i = 0; i < actMovie.getRating(); i++) {
                                                         out.println("<img src='res/stern.png' style='width:30px'/>");
                                                     }
@@ -175,9 +175,9 @@
                     <div name="suggestions" class="suggestions">
                         <form name="1" method="post">
                             <table  align="center" cellpadding="13">
-                                <tr><td><div  onclick="schickenX('' +<%=randiList.get(1)%>)"><img src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
-                                <tr><td><div  onclick="schickenX('' +<%=randiList.get(2)%>)"><img src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
-                                <tr><td><div  onclick="schickenX('' +<%=randiList.get(3)%>)"><img src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>           
+                                <tr><td><div  onclick="schickenX('' +<%=randiList.get(1)%>)"><img src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleGerman()%>" style="width:150px"/></div> </td></tr>
+                                <tr><td><div  onclick="schickenX('' +<%=randiList.get(2)%>)"><img src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleGerman()%>" style="width:150px"/></div> </td></tr>
+                                <tr><td><div  onclick="schickenX('' +<%=randiList.get(3)%>)"><img src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleGerman()%>" style="width:150px"/></div> </td></tr>           
                             </table>
                         </form>
                     </div>

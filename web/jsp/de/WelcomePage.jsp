@@ -139,8 +139,8 @@
             <form action="#" method="get">
             <div name="checkbox" style="text-align:right; float:right;" class="lang">
                 <select name="lang" onchange="submit();">
-                    <option value="en">English</option>
-                    <option value="de">German</option>
+                    <option value="de">Deutsch</option>
+                    <option value="en">Englisch</option>
                 </select>
             </div>
             </form>
@@ -166,29 +166,29 @@
     <center>
         <div class='suggestions' style="display: block">
             <form action="CineticServlet" name="x" method="get">
-                Title: <input type="text" name="titlefilter" style='margin-top: 20px'/>
+                Titel: <input type="text" name="titlefilter" style='margin-top: 20px'/>
                 <select name="genrefilter">
                     <% if (genreListE != null) {
-                            for (int i = 0; i < genreListE.size(); i++) {
+                            for (int i = 0; i < genreListD.size(); i++) {
                                 out.println("<option>");
-                                out.println(genreListE.get(i));
+                                out.println(genreListD.get(i));
                                 out.println("</option>");
                             }
                         }
                     %>
                 </select>
-                <input type="submit" value="Search"/>
+                <input type="submit" value="Suchen"/>
                 </br>
                 </br>
                 
                 <div class="datagrid">
                     <table>
-                        <thead><tr><th>Title</th><th>Genre</th><th>Length</th></tr></thead>
+                        <thead><tr><th>Titel</th><th>Genre</th><th>Länge</th></tr></thead>
                         <tbody>
                             <%
                                 for(int i = 0; i<actualList.size(); i++)
                                 {
-                                    out.println("<tr><td><p onclick='schicken("+i+")'>" + actualList.get(i).getTitleEnglish() + "</p></td><td>" + actualList.get(i).getGenreEnglish() + "</td><td>" + actualList.get(i).getLength() / 60 + ":" + String.format("%02d", actualList.get(i).getLength() % 60) + "</td></tr>");
+                                    out.println("<tr><td><p onclick='schicken("+i+")'>" + actualList.get(i).getTitleGerman()+ "</p></td><td>" + actualList.get(i).getGenreGerman()+ "</td><td>" + actualList.get(i).getLength() / 60 + ":" + String.format("%02d", actualList.get(i).getLength() % 60) + "</td></tr>");
                                 }
                             %>
                         </tbody>
@@ -200,20 +200,20 @@
             <div name="suggestions" id="divSuggestions" class="suggestions" style='display: table'>
                 <form action="CineticServlet2" name="y" method="post">
                     <table class="table" style="width: 500px; height: 400px;" >
-                        <tr><td><b>Suggestions</b></td></tr>
+                        <tr><td><b>Vorschläge</b></td></tr>
                         <tr>
-                            <td align="center"><div onclick="schickenX(<%=randiList.get(1)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:120px"/></div></td>
-                            <td align="center"><div onclick="schickenX(<%=randiList.get(2)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleEnglish()%>" style="width:120px" /></div></td>
-                            <td align="center"><div onclick="schickenX(<%=randiList.get(3)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleEnglish()%>" style="width:120px" /></div></td>
+                            <td align="center"><div onclick="schickenX(<%=randiList.get(1)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleGerman()%>" style="width:120px"/></div></td>
+                            <td align="center"><div onclick="schickenX(<%=randiList.get(2)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(2)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(2)).getTitleGerman()%>" style="width:120px" /></div></td>
+                            <td align="center"><div onclick="schickenX(<%=randiList.get(3)%>)"><img border="1" src="res/<%=movieList.get(randiList.get(3)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(3)).getTitleGerman()%>" style="width:120px" /></div></td>
                         </tr>
                         <tr>
-                            <td align="center"><p style="font-size: 16px;"><b><%=movieList.get(randiList.get(1)).getTitleEnglish()%></b></p></br><% for (int i = 0; i < movieList.get(randiList.get(1)).getRating(); i++) {
+                            <td align="center"><p style="font-size: 16px;"><b><%=movieList.get(randiList.get(1)).getTitleGerman()%></b></p></br><% for (int i = 0; i < movieList.get(randiList.get(1)).getRating(); i++) {
                                     out.println("<img src='res/stern.png' width='20px'/>");
                                 }%></td>
-                            <td align="center"><p style="font-size: 16px;"><b><%=movieList.get(randiList.get(2)).getTitleEnglish()%></b></p></br><% for (int i = 0; i < movieList.get(randiList.get(2)).getRating(); i++) {
+                            <td align="center"><p style="font-size: 16px;"><b><%=movieList.get(randiList.get(2)).getTitleGerman()%></b></p></br><% for (int i = 0; i < movieList.get(randiList.get(2)).getRating(); i++) {
                                     out.println("<img src='res/stern.png' width='20px'/>");
                                 }%></td>
-                            <td align="center"><p style="font-size: 16px;"><b><%=movieList.get(randiList.get(3)).getTitleEnglish()%></b></p></br><% for (int i = 0; i < movieList.get(randiList.get(3)).getRating(); i++) {
+                            <td align="center"><p style="font-size: 16px;"><b><%=movieList.get(randiList.get(3)).getTitleGerman()%></b></p></br><% for (int i = 0; i < movieList.get(randiList.get(3)).getRating(); i++) {
                                     out.println("<img src='res/stern.png' width='20px'/>");
                                 }%></td>
                         </tr>
