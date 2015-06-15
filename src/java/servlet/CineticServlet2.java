@@ -46,7 +46,7 @@ public class CineticServlet2 extends HttpServlet {
             roomList = dba.getRoomList();
             for (int i = 0; i < roomList.size(); i++) 
             {
-                System.out.println("Servlet2 roomList: "+roomList.get(i).getRoomId());            
+                System.out.println("Servlet2 roomList: "+showList.get(i).getRoomName());            
             }
             
         } catch (ClassNotFoundException ex) {
@@ -74,7 +74,12 @@ public class CineticServlet2 extends HttpServlet {
             s.setAttribute("movieList",movieList);
             s.setAttribute("showList", showList);
             s.setAttribute("roomList", roomList);
-
+            
+            try {
+                dba.setShows();
+            } catch (Exception ex) {
+                Logger.getLogger(CineticServlet2.class.getName()).log(Level.SEVERE, null, ex);
+            }
             //movieList = (LinkedList<Movie>) request.getAttribute("movieList");
             //out.println("bbblalala");
             request.getRequestDispatcher("/jsp/en/MoviePage2.jsp").forward(request, response);
@@ -93,6 +98,7 @@ public class CineticServlet2 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         processRequest(request, response);
     }
 

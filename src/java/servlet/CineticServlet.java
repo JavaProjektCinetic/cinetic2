@@ -85,6 +85,7 @@ public class CineticServlet extends HttpServlet {
             s.setAttribute("actualList", actualList);
             s.setAttribute("genreListE", genreListE);
             s.setAttribute("genreListD", genreListD);
+            
             request.getRequestDispatcher("/jsp/en/WelcomePage.jsp").forward(request, response);
             
         }
