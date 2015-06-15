@@ -9,6 +9,7 @@ import beans.Movie;
 import beans.Room;
 import beans.Seat;
 import beans.Show;
+import beans.ShowAnzeige;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -42,9 +43,10 @@ public class DB_Access {
         connPool = DB_ConnectionPool.getTheInstance();
     }
 
-    public LinkedList<Show> getShows() throws Exception
+    public LinkedList<ShowAnzeige> getShows() throws Exception
     {
-        LinkedList<Show> shows = new LinkedList<>();
+        LinkedList<ShowAnzeige> shows = new LinkedList<>();
+        LinkedList<Room> rooms = getRoomList();
         SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
         Connection conn = connPool.getConnection();
         Statement stat = conn.createStatement();
@@ -53,17 +55,24 @@ public class DB_Access {
         ResultSet rs = stat.executeQuery(sqlString);
         int roomid, movieid, takenseats, showid, freeseats;
         Date d;
-        String time;
+        String time, roomName="";
         while(rs.next())
         {
             roomid = Integer.parseInt(rs.getString(1));
+            for (int i = 0; i < rooms.size(); i++) 
+            {             
+                if(roomid == rooms.get(i).getRoomId())
+                {
+                    roomName=rooms.get(i).getRoomName();
+                }             
+            }
             movieid = Integer.parseInt(rs.getString(2));
             d = forDate.parse(rs.getString(3));
             takenseats = Integer.parseInt(rs.getString(4));
             showid = Integer.parseInt(rs.getString(5));
             time = rs.getString(6);
             freeseats = Integer.parseInt(rs.getString(7));           
-            Show s = new Show(roomid, movieid, d, takenseats, showid, time, freeseats);
+            ShowAnzeige s = new ShowAnzeige(roomName, movieid, d, takenseats, showid, time, freeseats);
             shows.add(s);
         }  
         return shows;
