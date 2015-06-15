@@ -73,13 +73,13 @@
         </div>
         
             <center>
-                
+                <form action="CineticServlet4">
                 <h1>Login</h1>
                 <h4>Please log in before reservating a seat!</h4>
                 Name<input type="text" id="username" name="username"/></br>
                 Telephone number<input type="text" id="tel" name="tel"/>
                 <input type="submit" value="Login"/>
-               
+                </form>
             </center>
         
     </body>

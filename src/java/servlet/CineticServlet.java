@@ -62,7 +62,8 @@ public class CineticServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) 
+        {
             
             String t = request.getParameter("titlefilter");
             String g = request.getParameter("genrefilter");
@@ -84,11 +85,7 @@ public class CineticServlet extends HttpServlet {
             s.setAttribute("actualList", actualList);
             s.setAttribute("genreListE", genreListE);
             s.setAttribute("genreListD", genreListD);
-            //request.setAttribute("movieList",movieList);
-            //response.sendRedirect("/jsp/en/WelcomePage.jsp");
             request.getRequestDispatcher("/jsp/en/WelcomePage.jsp").forward(request, response);
-            //request.getRequestDispatcher("/jsp/en/MoviePage.jsp").forward(request, response);
-            //request.getRequestDispatcher(path).forward(request, response);
             
         }
     } 

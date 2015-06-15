@@ -68,8 +68,11 @@ public class CineticServlet3 extends HttpServlet {
             s.setAttribute("roomList", roomList);
             s.setAttribute("showList", showList);
             
-            System.out.println("########## Datum: "+request.getParameter("reservationdate"));
-            System.out.println("########## Show: "+request.getParameter("show"));
+            
+            
+            System.out.println("########## Datum: "+request.getParameter("datum"));
+            System.out.println("########## Room: "+request.getParameter("room"));
+            
             
             request.getRequestDispatcher("/jsp/en/LoginPage.jsp").forward(request, response);
         }
