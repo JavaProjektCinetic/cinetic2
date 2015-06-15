@@ -60,10 +60,11 @@ public class CineticServlet4 extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            String lang = "en";
             HttpSession s = request.getSession();
             s.setAttribute("movieList", movieList);
             s.setAttribute("roomList", roomList);
-            request.getRequestDispatcher("/jsp/en/ReservationPage.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/"+lang+"/ReservationPage.jsp").forward(request, response);
         }
     }
 

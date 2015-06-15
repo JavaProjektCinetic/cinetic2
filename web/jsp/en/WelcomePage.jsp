@@ -136,12 +136,14 @@
                     <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
                 </table>
             </div>
+            <form action="#" method="get">
             <div name="checkbox" style="text-align:right; float:right;" class="lang">
-                <select>
-                    <option>German</option>
-                    <option>English</option>
+                <select name="lang" onchange="submit();">
+                    <option value="en">English</option>
+                    <option value="de">German</option>
                 </select>
             </div>
+            </form>
         </div>
         <%
             HttpSession s = request.getSession();
@@ -221,16 +223,16 @@
             <script>
                 function schicken(name)
                 {
-                    document.forms[1].action = "CineticServlet2?name=" + name;
-                    document.forms[1].submit();
+                    document.forms[2].action = "CineticServlet2?name=" + name;
+                    document.forms[2].submit();
 
                 }
             </script>
             <script>
                 function schickenX(name)
                 {
-                    document.forms[1].action = "CineticServlet2?name=" + name+"X";
-                    document.forms[1].submit();
+                    document.forms[2].action = "CineticServlet2?name=" + name+"X";
+                    document.forms[2].submit();
 
                 }
             </script>
