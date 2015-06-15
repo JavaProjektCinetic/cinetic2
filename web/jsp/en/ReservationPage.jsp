@@ -4,6 +4,7 @@
     Author     : Laura
 --%>
 
+<%@page import="beans.Seat"%>
 <%@page import="beans.Room"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Random"%>
@@ -108,109 +109,121 @@
         </style>
     </head>
     <body>
-        <form action="jsp/en/ReservationPage.jsp">
-            <%
-                HttpSession s = request.getSession();
-                LinkedList<Movie> movieList = (LinkedList<Movie>) s.getAttribute("movieList");
-                LinkedList<Room> roomList = (LinkedList<Room>) s.getAttribute("roomList");
 
-                //Movie actMovie = (Movie) s.getAttribute("actMovie");
-                Movie actMovie2 = movieList.get(1);
-                //out.println(actMovie2.getTitleEnglish());
-                //int roomid = Integer.parseInt(request.getParameter("room"));
-                int roomid2 = 1;
+        <%
+            HttpSession s = request.getSession();
+            LinkedList<Movie> movieList = (LinkedList<Movie>) s.getAttribute("movieList");
+            LinkedList<Room> roomList = (LinkedList<Room>) s.getAttribute("roomList");
+            LinkedList<Seat> selectedSeatList = new LinkedList<>();
+            
+            //Movie actMovie = (Movie) s.getAttribute("actMovie");
+            Movie actMovie2 = movieList.get(1);
+            //out.println(actMovie2.getTitleEnglish());
+            //int roomid = Integer.parseInt(request.getParameter("room"));
+            int roomid2 = 2;
 
-                //Date time = (Date) request.getParameter("time");
-                LinkedList<Integer> randiList = new LinkedList<>();
-                Random randi = new Random();
-                do {
-                    int temp = randi.nextInt(46) + 1;
-                    if (!randiList.contains(temp) && movieList.get(temp) != null) {
-                        randiList.add(temp);
-                    }
-                } while (randiList.size() < 8);
-            %>
-            <div name="cinetic_header" class="header">
-                <table class="table2"><tr><td><left>
-                        <div name="logo" style="text-align:left; float:left" class='logo'>
-                            <table>
-                                <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
-                            </table>
-                        </div>
-                    </left></td>
-                    <td><right>
-                        <div name="checkbox" style="text-align:right;" class="lang">
+            //Date time = (Date) request.getParameter("time");
+            LinkedList<Integer> randiList = new LinkedList<>();
+            Random randi = new Random();
+            do {
+                int temp = randi.nextInt(46) + 1;
+                if (!randiList.contains(temp) && movieList.get(temp) != null) {
+                    randiList.add(temp);
+                }
+            } while (randiList.size() < 8);
+        %>
+        <div name="cinetic_header" class="header">
+            <table class="table2"><tr><td><left>
+                    <div name="logo" style="text-align:left; float:left" class='logo'>
+                        <table>
+                            <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
+                        </table>
+                    </div>
+                </left></td>
+                <td><right>
+                    <div name="checkbox" style="text-align:right;" class="lang">
 
-                            <select>
-                                <option>German</option>
-                                <option>English</option>
-                            </select>
-                        </div>
-                    </right> </td></tr></table>
-            </div>
-            <center>
-                <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%"><%=roomList.get(roomid2).getRoomName()%></span></br>18:00</h2>  
-                <div class="room">
-                    </br>
-                    <table>
-                        <%
-                            if (roomid2 == 0) {//cozy
-                                for (int i = 0; i < 5; i++) {
-                                    out.println("<tr>");
-                                    for (int j = 0; j < 6; j++) {
-                                        out.println("<td><div class='seats3'/></td>");
-                                    }
-                                    out.println("</tr>");
+                        <select>
+                            <option>German</option>
+                            <option>English</option>
+                        </select>
+                    </div>
+                </right> </td></tr></table>
+        </div>
+    <center>
+        <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%"><%=roomList.get(roomid2).getRoomName()%></span></br>18:00</h2>  
+        <div class="room">
+            </br>
+            <form action="CineticServlet">
+                <table>
+
+                    <%
+                        if (roomid2 == 0) {//cozy
+                            for (int i = 0; i < 5; i++) {
+                                out.println("<tr>");
+                                for (int j = 0; j < 6; j++) {
+                                    out.println("<td><div onclick='selectseat("+i+","+j+")' id="+i+"X"+j+" class='seats3'/></td>");
                                 }
-                            }
-
-                            if (roomid2 == 1) {//glamour
-                                for (int i = 0; i < 7; i++) {
-                                    out.println("<tr>");
-                                    for (int j = 0; j < 11; j++) {
-                                        if (j == 5) {
-                                            out.println("<td><div class='aisle1'/></td>");
-                                        } else {
-                                            out.println("<td><div class='seats1'/></td>");
-                                        }
-                                    }
-                                    out.println("</tr>");
-                                }
-                            }
-
-                            if (roomid2 == 2) {//the room
-                                for (int i = 0; i < 15; i++) {
-                                    out.println("<tr>");
-                                    for (int j = 0; j < 16; j++) {
-
-                                        if ((j == 10 || j == 5) && i > 7) {
-                                            out.println("<td><div class='aisle2'/></td>");
-                                        } else if (i == 7 || i == 2) {
-                                            out.println("<td><div class='aisle2'/></td>");
-                                        } else {
-                                            out.println("<td><div class='seats2'/></td>");
-                                        }
-                                    }
-                                }
-
                                 out.println("</tr>");
                             }
+                        }
+
+                        if (roomid2 == 1) {//glamour
+                            for (int i = 0; i < 7; i++) {
+                                out.println("<tr>");
+                                for (int j = 0; j < 11; j++) {
+                                    if (j == 5) {
+                                        out.println("<td><div class='aisle1'/></td>");
+                                    } else {
+                                        out.println("<td><div onclick='selectseat("+i+","+j+")' id="+i+"X"+j+" class='seats1'/></td>");
+                                    }
+                                }
+                                out.println("</tr>");
+                            }
+                        }
+
+                        if (roomid2 == 2) {//the room
+                            for (int i = 0; i < 15; i++) {
+                                out.println("<tr>");
+                                for (int j = 0; j < 16; j++) {
+
+                                    if ((j == 10 || j == 5) && i > 7) {
+                                        out.println("<td><div class='aisle2'/></td>");
+                                    } else if (i == 7 || i == 2) {
+                                        out.println("<td><div class='aisle2'/></td>");
+                                    } else {
+                                        out.println("<td><div onclick='selectseat("+i+","+j+")' id="+i+"X"+j+" class='seats2'/></td>");
+                                    }
+                                }
+                            }
+
+                            out.println("</tr>");
+                        }
 
 
-                        %>
-                    </table>
-                    </br>
-                    </br>
-                    <div style="width: 400px; height: 3px; background-color: black"/>
-                </div>
-                </br>
-                <form action="CineticServlet">
-                    <table>
-                        <tr><td><p>Price: €12,00</p></td><td></td></tr>
-                        <tr><td><p>Reservation Number: 214</p></td><td><input type="submit" value="reservate"/></td></tr>            
-                    </table>
-                </form>
-            </center>
+                    %>
+                </table>
+            </form>
+            </br>
+            </br>
+            <div style="width: 400px; height: 3px; background-color: black"/>
+        </div>
+        </br>
+        <form action="ReservationPage.jsp">
+            <table>
+                <tr><td><p>Price: €12,00</p></td><td></td></tr>
+                <tr><td><p>Reservation Number: 214</p></td><td><input type="submit" value="reservate"/></td></tr>            
+            </table>
         </form>
-    </body>
+    </center>
+
+
+    <script>
+        function selectseat(zeile, spalte)
+        {
+            
+            document.getElementById(zeile+"X"+spalte).style.backgroundColor = '#FF0000';
+        }
+    </script>
+</body>
 </html>

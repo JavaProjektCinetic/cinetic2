@@ -163,7 +163,7 @@
         %>
     <center>
         <div class='suggestions' style="display: block">
-            <form action="CineticServlet" method="get">
+            <form action="CineticServlet" name="x" method="get">
                 Title: <input type="text" name="titlefilter" style='margin-top: 20px'/>
                 <select name="genrefilter">
                     <% if (genreListE != null) {
@@ -196,7 +196,7 @@
             </form>
 
             <div name="suggestions" id="divSuggestions" class="suggestions" style='display: table'>
-                <form action="CineticServlet2" name="1" method="post">
+                <form action="CineticServlet2" name="y" method="post">
                     <table class="table" style="width: 500px; height: 400px;" >
                         <tr><td><b>Suggestions</b></td></tr>
                         <tr>
@@ -229,7 +229,7 @@
             <script>
                 function schickenX(name)
                 {
-                    document.forms[1].action = "CineticServlet2?name=" + name+"";
+                    document.forms[1].action = "CineticServlet2?name=" + name+"X";
                     document.forms[1].submit();
 
                 }

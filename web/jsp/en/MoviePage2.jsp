@@ -95,13 +95,6 @@
             LinkedList<Movie> movieList = (LinkedList<Movie>) s.getAttribute("movieList");
             LinkedList<Movie> actualList = (LinkedList<Movie>) s.getAttribute("al");
 
-            /*if(actualList!=null)
-             {
-             for(Movie m : actualList)
-             {
-             out.println(m.getTitleEnglish()+"</br>");
-             }
-             }*/
             Movie actMovie = null;
             if (request.getParameter("name").endsWith("X")) {
                 actMovie = movieList.get(Integer.parseInt(request.getParameter("name").substring(0, request.getParameter("name").lastIndexOf('X'))));
@@ -164,54 +157,13 @@
                                 </tr>
                             </table>
 
-                                <iframe width="500" height="300"
-                                        src="https://www.youtube.com/embed/<%=actMovie.getTrailer()%>?autoplay=1">
-                                </iframe>
+                                <iframe width="500" height="300" src="https://www.youtube.com/embed/<%=actMovie.getTrailer()%>?autoplay=1"></iframe>
+                                
                             <form action="CineticServlet3" method="get">
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <select name="show">
-                                                <%
-                                                    LinkedList<Show> showList = (LinkedList<Show>) request.getAttribute("showList");
-                                                    LinkedList<Room> roomList = (LinkedList<Room>) request.getAttribute("roomList");
-                                                    String room = "";
-                                                    SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
-                                                    
-                                                    for(int i = 0; i<showList.size(); i++)
-                                                    {
-                                                        room = "";
-                                                        if(movieList.get(0).getMovieID() == showList.get(i).getMovieID())
-                                                        {
-                                                            for(int j = 0; j<roomList.size(); j++)
-                                                            {
-                                                                
-                                                                if(roomList.get(j).getRoomId() == showList.get(i).getRoomID())
-                                                                {        
-                                                                    System.out.println("roomlist roomid: "+ roomList.get(j).getRoomId()+"showlist roomid: "+showList.get(i).getRoomID());
-                                                                    room = roomList.get(j).getRoomName();  
-                                                                    System.out.println(room);
-                                                          
-                                                                }
-                                                                
-                                                            }
-                                                            out.println("<option>"+ room+" "+forDate.format(showList.get(i).getDate())+" " + showList.get(i).getTime()+"</option>");
-                                                        }     
-                                                    }
-
-                                                %>
-
-                                            </select>                                 
-                                        </td>
-                                        <td>
-                                            <input type="submit" value="reserve"/>
-                                        </td>
-                                    </tr>
-                                </table>   
-                                                
+                                <input type="text" name="datum" value="15.06.2015"/>
+                                <input type="text" name="room" value="cozy room"/>
+                                <input type="submit" value="reserve"/>               
                             </form>
-                                                
-                                                
                                                 
                         </center>
                     </div>
