@@ -177,7 +177,7 @@
                                                     LinkedList<Room> roomList = (LinkedList<Room>) request.getAttribute("roomList");
                                                     String room = "";
                                                     SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
-                                                    SimpleDateFormat forTime = new SimpleDateFormat("hh:MM:ss");
+                                                    
                                                     for(int i = 0; i<showList.size(); i++)
                                                     {
                                                         room = "";
@@ -185,17 +185,18 @@
                                                         {
                                                             for(int j = 0; j<roomList.size(); j++)
                                                             {
-                                                                System.out.println("Moviepage2 roomID from showList: "+showList.get(i).getRoomID());
-                                                                System.out.println("Moviepage2 roomID from roomList "+roomList.get(j).getRoomId());
+                                                                
                                                                 if(roomList.get(j).getRoomId() == showList.get(i).getRoomID())
-                                                                {                                                               
+                                                                {        
+                                                                    System.out.println("roomlist roomid: "+ roomList.get(j).getRoomId()+"showlist roomid: "+showList.get(i).getRoomID());
                                                                     room = roomList.get(j).getRoomName();  
-                                                                    System.out.println("Moviepage2: "+room);
+                                                                    System.out.println(room);
+                                                          
                                                                 }
                                                                 
                                                             }
-                                                            out.println("<option>" + room + " " + forDate.format(showList.get(i).getDate()) + " " + forTime.format(showList.get(i).getTime()) + "</option>");
-                                                        }
+                                                            out.println("<option>"+ room+" "+forDate.format(showList.get(i).getDate())+" " + showList.get(i).getTime()+"</option>");
+                                                        }     
                                                     }
 
                                                 %>

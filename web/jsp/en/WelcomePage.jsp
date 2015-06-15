@@ -17,7 +17,7 @@
 
         <style>
             div.header {
-                width: 100%;
+                width: 1366px;
                 height: 150px;
                 margin-left: -8px;
                 margin-top: -8px;
@@ -155,7 +155,7 @@
             Random randi = new Random();
 
             do {
-                int temp = randi.nextInt(49) + 1;
+                int temp = randi.nextInt(46) + 1;
                 if (!randiList.contains(temp)) {
                     randiList.add(temp);
                 }
@@ -178,8 +178,7 @@
                 <input type="submit" value="Search"/>
                 </br>
                 </br>
-            </form>
-            <form>
+                
                 <div class="datagrid">
                     <table>
                         <thead><tr><th>Title</th><th>Genre</th><th>Length</th></tr></thead>
@@ -222,14 +221,17 @@
             <script>
                 function schicken(name)
                 {
-                    document.forms[2].action = "CineticServlet2?name=" + name;
-                    document.forms[2].submit();
+                    document.forms[1].action = "CineticServlet2?name=" + name;
+                    document.forms[1].submit();
+
                 }
-                
+            </script>
+            <script>
                 function schickenX(name)
                 {
-                    document.forms[2].action = "CineticServlet2?name=" + name+"X";
-                    document.forms[2].submit();
+                    document.forms[1].action = "CineticServlet2?name=" + name+"";
+                    document.forms[1].submit();
+
                 }
             </script>
 
