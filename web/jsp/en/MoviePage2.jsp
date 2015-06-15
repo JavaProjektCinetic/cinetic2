@@ -4,6 +4,7 @@
     Author     : Laura
 --%>
 
+<%@page import="beans.ShowAnzeige"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="beans.Room"%>
 <%@page import="beans.Show"%>
@@ -161,11 +162,29 @@
                                 <iframe width="500" height="300" src="https://www.youtube.com/embed/<%=actMovie.getTrailer()%>?autoplay=1"></iframe>
                                 
                             <form action="CineticServlet3" method="get">
-                                <input type="text" name="datum" value="15.06.2015"/>
-                                <input type="text" name="room" value="cozy room"/>
-                                <input type="submit" value="reserve"/>               
+                                <select name="datum">
+                                    <%
+                                    LinkedList<ShowAnzeige>shows = (LinkedList<ShowAnzeige>)s.getAttribute("showList"); 
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                    int movieId = actMovie.getMovieID();
+                                    String time;
+                                    Date date;
+                                    String roomname;
+                                    System.out.println(shows.size());
+                                    for (int i = 0; i<shows.size(); i++)
+                                    {
+                                    if(movieId==shows.get(i).getMovieID())
+                                        {
+                                            out.println("<option>"+sdf.format(shows.get(i).getDate())+" | "+shows.get(i).getTime()+" | "+shows.get(i).getRoomName()+"</option>");                                    
+                                        }
+                                    }
+                                    %>
+                                </select>   
+                                <input type="submit" value="reserve"/> 
+                                <p>Hint: to display more shows reload the page</p>
                             </form>
-                                                
+                                
+                                               
                         </center>
                     </div>
 

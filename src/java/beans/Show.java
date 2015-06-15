@@ -36,8 +36,8 @@ public class Show {
 
     public void setRoomID(int roomID) {
         this.roomID = roomID;
-    }
-
+    }   
+   
     public int getMovieID() {
         return movieID;
     }

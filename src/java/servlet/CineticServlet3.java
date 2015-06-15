@@ -8,6 +8,7 @@ package servlet;
 import beans.Movie;
 import beans.Room;
 import beans.Show;
+import beans.ShowAnzeige;
 import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,7 +32,7 @@ public class CineticServlet3 extends HttpServlet {
 
     LinkedList<Movie> movieList = null;
     LinkedList<Room> roomList = null;
-    LinkedList<Show> showList = null;
+    LinkedList<ShowAnzeige> showList = null;
     DB_Access dba = null;
 
     @Override
@@ -68,10 +69,13 @@ public class CineticServlet3 extends HttpServlet {
             s.setAttribute("roomList", roomList);
             s.setAttribute("showList", showList);
             
-            
-            
-            System.out.println("########## Datum: "+request.getParameter("datum"));
-            System.out.println("########## Room: "+request.getParameter("room"));
+            String str = request.getParameter("datum");
+            String strArray[] = str.split("|");
+            String date =strArray[0].trim();
+            String time = strArray[1].trim();
+            String room = strArray[2].trim();
+            System.out.println("########## Datum: "+date);
+            System.out.println("########## Room: "+room);
             
             
             request.getRequestDispatcher("/jsp/"+lang+"/LoginPage.jsp").forward(request, response);
