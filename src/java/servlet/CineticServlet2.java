@@ -43,12 +43,7 @@ public class CineticServlet2 extends HttpServlet {
             dba = DB_Access.getTheInstance();
             movieList = dba.getMovieList("","");
             showList = dba.getShows();     
-            roomList = dba.getRoomList();
-            for (int i = 0; i < roomList.size(); i++) 
-            {
-                System.out.println("Servlet2 roomList: "+showList.get(i).getRoomName());            
-            }
-            
+            roomList = dba.getRoomList();          
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CineticServlet2.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -70,16 +65,19 @@ public class CineticServlet2 extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 
+            try {              
+                dba.setActualShows();
+                showList = dba.getShows();
+            } catch (Exception ex) {
+                Logger.getLogger(CineticServlet2.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             HttpSession s = request.getSession();
             s.setAttribute("movieList",movieList);
             s.setAttribute("showList", showList);
             s.setAttribute("roomList", roomList);
             
-            try {
-                dba.setShows();
-            } catch (Exception ex) {
-                Logger.getLogger(CineticServlet2.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             //movieList = (LinkedList<Movie>) request.getAttribute("movieList");
             //out.println("bbblalala");
             request.getRequestDispatcher("/jsp/"+lang+"/MoviePage2.jsp").forward(request, response);

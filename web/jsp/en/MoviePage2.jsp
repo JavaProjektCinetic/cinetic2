@@ -167,10 +167,6 @@
                                     LinkedList<ShowAnzeige>shows = (LinkedList<ShowAnzeige>)s.getAttribute("showList"); 
                                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                                     int movieId = actMovie.getMovieID();
-                                    String time;
-                                    Date date;
-                                    String roomname;
-                                    System.out.println(shows.size());
                                     for (int i = 0; i<shows.size(); i++)
                                     {
                                     if(movieId==shows.get(i).getMovieID())
@@ -181,7 +177,7 @@
                                     %>
                                 </select>   
                                 <input type="submit" value="reserve"/> 
-                                <p>Hint: to display more shows reload the page</p>
+                                <p>Hint: to display more shows reload the page but there are only 600 available Shows</p>
                             </form>
                                 
                                                

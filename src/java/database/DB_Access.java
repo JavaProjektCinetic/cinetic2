@@ -43,46 +43,74 @@ public class DB_Access {
         connPool = DB_ConnectionPool.getTheInstance();
     }
 
-    
-    
-    public LinkedList<ShowAnzeige> getShows() throws Exception
-    {
+    public LinkedList<ShowAnzeige> getShows() throws Exception {
         LinkedList<ShowAnzeige> shows = new LinkedList<>();
         LinkedList<Room> rooms = getRoomList();
         SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
         Connection conn = connPool.getConnection();
         Statement stat = conn.createStatement();
-        String sqlString = "SELECT roomid, movieid, date, takenseats, showid, time, freeseats " +
-                            "FROM show";
+        String sqlString = "SELECT roomid, movieid, date, takenseats, showid, time, freeseats "
+                + "FROM show";
         ResultSet rs = stat.executeQuery(sqlString);
         int roomid, movieid, takenseats, showid, freeseats;
         Date d;
-        String time, roomName="";
-        while(rs.next())
-        {
+        String time, roomName = "";
+        while (rs.next()) {
             roomid = Integer.parseInt(rs.getString(1));
-            for (int i = 0; i < rooms.size(); i++) 
-            {             
-                if(roomid == rooms.get(i).getRoomId())
-                {
-                    roomName=rooms.get(i).getRoomName();
-                }             
+            for (int i = 0; i < rooms.size(); i++) {
+                if (roomid == rooms.get(i).getRoomId()) {
+                    roomName = rooms.get(i).getRoomName();
+                }
             }
             movieid = Integer.parseInt(rs.getString(2));
             d = forDate.parse(rs.getString(3));
             takenseats = Integer.parseInt(rs.getString(4));
             showid = Integer.parseInt(rs.getString(5));
             time = rs.getString(6);
-            freeseats = Integer.parseInt(rs.getString(7));           
+            freeseats = Integer.parseInt(rs.getString(7));
             ShowAnzeige s = new ShowAnzeige(roomName, movieid, d, takenseats, showid, time, freeseats);
             shows.add(s);
-        }  
+        }
         return shows;
     }
 
+    public void setActualShows() throws Exception {
+        LinkedList<ShowAnzeige> shows = getShows();
+        SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
+        
+            Date curDay = new Date();
+            int cday = curDay.getDay();
+            int cmonth = curDay.getMonth();
+            int cyear = curDay.getYear();
+            Connection conn = connPool.getConnection();
+            Statement stat = conn.createStatement();
+            for (int i = 0; i < shows.size(); i++) {
+                ShowAnzeige s = shows.get(i);
+                int day = s.getDate().getDay();
+                int month = s.getDate().getMonth();
+                int year = s.getDate().getYear();
+                int sID = s.getShowid(); 
+                String sqlString = "DELETE FROM show WHERE showid = " + sID;
+                if (cyear > year) {  
+                    stat.executeUpdate(sqlString);    
+                }
+                else if(cmonth > month)
+                {
+                    stat.executeUpdate(sqlString);
+                }
+            }
+            shows = getShows();
+            if(shows.size()<600)
+            {
+                setShows();
+            }       
+        }
+
+    //}
+
     public void setShows() throws Exception {
         LinkedList<Show> showList = new LinkedList<>();
-        SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");        
+        SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
         LinkedList<Room> rooms = getRoomList();
         LinkedList<String> time = new LinkedList<>();
         time.add("15:00");
@@ -101,6 +129,7 @@ public class DB_Access {
         }
         dmax = forDate.parse(str);
         int day = dmax.getDate();
+        System.out.println("Day in DBAccess:" + day);
         int month = dmax.getMonth();
         int year = 2015;
         stat = conn.createStatement();
@@ -214,25 +243,24 @@ public class DB_Access {
                     }
                     break;
             }
-            Random randi = new Random();  
-            String dDate = year + "-" + (month+1) + "-" + day;
+            Random randi = new Random();
+            String dDate = year + "-" + (month + 1) + "-" + day;
             Date d = forDate.parse(dDate);
-            
-            
+
             for (int roomID = 1; roomID <= 3; roomID++) {
                 for (int j = 0; j < time.size(); j++) {
                     showID++;
                     int movieID = randi.nextInt(getCountMovies());
-                    String t = time.get(j);                                
-                    Show s = new Show(roomID, (movieID+1), d, 0, showID, t, rooms.get(roomID-1).getSeats());
-                    showList.add(s);                  
+                    String t = time.get(j);
+                    Show s = new Show(roomID, (movieID + 1), d, 0, showID, t, rooms.get(roomID - 1).getSeats());
+                    showList.add(s);
                 }
             }
         }
         for (int i = 0; i < showList.size(); i++) {
             Show s = showList.get(i);
             stat = conn.createStatement(); //roomID, movieID, date, showID, takenseats, time, freeseats           
-            sqlString = "INSERT INTO show VALUES ("+s.getRoomID()+", "+s.getMovieID()+", '"+forDate.format(s.getDate())+"', "+s.getShowid()+", 0, "+rooms.get(s.getRoomID()-1).getSeats()+",'"+s.getTime()+"')";
+            sqlString = "INSERT INTO show VALUES (" + s.getRoomID() + ", " + s.getMovieID() + ", '" + forDate.format(s.getDate()) + "', " + s.getShowid() + ", 0, " + rooms.get(s.getRoomID() - 1).getSeats() + ",'" + s.getTime() + "')";
             stat.executeUpdate(sqlString);
         }
         connPool.releaseConnection(conn);
@@ -302,10 +330,9 @@ public class DB_Access {
             id = rs.getInt("roomid");
             name = rs.getString("name");
             seats = rs.getInt("seats");
-            Room r = new Room(id,name,seats);
+            Room r = new Room(id, name, seats);
             roomList.add(r);
         }
-        System.out.println("DBAccess roomlist: "+roomList.get(1).getRoomId());
         return roomList;
     }
 
@@ -316,18 +343,16 @@ public class DB_Access {
         LinkedList<Movie> movieList = new LinkedList<>();
         Statement stat = conn.createStatement();
         t = t.toUpperCase();
-        
-        if(g.equals("All Movies"))
-        {
-            g="";
+
+        if (g.equals("All Movies")) {
+            g = "";
         }
-        if(t==null || t.equals(""))
-        {
-            t="";
+        if (t == null || t.equals("")) {
+            t = "";
         }
         String sqlString = "SELECT movieid, title, picture, description, trailer, music, titlegerman, rating, genre, genregerman, length "
-                         + "FROM movie "
-                         + "WHERE upper(title) LIKE '%"+t+"%' AND genre LIKE '%"+g+"%';";
+                + "FROM movie "
+                + "WHERE upper(title) LIKE '%" + t + "%' AND genre LIKE '%" + g + "%';";
         ResultSet rs = stat.executeQuery(sqlString);
         while (rs.next()) {
             Movie m = new Movie(rs.getString("title"), rs.getString("picture"), rs.getString("description"), rs.getString("trailer"), rs.getString("music"), rs.getString("titlegerman"), rs.getInt("rating"), rs.getString("genre"), rs.getString("genregerman"), rs.getInt("length"), rs.getInt("movieid"));
@@ -338,9 +363,9 @@ public class DB_Access {
         connPool.releaseConnection(conn);
         return movieList;
     }
-    
+
     public int getCountMovies() throws Exception {
-        int count = getMovieList("","").size();
+        int count = getMovieList("", "").size();
         return count;
     }
 
@@ -377,11 +402,11 @@ public class DB_Access {
         connPool.releaseConnection(conn);
         return genreList;
     }
-    
+
 //    public static void main(String[] args) {
 //        try {
 //            DB_Access dba = new DB_Access();
-//            LinkedList<Room> r = dba.getRoomList();
+//            
 //            
 //        } catch (ClassNotFoundException ex) {
 //            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);

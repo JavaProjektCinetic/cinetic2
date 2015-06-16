@@ -67,8 +67,7 @@ public class CineticServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) 
         {
             lang = LanguageSelector.selectLang(request, response);
-            System.out.println("*** CineticServlet processRequest lang:" + lang);
-            
+            System.out.println("*** CineticServlet processRequest lang:" + lang);            
             String t = request.getParameter("titlefilter");
             String g = request.getParameter("genrefilter");
             if (t == null) {
