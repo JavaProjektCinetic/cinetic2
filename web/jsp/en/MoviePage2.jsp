@@ -37,7 +37,6 @@
                 margin-left: -8px;
                 margin-top: -8px;
             }
-
             div.logo{
                 width: 220px;
                 background-color: white;
@@ -46,13 +45,11 @@
                 margin-left: 20px;
                 margin-top: 20px;
             }
-
             div.lang{
                 height:150px;
                 margin-top: 20px;
                 margin-right: 20px;
             }
-
             div.movie{
                 border-style: inset;
                 border-width: 5px;
@@ -61,7 +58,6 @@
                 background-color: white;
                 //opacity: 0.9;
             }
-
             div.suggestions
             {
                 width:180px;
@@ -72,12 +68,10 @@
                 border-width: 5px;
                 border-color: #644030;
             }
-
             table.table2
             {
                 width:100%;
             }
-
             body
             {
                 background-image: url("res/background2.jpg");
@@ -95,7 +89,6 @@
             HttpSession s = request.getSession();
             LinkedList<Movie> movieList = (LinkedList<Movie>) s.getAttribute("movieList");
             LinkedList<Movie> actualList = (LinkedList<Movie>) s.getAttribute("al");
-
             Movie actMovie = null;
             if (request.getParameter("name").endsWith("X")) {
                 actMovie = movieList.get(Integer.parseInt(request.getParameter("name").substring(0, request.getParameter("name").lastIndexOf('X'))));
@@ -103,7 +96,6 @@
                 actMovie = actualList.get(Integer.parseInt(request.getParameter("name")));
             }
             s.setAttribute("actMovie", actMovie);
-            
             LinkedList<Integer> randiList = new LinkedList<>();
             Random randi = new Random();
             do {
@@ -113,29 +105,29 @@
                 }
             } while (randiList.size() < 8);
         %>
-        <div name="cinetic_header" class="header">
-            <table class="table2"><tr><td><left>
-                    <div name="logo" style="text-align:left; float:left" class='logo'>
+        <div class="header">
+            <table class="table2"><tr><td>
+                    <div style="text-align:left; float:left" class='logo'>
                         <table>
-                            <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
+                            <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
                         </table>
                     </div>
-                </left></td>
-                <td><right>
+                </td>
+                <td>
                     <form action="#" method="get">
-            <div name="checkbox" style="text-align:right; float:right;" class="lang">
-                <select name="lang" onchange="submit();">
-                    <option value="en">English</option>
-                    <option value="de">German</option>
-                </select>
-            </div>
-            </form>
-                </right> </td></tr></table>
+                        <div style="text-align:right; float:right;" class="lang">
+                            <select name="lang" onchange="submit();">
+                                <option value="en">English</option>
+                                <option value="de">German</option>
+                            </select>
+                        </div>
+                    </form>
+                 </td></tr></table>
         </div>
 
         <table align="center" cellpadding="50">
             <tr><td>
-                    <div name="<%=actMovie.getTitleEnglish()%>" class="movie">
+                    <div class="movie">
                         <center>
                             <table>
                                 <tr>
@@ -159,35 +151,30 @@
                                 </tr>
                             </table>
 
-                                <iframe width="500" height="300" src="https://www.youtube.com/embed/<%=actMovie.getTrailer()%>?autoplay=1"></iframe>
-                                
+                            <iframe width="500" height="300" src="https://www.youtube.com/embed/<%=actMovie.getTrailer()%>?autoplay=1"></iframe>
+
                             <form action="CineticServlet3" method="get">
                                 <select name="datum">
                                     <%
-                                    LinkedList<ShowAnzeige>shows = (LinkedList<ShowAnzeige>)s.getAttribute("showList"); 
-                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                                    int movieId = actMovie.getMovieID();
-                                    for (int i = 0; i<shows.size(); i++)
-                                    {
-                                    if(movieId==shows.get(i).getMovieID())
-                                        {
-                                            out.println("<option>"+sdf.format(shows.get(i).getDate())+" | "+shows.get(i).getTime()+" | "+shows.get(i).getRoomName()+"</option>");                                    
+                                        LinkedList<ShowAnzeige> shows = (LinkedList<ShowAnzeige>) s.getAttribute("showList");
+                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                        int movieId = actMovie.getMovieID();                                      
+                                        System.out.println(shows.size());
+                                        for (int i = 0; i < shows.size(); i++) {
+                                            if (movieId == shows.get(i).getMovieID()) {
+                                                out.println("<option>" + sdf.format(shows.get(i).getDate()) + " | " + shows.get(i).getTime() + " | " + shows.get(i).getRoomName() + "</option>");
+                                            }
                                         }
-                                    }
                                     %>
                                 </select>   
                                 <input type="submit" value="reserve"/> 
-                                <p>Hint: to display more shows reload the page but there are only 600 available Shows</p>
+                                <p>Hint: to display more shows reload the page!</p>
                             </form>
-                                
-                                               
                         </center>
                     </div>
-
                 </td>
                 <td>
-
-                    <div name="suggestions" class="suggestions">
+                    <div class="suggestions">
                         <form name="1" method="post">
                             <table  align="center" cellpadding="13">
                                 <tr><td><div  onclick="schickenX('' +<%=randiList.get(1)%>)"><img src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleEnglish()%>" style="width:150px"/></div> </td></tr>
@@ -199,16 +186,13 @@
                     <script>
                         function schicken(name)
                         {
-                            document.forms[1].action = "CineticServlet2?name=" + name;
-                            document.forms[1].submit();
-
+                            document.forms[2].action = "CineticServlet2?name=" + name;
+                            document.forms[2].submit();
                         }
-                    
                         function schickenX(name)
                         {
-                            document.forms[1].action = "CineticServlet2?name=" + name + "X";
-                            document.forms[1].submit();
-
+                            document.forms[2].action = "CineticServlet2?name=" + name + "X";
+                            document.forms[2].submit();
                         }
                     </script>
                 </td>
@@ -218,4 +202,3 @@
 
     </body>
 </html>
-
