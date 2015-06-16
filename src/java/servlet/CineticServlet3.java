@@ -70,10 +70,11 @@ public class CineticServlet3 extends HttpServlet {
             s.setAttribute("showList", showList);
             
             String str = request.getParameter("datum");
-            String strArray[] = str.split("|");
-            String date =strArray[0].trim();
-            String time = strArray[1].trim();
-            String room = strArray[2].trim();
+            String strArray[] = str.split(" ");
+            String date =strArray[0];            
+            String time = strArray[2];
+            String room = strArray[4] + " " + strArray[5];
+            System.out.println(""+str);
             System.out.println("########## Datum: "+date);
             System.out.println("########## Room: "+room);
             

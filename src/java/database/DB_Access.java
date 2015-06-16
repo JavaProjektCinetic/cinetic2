@@ -43,6 +43,8 @@ public class DB_Access {
         connPool = DB_ConnectionPool.getTheInstance();
     }
 
+    
+    
     public LinkedList<ShowAnzeige> getShows() throws Exception
     {
         LinkedList<ShowAnzeige> shows = new LinkedList<>();
