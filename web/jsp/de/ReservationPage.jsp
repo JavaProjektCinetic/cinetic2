@@ -157,7 +157,6 @@
             </br>
             <form action="CineticServlet">
                 <table>
-
                     <%
                         if (roomid2 == 0) {//cozy
                             for (int i = 0; i < 5; i++) {
