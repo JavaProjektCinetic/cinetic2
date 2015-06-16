@@ -4,6 +4,8 @@
     Author     : Laura
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="beans.ShowAnzeige"%>
 <%@page import="beans.Seat"%>
 <%@page import="beans.Room"%>
 <%@page import="java.util.Date"%>
@@ -115,22 +117,21 @@
             LinkedList<Movie> movieList = (LinkedList<Movie>) s.getAttribute("movieList");
             LinkedList<Room> roomList = (LinkedList<Room>) s.getAttribute("roomList");
             LinkedList<Seat> selectedSeatList = new LinkedList<>();
-            
-            //Movie actMovie = (Movie) s.getAttribute("actMovie");
-            Movie actMovie2 = movieList.get(1);
-            //out.println(actMovie2.getTitleEnglish());
-            //int roomid = Integer.parseInt(request.getParameter("room"));
-            int roomid2 = 2;
-
-            //Date time = (Date) request.getParameter("time");
-            LinkedList<Integer> randiList = new LinkedList<>();
-            Random randi = new Random();
-            do {
-                int temp = randi.nextInt(46) + 1;
-                if (!randiList.contains(temp) && movieList.get(temp) != null) {
-                    randiList.add(temp);
-                }
-            } while (randiList.size() < 8);
+            ShowAnzeige sh = (ShowAnzeige) s.getAttribute("choosenShow");
+            Movie actMovie2 = (Movie)s.getAttribute("choosenMovie");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String str = sdf.format(sh.getDate());
+            String strArray[] = str.split("-");
+            String datum = actMovie2.getTitleEnglish()+" "+strArray[2]+"."+strArray[1]+"."+strArray[0]+"     "+sh.getTime();
+            int roomid2 = 0;           
+            for(int i = 0; i<roomList.size(); i++)
+            {
+                if(roomList.get(i).getRoomName().equals(sh.getRoomName()))
+                {
+                    roomid2 = roomList.get(i).getRoomId();
+                }              
+            }
+        
         %>
         <div class="header">
             <table class="table2"><tr><td>
@@ -152,14 +153,14 @@
                 </td></tr></table>
         </div>
     <center>
-        <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%"><%=roomList.get(roomid2).getRoomName()%></span></br>18:00</h2>  
+        <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%"><%=sh.getRoomName()%></span></br><%=datum%></h2>  
         <div class="room">
             </br>
             <form action="CineticServlet">
                 <table id="roomview">
 
                     <%
-                        if (roomid2 == 0) {//cozy
+                        if (roomid2 == 2) {//cozy
                             for (int i = 0; i < 5; i++) {
                                 out.println("<tr>");
                                 for (int j = 0; j < 6; j++) {
@@ -169,7 +170,7 @@
                             }
                         }
 
-                        if (roomid2 == 1) {//glamour
+                        if (roomid2 == 3) {//glamour
                             for (int i = 0; i < 7; i++) {
                                 out.println("<tr>");
                                 for (int j = 0; j < 11; j++) {
@@ -183,7 +184,7 @@
                             }
                         }
 
-                        if (roomid2 == 2) {//the room
+                        if (roomid2 == 1) {//the room
                             for (int i = 0; i < 15; i++) {
                                 out.println("<tr>");
                                 for (int j = 0; j < 16; j++) {

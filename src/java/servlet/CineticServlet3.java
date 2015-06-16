@@ -12,6 +12,7 @@ import beans.ShowAnzeige;
 import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +37,7 @@ public class CineticServlet3 extends HttpServlet {
     LinkedList<ShowAnzeige> showList = null;
     DB_Access dba = null;
     String lang;
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -75,12 +77,21 @@ public class CineticServlet3 extends HttpServlet {
             String strArray[] = str.split(" ");
             String date =strArray[0];            
             String time = strArray[2];
-            String room = strArray[4] + " " + strArray[5];
-            System.out.println(""+str);
-            System.out.println("########## Datum: "+date);
-            System.out.println("########## Room: "+room);
+            String room = strArray[4] + " " + strArray[5];              
             
-            
+            Movie m = (Movie) s.getAttribute("choosenMovie");
+            ShowAnzeige sh;
+            for (int i = 0; i < showList.size(); i++) 
+            {
+                sh=showList.get(i);
+                if(sdf.format(sh.getDate()).equals(date) && sh.getMovieID()==m.getMovieID())
+                {
+                    if(sh.getRoomName().equals(room))
+                    {
+                        s.setAttribute("choosenShow", sh);
+                    } 
+                }                
+            }   
             request.getRequestDispatcher("/jsp/"+lang+"/LoginPage.jsp").forward(request, response);
         }
     }

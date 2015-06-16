@@ -53,24 +53,24 @@
         </style>
     </head>
     <body>
-            <div name="cinetic_header" class="header">
-            <table class="table2"><tr><td><left>
-            <div name="logo" style="text-align:left; float:left" class='logo'>
+            <div class="header">
+            <table class="table2"><tr><td>
+            <div style="text-align:left; float:left" class='logo'>
                 <table>
-                    <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
+                    <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
                 </table>
             </div>
-                </left></td>
-                <td><right>
+                </td>
+                <td>
             <form action="#" method="get">
-            <div name="checkbox" style="text-align:right; float:right;" class="lang">
+            <div style="text-align:right; float:right;" class="lang">
                 <select name="lang" onchange="submit();">
                     <option value="en">English</option>
                     <option value="de">German</option>
                 </select>
             </div>
             </form>
-                </right> </td></tr></table>
+                 </td></tr></table>
         </div>
         
             <center>
