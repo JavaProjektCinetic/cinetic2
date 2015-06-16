@@ -65,13 +65,28 @@
                 background-repeat: no-repeat;
             }
 
-            div.seats2
+            .seats2 
             {
+                font-family: Arial;
+                color: #39db51;
+                font-size: 21px;
+                background: #34d939;
                 height:20px;
                 width:20px;
-                background-color: greenyellow;
-                margin-bottom: 5px;
+                text-decoration: none;
             }
+            
+            .seats21 
+            {
+                font-family: Arial;
+                color: #db1b1b;;
+                font-size: 21px;
+                background: #db1b1b;;
+                height:20px;
+                width:20px;
+                text-decoration: none;
+            }
+            
 
             div.aisle2
             {
@@ -117,46 +132,46 @@
             LinkedList<Movie> movieList = (LinkedList<Movie>) s.getAttribute("movieList");
             LinkedList<Room> roomList = (LinkedList<Room>) s.getAttribute("roomList");
             LinkedList<Seat> selectedSeatList = new LinkedList<>();
+            LinkedList<String> reservatedSeat = (LinkedList<String>)s.getAttribute("reservateSeats");
             ShowAnzeige sh = (ShowAnzeige) s.getAttribute("choosenShow");
-            Movie actMovie2 = (Movie)s.getAttribute("choosenMovie");
+            Movie actMovie2 = (Movie) s.getAttribute("choosenMovie");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String str = sdf.format(sh.getDate());
             String strArray[] = str.split("-");
-            String datum = actMovie2.getTitleEnglish()+" "+strArray[2]+"."+strArray[1]+"."+strArray[0]+"     "+sh.getTime();
-            int roomid2 = 0;           
-            for(int i = 0; i<roomList.size(); i++)
-            {
-                if(roomList.get(i).getRoomName().equals(sh.getRoomName()))
-                {
+            String datum = actMovie2.getTitleEnglish() + " " + strArray[2] + "." + strArray[1] + "." + strArray[0] + "     " + sh.getTime();
+            int roomid2 = 0;
+            for (int i = 0; i < roomList.size(); i++) {
+                if (roomList.get(i).getRoomName().equals(sh.getRoomName())) {
                     roomid2 = roomList.get(i).getRoomId();
-                }              
+                }
             }
-        
+
+
         %>
         <div class="header">
             <table class="table2"><tr><td>
-                    <div style="text-align:left; float:left" class='logo'>
-                        <table>
-                            <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
-                        </table>
-                    </div>
-                </td>
-                <td>
-                    <form action="#" method="get">
-            <div style="text-align:right; float:right;" class="lang">
-                <select name="lang" onchange="submit();">
-                    <option value="en">English</option>
-                    <option value="de">German</option>
-                </select>
-            </div>
-            </form>
-                </td></tr></table>
+                        <div style="text-align:left; float:left" class='logo'>
+                            <table>
+                                <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td>
+                        <form action="#" method="get">
+                            <div style="text-align:right; float:right;" class="lang">
+                                <select name="lang" onchange="submit();">
+                                    <option value="en">English</option>
+                                    <option value="de">German</option>
+                                </select>
+                            </div>
+                        </form>
+                    </td></tr></table>
         </div>
     <center>
         <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%"><%=sh.getRoomName()%></span></br><%=datum%></h2>  
         <div class="room">
             </br>
-            <form action="CineticServlet">
+            <form action="CineticServlet4" method="post">
                 <table id="roomview">
 
                     <%
@@ -164,7 +179,7 @@
                             for (int i = 0; i < 5; i++) {
                                 out.println("<tr>");
                                 for (int j = 0; j < 6; j++) {
-                                    out.println("<td><div onclick='selectseat("+i+","+j+")' id="+i+"X"+j+" class='seats3'/></td>");
+                                    out.println("<td><div onclick='selectseat(" + i + "," + j + ")' id=" + i + "X" + j + " class='seats3'/></td>");
                                 }
                                 out.println("</tr>");
                             }
@@ -177,7 +192,7 @@
                                     if (j == 5) {
                                         out.println("<td><div class='aisle1'/></td>");
                                     } else {
-                                        out.println("<td><div onclick='selectseat("+i+","+j+")' id="+i+"X"+j+" class='seats1'/></td>");
+                                        out.println("<td><div onclick='selectseat(" + i + "," + j + ")' id=" + i + "X" + j + " class='seats1'/></td>");
                                     }
                                 }
                                 out.println("</tr>");
@@ -194,8 +209,31 @@
                                     } else if (i == 7 || i == 2) {
                                         out.println("<td><div class='aisle2'/></td>");
                                     } else {
-                                        out.println("<td><div onclick='selectseat("+i+","+j+")' id="+i+"X"+j+" class='seats2'/></td>");
-                                    }
+                                        if(!reservatedSeat.isEmpty())
+                                        {
+                                            String stri = i+"X"+j;
+                                            for(int k =0; k < reservatedSeat.size(); i++)
+                                            {
+                                                String rs = reservatedSeat.get(k);
+                                                if(rs.equals(stri))
+                                                {
+                                                   out.println("<td><input type='submit' class=seats21 value='"+i+"X"+j+"' name='room' id="+i+"X"+j+"/></td>");  
+                                                   break;
+                                                }else
+                                                {
+                                                    out.println("<td><input type='submit' class=seats2 value='"+i+"X"+j+"' name='room' id="+i+"X"+j+"/></td>");
+                                                    break;
+                                     
+                                                }
+                                            }
+                                           
+                                        }
+                                        else
+                                        {
+                                            out.println("<td><input type='submit' class=seats2 value='"+i+"X"+j+"' name='room' id="+i+"X"+j+"/></td>");
+                                     
+                                        }
+                                        }
                                 }
                             }
 
@@ -224,9 +262,9 @@
     <script>
         function selectseat(zeile, spalte)
         {
-            document.getElementById(zeile+"X"+spalte).style.backgroundColor = '#FF0000';
+            document.getElementById(zeile + "X" + spalte).style.backgroundColor = '#FF0000';
         }
-        
+
         function rollback()
         {
         }

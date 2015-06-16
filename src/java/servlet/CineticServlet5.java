@@ -11,9 +11,6 @@ import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,30 +21,14 @@ import util.LanguageSelector;
 
 /**
  *
- * @author Laura
+ * @author Sarah
  */
-@WebServlet(name = "CineticServlet4", urlPatterns = {"/CineticServlet4"})
-public class CineticServlet4 extends HttpServlet {
+@WebServlet(name = "CineticServlet5", urlPatterns = {"/CineticServlet5"})
+public class CineticServlet5 extends HttpServlet {
 
-    LinkedList<Movie> movieList = null;
-    LinkedList<Room> roomList = null;
-    LinkedList<String> reservateSeats = new LinkedList<>();
+
     DB_Access dba = null;
     String lang;
-    
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        try {
-            dba = DB_Access.getTheInstance();
-            movieList = dba.getMovieList("","");
-            roomList = dba.getRoomList();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CineticServlet3.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(CineticServlet3.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -65,11 +46,8 @@ public class CineticServlet4 extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             lang = LanguageSelector.selectLang(request, response);
             HttpSession s = request.getSession();
-            s.setAttribute("movieList", movieList);
-            s.setAttribute("roomList", roomList);
-            s.setAttribute("reservateSeats", reservateSeats);
-            
-            request.getRequestDispatcher("/jsp/"+lang+"/ReservationPage.jsp").forward(request, response);
+
+            request.getRequestDispatcher("/jsp/"+lang+"/LastPage.jsp").forward(request, response);
         }
     }
 
@@ -99,13 +77,6 @@ public class CineticServlet4 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String str = request.getParameter("room");
-        System.out.println(str);
-        reservateSeats.add(str);
-        
-        
-        
         processRequest(request, response);
     }
 
