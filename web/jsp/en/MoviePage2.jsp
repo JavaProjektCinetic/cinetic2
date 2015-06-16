@@ -181,14 +181,10 @@
                                 <input type="submit" value="reserve"/> 
                                 <p>Hint: to display more shows reload the page!</p>
                             </form>
-
-
                         </center>
                     </div>
-
                 </td>
                 <td>
-
                     <div name="suggestions" class="suggestions">
                         <form name="1" method="post">
                             <table  align="center" cellpadding="13">
