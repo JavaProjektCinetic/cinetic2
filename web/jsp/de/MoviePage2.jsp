@@ -113,7 +113,7 @@
                 }
             } while (randiList.size() < 8);
         %>
-        <div name="cinetic_header" class="header">
+        <div class="header">
             <table class="table2"><tr><td><left>
                     <div name="logo" style="text-align:left; float:left" class='logo'>
                         <table>
