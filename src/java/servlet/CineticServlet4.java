@@ -34,6 +34,7 @@ public class CineticServlet4 extends HttpServlet {
     LinkedList<String> reservateSeats = new LinkedList<>();
     DB_Access dba = null;
     String lang;
+    int reservatID;
     
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -42,6 +43,7 @@ public class CineticServlet4 extends HttpServlet {
             dba = DB_Access.getTheInstance();
             movieList = dba.getMovieList("","");
             roomList = dba.getRoomList();
+            reservatID=dba.getReservationID();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CineticServlet3.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -68,7 +70,8 @@ public class CineticServlet4 extends HttpServlet {
             s.setAttribute("movieList", movieList);
             s.setAttribute("roomList", roomList);
             s.setAttribute("reservateSeats", reservateSeats);
-            
+            s.setAttribute("reservationID", reservatID);
+            System.out.println(reservatID);
             request.getRequestDispatcher("/jsp/"+lang+"/ReservationPage.jsp").forward(request, response);
         }
     }
@@ -101,11 +104,34 @@ public class CineticServlet4 extends HttpServlet {
             throws ServletException, IOException {
         
         String str = request.getParameter("room");
-        System.out.println(str);
-        reservateSeats.add(str);
+        String stri = request.getParameter("glamour");
+        String stra = request.getParameter("cozy");
+        if(reservateSeats.contains(str))
+        {
+            reservateSeats.remove(str);
+        }
+        else
+        {
+              reservateSeats.add(str);
+        }
         
+        if(reservateSeats.contains(stri))
+        {
+            reservateSeats.remove(stri);
+        }
+        else
+        {
+              reservateSeats.add(stri);
+        }
         
-        
+        if(reservateSeats.contains(stra))
+        {
+            reservateSeats.remove(stra);
+        }
+        else
+        {
+              reservateSeats.add(stra);
+        }
         processRequest(request, response);
     }
 
