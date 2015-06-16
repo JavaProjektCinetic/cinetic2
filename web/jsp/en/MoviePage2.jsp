@@ -181,7 +181,7 @@
                                     %>
                                 </select>   
                                 <input type="submit" value="reserve"/> 
-                                <p>Hint: to display more shows reload the page</p>
+                                <p>Hint: to display more shows reload the page!</p>
                             </form>
                                 
                                                
