@@ -156,7 +156,7 @@
         <div class="room">
             </br>
             <form action="CineticServlet">
-                <table>
+                <table id="roomview">
 
                     <%
                         if (roomid2 == 0) {//cozy
@@ -211,9 +211,10 @@
         </div>
         </br>
         <form action="ReservationPage.jsp">
+            <input type="button" onclick="rollback()" value="cancel selection"/>
             <table>
-                <tr><td><p>Price: €12,00</p></td><td></td></tr>
-                <tr><td><p>Reservation Number: 214</p></td><td><input type="submit" value="reservate"/></td></tr>            
+                <tr><td><p>Price:</p></td><td></td></tr>
+                <tr><td><p>Reservation Number:</p></td><td><input type="submit" value="reservate"/></td></tr>            
             </table>
         </form>
     </center>
@@ -223,6 +224,10 @@
         function selectseat(zeile, spalte)
         {
             document.getElementById(zeile+"X"+spalte).style.backgroundColor = '#FF0000';
+        }
+        
+        function rollback()
+        {
         }
     </script>
 </body>

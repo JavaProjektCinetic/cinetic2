@@ -105,7 +105,7 @@
                 }
             } while (randiList.size() < 8);
         %>
-        <div class="header">
+         <div  class="header">
             <table class="table2"><tr><td>
                     <div style="text-align:left; float:left" class='logo'>
                         <table>
@@ -158,7 +158,7 @@
                                     <%
                                         LinkedList<ShowAnzeige> shows = (LinkedList<ShowAnzeige>) s.getAttribute("showList");
                                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                                        int movieId = actMovie.getMovieID();                                      
+                                        int movieId = actMovie.getMovieID();
                                         System.out.println(shows.size());
                                         for (int i = 0; i < shows.size(); i++) {
                                             if (movieId == shows.get(i).getMovieID()) {
@@ -168,8 +168,8 @@
                                     %>
                                 </select>   
                                 <input type="submit" value="reserve"/> 
-                                <p>Hint: to display more shows reload the page!</p>
-                            </form>
+                                <p>Hint: to display more shows reload the page but there are only 600 Shows available!</p>
+                             </form>
                         </center>
                     </div>
                 </td>
