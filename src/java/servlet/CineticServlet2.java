@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.LanguageSelector;
 
 /**
  *
@@ -29,7 +30,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "CineticServlet2", urlPatterns = {"/CineticServlet2"})
 public class CineticServlet2 extends HttpServlet {
-    String lang = "en";
+    String lang;
     LinkedList<Movie> movieList = null;
     //LinkedList<Movie> actualList = null;
     LinkedList<ShowAnzeige> showList = null;
@@ -69,7 +70,7 @@ public class CineticServlet2 extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-
+            lang = LanguageSelector.selectLang(request, response);
             HttpSession s = request.getSession();
             s.setAttribute("movieList",movieList);
             s.setAttribute("showList", showList);

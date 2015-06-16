@@ -103,7 +103,7 @@
                 actMovie = actualList.get(Integer.parseInt(request.getParameter("name")));
             }
             s.setAttribute("actMovie", actMovie);
-            
+
             LinkedList<Integer> randiList = new LinkedList<>();
             Random randi = new Random();
             do {
@@ -123,19 +123,19 @@
                 </left></td>
                 <td><right>
                     <form action="#" method="get">
-            <div name="checkbox" style="text-align:right; float:right;" class="lang">
-                <select name="lang" onchange="submit();">
-                    <option value="de">Deutsch</option>
-                    <option value="en">Englisch</option>
-                </select>
-            </div>
-            </form>
+                        <div name="checkbox" style="text-align:right; float:right;" class="lang">
+                            <select name="lang" onchange="submit();">
+                                <option value="de">Deutsch</option>
+                                <option value="en">Englisch</option>
+                            </select>
+                        </div>
+                    </form>
                 </right> </td></tr></table>
         </div>
 
         <table align="center" cellpadding="50">
             <tr><td>
-                    <div name="<%=actMovie.getTitleEnglish()%>" class="movie">
+                    <div name="<%=actMovie.getTitleGerman()%>" class="movie">
                         <center>
                             <table>
                                 <tr>
@@ -151,7 +151,7 @@
                                                     }
                                                     out.println("</br>" + actMovie.getDescription());
                                                 } else {
-                                                    out.println("ERROR: No description found!");
+                                                    out.println("ERROR: keine Beschreibung gefunden!");
                                                 }
                                             %>
                                         </p>
@@ -159,34 +159,30 @@
                                 </tr>
                             </table>
 
-                                <iframe width="500" height="300" src="https://www.youtube.com/embed/<%=actMovie.getTrailer()%>?autoplay=1"></iframe>
-                                
+                            <iframe width="500" height="300" src="https://www.youtube.com/embed/<%=actMovie.getTrailer()%>?autoplay=1"></iframe>
+
                             <form action="CineticServlet3" method="get">
                                 <select name="datum">
                                     <%
-                                    LinkedList<ShowAnzeige>shows = (LinkedList<ShowAnzeige>)s.getAttribute("showList"); 
-                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                                    int movieId = actMovie.getMovieID();
-                                    String time;
-                                    Date date;
-                                    String roomname;
-                                    System.out.println(shows.size());
-                                    for (int i = 0; i<shows.size(); i++)
-                                    {
-                                    if(movieId==shows.get(i).getMovieID())
-                                        {
-                                            out.println("<option>"+sdf.format(shows.get(i).getDate())+" | "+shows.get(i).getTime()+" | "+shows.get(i).getRoomName()+"</option>");                                    
+                                        LinkedList<ShowAnzeige> shows = (LinkedList<ShowAnzeige>) s.getAttribute("showList");
+                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                        int movieId = actMovie.getMovieID();
+                                        String time;
+                                        Date date;
+                                        String roomname;
+                                        System.out.println(shows.size());
+                                        for (int i = 0; i < shows.size(); i++) {
+                                            if (movieId == shows.get(i).getMovieID()) {
+                                                out.println("<option>" + sdf.format(shows.get(i).getDate()) + " | " + shows.get(i).getTime() + " | " + shows.get(i).getRoomName() + "</option>");
+                                            }
                                         }
-                                    }
                                     %>
                                 </select>   
-                                <input type="submit" value="reserve"/> 
-                                <p>Hinweis: um mehr Shows anzuzeigen, lade die Seite neu!</p>
+                                <input type="submit" value="reservieren"/> 
+                                <p>Hinweis: um mehr Shows anzuzeigen die Seite neu laden!</p>
                             </form>
-                                                
                         </center>
                     </div>
-
                 </td>
                 <td>
 
@@ -202,16 +198,13 @@
                     <script>
                         function schicken(name)
                         {
-                            document.forms[1].action = "CineticServlet2?name=" + name;
-                            document.forms[1].submit();
-
+                            document.forms[2].action = "CineticServlet2?name=" + name;
+                            document.forms[2].submit();
                         }
-                    
                         function schickenX(name)
                         {
-                            document.forms[1].action = "CineticServlet2?name=" + name + "X";
-                            document.forms[1].submit();
-
+                            document.forms[2].action = "CineticServlet2?name=" + name + "X";
+                            document.forms[2].submit();
                         }
                     </script>
                 </td>

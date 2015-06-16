@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.LanguageSelector;
 
 /**
  *
@@ -34,7 +35,8 @@ public class CineticServlet3 extends HttpServlet {
     LinkedList<Room> roomList = null;
     LinkedList<ShowAnzeige> showList = null;
     DB_Access dba = null;
-
+    String lang;
+    
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -63,7 +65,7 @@ public class CineticServlet3 extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String lang = "en";
+            lang = LanguageSelector.selectLang(request, response);
             HttpSession s = request.getSession();
             s.setAttribute("movieList", movieList);
             s.setAttribute("roomList", roomList);

@@ -103,7 +103,7 @@
                 actMovie = actualList.get(Integer.parseInt(request.getParameter("name")));
             }
             s.setAttribute("actMovie", actMovie);
-            
+
             LinkedList<Integer> randiList = new LinkedList<>();
             Random randi = new Random();
             do {
@@ -123,13 +123,13 @@
                 </left></td>
                 <td><right>
                     <form action="#" method="get">
-            <div name="checkbox" style="text-align:right; float:right;" class="lang">
-                <select name="lang" onchange="submit();">
-                    <option value="en">English</option>
-                    <option value="de">German</option>
-                </select>
-            </div>
-            </form>
+                        <div name="checkbox" style="text-align:right; float:right;" class="lang">
+                            <select name="lang" onchange="submit();">
+                                <option value="en">English</option>
+                                <option value="de">German</option>
+                            </select>
+                        </div>
+                    </form>
                 </right> </td></tr></table>
         </div>
 
@@ -159,32 +159,30 @@
                                 </tr>
                             </table>
 
-                                <iframe width="500" height="300" src="https://www.youtube.com/embed/<%=actMovie.getTrailer()%>?autoplay=1"></iframe>
-                                
+                            <iframe width="500" height="300" src="https://www.youtube.com/embed/<%=actMovie.getTrailer()%>?autoplay=1"></iframe>
+
                             <form action="CineticServlet3" method="get">
                                 <select name="datum">
                                     <%
-                                    LinkedList<ShowAnzeige>shows = (LinkedList<ShowAnzeige>)s.getAttribute("showList"); 
-                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                                    int movieId = actMovie.getMovieID();
-                                    String time;
-                                    Date date;
-                                    String roomname;
-                                    System.out.println(shows.size());
-                                    for (int i = 0; i<shows.size(); i++)
-                                    {
-                                    if(movieId==shows.get(i).getMovieID())
-                                        {
-                                            out.println("<option>"+sdf.format(shows.get(i).getDate())+" | "+shows.get(i).getTime()+" | "+shows.get(i).getRoomName()+"</option>");                                    
+                                        LinkedList<ShowAnzeige> shows = (LinkedList<ShowAnzeige>) s.getAttribute("showList");
+                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                        int movieId = actMovie.getMovieID();
+                                        String time;
+                                        Date date;
+                                        String roomname;
+                                        System.out.println(shows.size());
+                                        for (int i = 0; i < shows.size(); i++) {
+                                            if (movieId == shows.get(i).getMovieID()) {
+                                                out.println("<option>" + sdf.format(shows.get(i).getDate()) + " | " + shows.get(i).getTime() + " | " + shows.get(i).getRoomName() + "</option>");
+                                            }
                                         }
-                                    }
                                     %>
                                 </select>   
                                 <input type="submit" value="reserve"/> 
                                 <p>Hint: to display more shows reload the page!</p>
                             </form>
-                                
-                                               
+
+
                         </center>
                     </div>
 
@@ -203,15 +201,15 @@
                     <script>
                         function schicken(name)
                         {
-                            document.forms[1].action = "CineticServlet2?name=" + name;
-                            document.forms[1].submit();
+                            document.forms[2].action = "CineticServlet2?name=" + name;
+                            document.forms[2].submit();
 
                         }
-                    
+
                         function schickenX(name)
                         {
-                            document.forms[1].action = "CineticServlet2?name=" + name + "X";
-                            document.forms[1].submit();
+                            document.forms[2].action = "CineticServlet2?name=" + name + "X";
+                            document.forms[2].submit();
 
                         }
                     </script>
