@@ -31,23 +31,26 @@ public class CineticServlet4 extends HttpServlet {
 
     LinkedList<Movie> movieList = null;
     LinkedList<Room> roomList = null;
+    LinkedList<String> reservateSeats = new LinkedList<>();
     DB_Access dba = null;
     String lang;
-    
+    int reservatID;
+
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         try {
             dba = DB_Access.getTheInstance();
-            movieList = dba.getMovieList("","");
+            movieList = dba.getMovieList("", "");
             roomList = dba.getRoomList();
+            reservatID = dba.getReservationID();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CineticServlet3.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
             Logger.getLogger(CineticServlet3.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -66,7 +69,13 @@ public class CineticServlet4 extends HttpServlet {
             HttpSession s = request.getSession();
             s.setAttribute("movieList", movieList);
             s.setAttribute("roomList", roomList);
-            request.getRequestDispatcher("/jsp/"+lang+"/ReservationPage.jsp").forward(request, response);
+            s.setAttribute("reservateSeats", reservateSeats);
+            s.setAttribute("reservationID", reservatID); 
+            if (request.getParameter("tel") != null) {
+                s.setAttribute("tel", request.getParameter("tel"));
+                s.setAttribute("username", request.getParameter("username"));
+            }
+            request.getRequestDispatcher("/jsp/" + lang + "/ReservationPage.jsp").forward(request, response);
         }
     }
 
@@ -96,6 +105,27 @@ public class CineticServlet4 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        String str = request.getParameter("room");
+        String stri = request.getParameter("glamour");
+        String stra = request.getParameter("cozy");
+        if (reservateSeats.contains(str)) {
+            reservateSeats.remove(str);
+        } else {
+            reservateSeats.add(str);
+        }
+
+        if (reservateSeats.contains(stri)) {
+            reservateSeats.remove(stri);
+        } else {
+            reservateSeats.add(stri);
+        }
+
+        if (reservateSeats.contains(stra)) {
+            reservateSeats.remove(stra);
+        } else {
+            reservateSeats.add(stra);
+        }
         processRequest(request, response);
     }
 

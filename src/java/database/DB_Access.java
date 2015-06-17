@@ -74,40 +74,50 @@ public class DB_Access {
         return shows;
     }
 
+    public int getReservationID() throws Exception {
+        int reID = 0;
+        Connection conn = connPool.getConnection();
+        Statement stat = conn.createStatement();
+        String sqlString = "SELECT MAX(reservationid)"
+                + "FROM reservation;";
+        ResultSet rs = stat.executeQuery(sqlString);
+        while (rs.next()) {
+            reID = Integer.parseInt(rs.getString(1)) + 1;
+        }
+
+        return reID;
+    }
+
     public void setActualShows() throws Exception {
         LinkedList<ShowAnzeige> shows = getShows();
         SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
-        
-            Date curDay = new Date();
-            int cday = curDay.getDay();
-            int cmonth = curDay.getMonth();
-            int cyear = curDay.getYear();
-            Connection conn = connPool.getConnection();
-            Statement stat = conn.createStatement();
-            for (int i = 0; i < shows.size(); i++) {
-                ShowAnzeige s = shows.get(i);
-                int day = s.getDate().getDay();
-                int month = s.getDate().getMonth();
-                int year = s.getDate().getYear();
-                int sID = s.getShowid(); 
-                String sqlString = "DELETE FROM show WHERE showid = " + sID;
-                if (cyear > year) {  
-                    stat.executeUpdate(sqlString);    
-                }
-                else if(cmonth > month)
-                {
-                    stat.executeUpdate(sqlString);
-                }
+
+        Date curDay = new Date();
+        int cday = curDay.getDay();
+        int cmonth = curDay.getMonth();
+        int cyear = curDay.getYear();
+        Connection conn = connPool.getConnection();
+        Statement stat = conn.createStatement();
+        for (int i = 0; i < shows.size(); i++) {
+            ShowAnzeige s = shows.get(i);
+            int day = s.getDate().getDay();
+            int month = s.getDate().getMonth();
+            int year = s.getDate().getYear();
+            int sID = s.getShowid();
+            String sqlString = "DELETE FROM show WHERE showid = " + sID;
+            if (cyear > year) {
+                stat.executeUpdate(sqlString);
+            } else if (cmonth > month) {
+                stat.executeUpdate(sqlString);
             }
-            shows = getShows();
-            if(shows.size()<600)
-            {
-                setShows();
-            }       
         }
+        shows = getShows();
+        if (shows.size() < 600) {
+            setShows();
+        }
+    }
 
     //}
-
     public void setShows() throws Exception {
         LinkedList<Show> showList = new LinkedList<>();
         SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
@@ -275,32 +285,50 @@ public class DB_Access {
             Room r = roomL.get(i);
             System.out.println(r.getRoomName());
             if (r.getRoomName().equals("Cozy Room")) {
-                for (int row = 1; row <= 6; row++) {
-                    for (int column = 1; column <= 16; column++) {
+                for (int row = 0; row < 5; row++) {
+                    for (int column = 0; column < 6; column++) {
                         s = new Seat(column, row, r.getRoomName());
-                        seatList.add(s);
-                        if (row <= 5 && column == 12) {
-                            column = 17;
-                        }
+                        seatList.add(s);                        
                     }
                 }
             } else if (r.getRoomName().equals("Glamour Room")) {
-                for (int row = 1; row <= 7; row++) {
-                    for (int column = 1; column <= 10; column++) {
+                for (int row = 0; row < 7; row++) {
+                    for (int column = 0; column < 11; column++) {
+                        if(column == 5)
+                        {
+                            column++;
+                        }
                         s = new Seat(column, row, r.getRoomName());
                         seatList.add(s);
                     }
                 }
             } else if (r.getRoomName().equals("The Room")) {
-                for (int row = 1; row <= 13; row++) {
-                    for (int column = 1; column <= 20; column++) {
+                for (int row = 0; row < 2; row++) {
+                    for (int column = 0; column < 16; column++) {
                         s = new Seat(column, row, r.getRoomName());
                         seatList.add(s);
-                        if (row <= 8 && column == 14) {
-                            column = 21;
-                        } else if (row <= 12 && column == 15) {
-                            column = 21;
+                    }
+                }
+                for (int row = 3; row < 7; row++) {
+                    for (int column = 0; column < 16; column++) {
+                        s = new Seat(column, row, r.getRoomName());
+                        seatList.add(s);
+                    }
+                }
+                for (int row = 8; row < 15; row++)
+                {
+                    for (int column = 0; column < 16; column++)
+                    {
+                        if(column == 5)
+                        {
+                            column ++;
                         }
+                        else if (column == 10)
+                        {
+                            column++;
+                        }
+                        s = new Seat(column, row, r.getRoomName());
+                        seatList.add(s);
                     }
                 }
             }
@@ -403,16 +431,16 @@ public class DB_Access {
         return genreList;
     }
 
-//    public static void main(String[] args) {
-//        try {
-//            DB_Access dba = new DB_Access();
-//            
-//            
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (Exception ex) {
-//            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-//    }
+    public static void main(String[] args) {
+        try {
+            DB_Access dba = new DB_Access();
+            dba.setSeats();
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
 }

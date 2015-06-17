@@ -7,12 +7,10 @@ package servlet;
 
 import beans.Movie;
 import beans.Room;
-import beans.Show;
 import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,34 +21,14 @@ import util.LanguageSelector;
 
 /**
  *
- * @author Laura
+ * @author Sarah
  */
-@WebServlet(name = "CineticServlet", urlPatterns = {"/CineticServlet"})
-public class CineticServlet extends HttpServlet {
+@WebServlet(name = "CineticServlet5", urlPatterns = {"/CineticServlet5"})
+public class CineticServlet5 extends HttpServlet {
+
 
     DB_Access dba = null;
-    LinkedList<String> genreListE = null;
-    LinkedList<String> genreListD = null;
-    LinkedList<Movie> movieList  = null;
-    LinkedList<Movie> actualList = null;
     String lang;
-    
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        try {
-            dba = DB_Access.getTheInstance();
-            genreListE = dba.getGenres("e");
-            genreListD = dba.getGenres("d");
-            
-            movieList = dba.getMovieList("","");
-            actualList = dba.getMovieList("","");
-        } catch (ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-        }      
-    }
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -64,33 +42,14 @@ public class CineticServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) 
-        {
-            lang = LanguageSelector.selectLang(request, response);            
-            String t = request.getParameter("titlefilter");
-            String g = request.getParameter("genrefilter");
-            if (t == null) {
-                t = "";
-            }
-            if (g == null) {
-                g = "";
-            }
-            try {
-                actualList.clear();
-                actualList = dba.getMovieList(t, g);
-            } catch (Exception ex) {
-                System.out.println(ex.toString());
-            }
-                      
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            lang = LanguageSelector.selectLang(request, response);
             HttpSession s = request.getSession();
-            s.setAttribute("movieList", movieList);
-            s.setAttribute("actualList", actualList);
-            s.setAttribute("genreListE", genreListE);
-            s.setAttribute("genreListD", genreListD);
-            request.getRequestDispatcher("/jsp/"+lang+"/WelcomePage.jsp").forward(request, response);
-            
+
+            request.getRequestDispatcher("/jsp/"+lang+"/LastPage.jsp").forward(request, response);
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

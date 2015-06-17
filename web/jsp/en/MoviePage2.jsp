@@ -154,6 +154,8 @@
                                                 out.println("<option>" + sdf.format(shows.get(i).getDate()) + " | " + shows.get(i).getTime() + " | " + shows.get(i).getRoomName() + "</option>");
                                             }
                                         }
+                                        s.setAttribute("choosenMovie", actMovie);
+                                        
                                     %>
                                 </select>   
                                 <input type="submit" value="reserve"/> 
