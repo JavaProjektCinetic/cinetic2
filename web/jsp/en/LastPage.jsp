@@ -119,8 +119,8 @@
                     </table>    
                 </div>
                 <p>Please keep in mind your Reservation Number to get your tickets!</p>
-                <form action="CineticServlet">
-                <input type="submit" value="Back to Startpage"/>
+                <form action="CineticServlet6">
+                    <input type="submit" value="Validate the Reservation"/>
                 </form>
             </center>
         
