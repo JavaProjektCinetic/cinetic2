@@ -51,7 +51,7 @@
 
                 width:450px;
                 background-color: white;
-                opacity: 0.7;
+                opacity: 0.8;
             }
 
             body
@@ -201,15 +201,15 @@
                                 out.println("<tr>");
                                 for (int j = 0; j < 6; j++) {
                                     if (!reservatedSeat.isEmpty()) {
-                                            String stri = i + "C" + j;
+                                            String stri = i + "X" + j;
                                             if (reservatedSeat.contains(stri)) {
-                                                out.println("<td><input type='submit' class=seats31 value='" + i + "C" + j + "' name='cozy' id=" + i + "C" + j + "/></td>");
+                                                out.println("<td><input type='submit' class=seats31 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
 
                                             } else {
-                                                out.println("<td><input type='submit' class=seats3 value='" + i + "C" + j + "' name='cozy' id=" + i + "C" + j + "/></td>");
+                                                out.println("<td><input type='submit' class=seats3 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
                                             }
                                         } else {
-                                            out.println("<td><input type='submit' class=seats3 value='" + i + "C" + j + "' name='cozy' id=" + i + "C" + j + "/></td>");
+                                            out.println("<td><input type='submit' class=seats3 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
                                         }
                                 }
                                 out.println("</tr>");
@@ -224,15 +224,15 @@
                                         out.println("<td><div class='aisle1'/></td>");
                                     } else {
                                         if (!reservatedSeat.isEmpty()) {
-                                            String stri = i + "G" + j;
+                                            String stri = i + "X" + j;
                                             if (reservatedSeat.contains(stri)) {
-                                                out.println("<td><input type='submit' class=seats11 value='" + i + "G" + j + "' name='glamour' id=" + i + "G" + j + "/></td>");
+                                                out.println("<td><input type='submit' class=seats11 value='" + i + "X" + j + "' name='glamour' id=" + i + "X" + j + "/></td>");
 
                                             } else {
-                                                out.println("<td><input type='submit' class=seats1 value='" + i + "G" + j + "' name='glamour' id=" + i + "G" + j + "/></td>");
+                                                out.println("<td><input type='submit' class=seats1 value='" + i + "X" + j + "' name='glamour' id=" + i + "X" + j + "/></td>");
                                             }
                                         } else {
-                                            out.println("<td><input type='submit' class=seats1 value='" + i + "G" + j + "' name='glamour' id=" + i + "G" + j + "/></td>");
+                                            out.println("<td><input type='submit' class=seats1 value='" + i + "X" + j + "' name='glamour' id=" + i + "X" + j + "/></td>");
                                         }
                                     }
                                 }
@@ -250,15 +250,15 @@
                                         out.println("<td><div class='aisle2'/></td>");
                                     } else {
                                         if (!reservatedSeat.isEmpty()) {
-                                            String stri = i + "R" + j;
+                                            String stri = i + "X" + j;
                                             if (reservatedSeat.contains(stri)) {
-                                                out.println("<td><input type='submit' class=seats21 value='" + i + "R" + j + "' name='room' id=" + i + "R" + j + "/></td>");
+                                                out.println("<td><input type='submit' class=seats21 value='" + i + "X" + j + "' name='room' id=" + i + "X" + j + "/></td>");
 
                                             } else {
-                                                out.println("<td><input type='submit' class=seats2 value='" + i + "R" + j + "' name='room' id=" + i + "R" + j + "/></td>");
+                                                out.println("<td><input type='submit' class=seats2 value='" + i + "X" + j + "' name='room' id=" + i + "X" + j + "/></td>");
                                             }
                                         } else {
-                                            out.println("<td><input type='submit' class=seats2 value='" + i + "R" + j + "' name='room' id=" + i + "R" + j + "/></td>");
+                                            out.println("<td><input type='submit' class=seats2 value='" + i + "X" + j + "' name='room' id=" + i + "X" + j + "/></td>");
                                         }
                                     }
                                 }
@@ -276,10 +276,19 @@
             <div style="width: 400px; height: 3px; background-color: black"/>
         </div>
         </br>
-        <form action="ReservationPage.jsp">
-            
+        <form action="CineticServlet5">         
             <table>
-                <tr><td><p>Price: </p></td><td><p><%=reservatedSeat.size()*7%>.00 €</p></td></tr>
+                <%
+                        if(reservatedSeat.size()>0)
+                        {
+                            out.println("<tr><td><p>Price: </p></td><td><p>7.00€ x "+reservatedSeat.size()+" = "+reservatedSeat.size()*7+".00 €</p></td></tr>");
+                        }
+                        else
+                        {
+                          out.println("<tr><td><p>Price: </p></td><td></td></tr>");                         
+                        }
+                        %>
+                
                 <tr><td><p>Reservation Number: <%=reservatID%></p></td><td><input type="submit" value="reservate"/></td></tr>            
             </table>
         </form>

@@ -74,7 +74,7 @@
         </div>
         
             <center>
-                <form action="CineticServlet4">
+                <form action="CineticServlet4" method="get">
                 <h1>Login</h1>
                 <h4>Please log in before reservating a seat!</h4>
                 Name: <input type="text" id="username" name="username"/></br>
