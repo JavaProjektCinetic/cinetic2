@@ -99,7 +99,7 @@
             <table class="table2"><tr><td>
                     <div style="text-align:left; float:left" class='logo'>
                         <table>
-                            <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
+                            <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"/></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
                         </table>
                     </div>
                 </td>

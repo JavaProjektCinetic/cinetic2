@@ -19,16 +19,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Movie Page</title>
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>  
-        <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-        <link rel="stylesheet" href="/resources/demos/style.css">
-        <script>
-            $(function () {
-                $("#datepicker").datepicker({minDate: 0, maxDate: "+1M -1D"});
-                $("#datepicker").datepicker("option", "dateFormat", "dd.mm.yy");
-            });
-        </script>
         <style>
             div.header 
             {
@@ -37,7 +27,6 @@
                 margin-left: -8px;
                 margin-top: -8px;
             }
-
             div.logo{
                 width: 220px;
                 background-color: white;
@@ -46,13 +35,11 @@
                 margin-left: 20px;
                 margin-top: 20px;
             }
-
             div.lang{
                 height:150px;
                 margin-top: 20px;
                 margin-right: 20px;
             }
-
             div.movie{
                 border-style: inset;
                 border-width: 5px;
@@ -61,7 +48,6 @@
                 background-color: white;
                 //opacity: 0.9;
             }
-
             div.suggestions
             {
                 width:180px;
@@ -72,12 +58,10 @@
                 border-width: 5px;
                 border-color: #644030;
             }
-
             table.table2
             {
                 width:100%;
             }
-
             body
             {
                 background-image: url("res/background2.jpg");
@@ -95,7 +79,6 @@
             HttpSession s = request.getSession();
             LinkedList<Movie> movieList = (LinkedList<Movie>) s.getAttribute("movieList");
             LinkedList<Movie> actualList = (LinkedList<Movie>) s.getAttribute("al");
-
             Movie actMovie = null;
             if (request.getParameter("name").endsWith("X")) {
                 actMovie = movieList.get(Integer.parseInt(request.getParameter("name").substring(0, request.getParameter("name").lastIndexOf('X'))));
@@ -103,7 +86,6 @@
                 actMovie = actualList.get(Integer.parseInt(request.getParameter("name")));
             }
             s.setAttribute("actMovie", actMovie);
-
             LinkedList<Integer> randiList = new LinkedList<>();
             Random randi = new Random();
             do {
@@ -113,17 +95,17 @@
                 }
             } while (randiList.size() < 8);
         %>
-        <div name="cinetic_header" class="header">
+        <div class="header">
             <table class="table2"><tr><td><left>
-                    <div name="logo" style="text-align:left; float:left" class='logo'>
+                    <div style="text-align:left; float:left" class='logo'>
                         <table>
-                            <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></img></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
+                            <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"/></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
                         </table>
                     </div>
                 </left></td>
                 <td><right>
                     <form action="#" method="get">
-                        <div name="checkbox" style="text-align:right; float:right;" class="lang">
+                        <div style="text-align:right; float:right;" class="lang">
                             <select name="lang" onchange="submit();">
                                 <option value="de">Deutsch</option>
                                 <option value="en">Englisch</option>
