@@ -430,17 +430,4 @@ public class DB_Access {
         connPool.releaseConnection(conn);
         return genreList;
     }
-
-    public static void main(String[] args) {
-        try {
-            DB_Access dba = new DB_Access();
-            dba.setSeats();
-            
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
 }
