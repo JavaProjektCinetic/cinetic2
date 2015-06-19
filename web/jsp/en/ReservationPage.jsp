@@ -203,7 +203,6 @@
             <form action="CineticServlet4" method="post">
                 <table id="roomview">
                     
-                    
 
                     <%
                         if (roomid2 == 2) {//cozy
@@ -226,7 +225,7 @@
                                         String stri = i + "X" + j+"X"+sh.getShowid();   
                                         if (resSeats.contains(stri)) {
                                             System.out.println("inif");
-                                            out.println("<td><input type='submit' class=seats32 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
+                                            out.println("<td><input type='submit' class=seats32 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + " disabled='disabled'/></td>");
                                         } else {
                                             if (!reservatedSeat.isEmpty()) {
                                                 stri = i + "X" + j;
