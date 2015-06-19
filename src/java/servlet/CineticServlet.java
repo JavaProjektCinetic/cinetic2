@@ -33,6 +33,7 @@ public class CineticServlet extends HttpServlet {
     LinkedList<String> genreListD = null;
     LinkedList<Movie> movieList  = null;
     LinkedList<Movie> actualList = null;
+    LinkedList<String> reserSeats = null;
     String lang;
     
     @Override
@@ -45,6 +46,7 @@ public class CineticServlet extends HttpServlet {
             
             movieList = dba.getMovieList("","");
             actualList = dba.getMovieList("","");
+            reserSeats = dba.getReservatedSeats();
         } catch (ClassNotFoundException ex) {
             System.out.println(ex.toString());
         } catch (Exception ex) {
@@ -80,13 +82,15 @@ public class CineticServlet extends HttpServlet {
                 actualList = dba.getMovieList(t, g);
             } catch (Exception ex) {
                 System.out.println(ex.toString());
-            }
+            }            
+            
                       
             HttpSession s = request.getSession();
             s.setAttribute("movieList", movieList);
             s.setAttribute("actualList", actualList);
             s.setAttribute("genreListE", genreListE);
             s.setAttribute("genreListD", genreListD);
+            s.setAttribute("reserSeats", reserSeats);
             request.getRequestDispatcher("/jsp/"+lang+"/WelcomePage.jsp").forward(request, response);
             
         }

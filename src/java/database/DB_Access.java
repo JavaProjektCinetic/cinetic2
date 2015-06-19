@@ -331,16 +331,14 @@ public class DB_Access {
             s = seatList.get(i);
             System.out.println("Roomname: " + s.getRoomName() + " Reihe: " + s.getRow() + " Sitz: " + s.getColumn());
             int roomID = 2;
-            for (int j = 0; j < roomL.size(); j++) 
-            {
-                if(roomL.get(j).getRoomName().equals(s.getRoomName()))
-                {
-                    roomID=roomL.get(j).getRoomId();
-                }   
+            for (int j = 0; j < roomL.size(); j++) {
+                if (roomL.get(j).getRoomName().equals(s.getRoomName())) {
+                    roomID = roomL.get(j).getRoomId();
+                }
             }
             Statement stat = conn.createStatement();
-            String sqlString = "INSERT INTO seat VALUES (" + (i + 1) + ",  " + s.getRow() + ", "+roomID+", " + s.getColumn()+")" ;
-                     
+            String sqlString = "INSERT INTO seat VALUES (" + (i + 1) + ",  " + s.getRow() + ", " + roomID + ", " + s.getColumn() + ")";
+
             stat.executeUpdate(sqlString);
         }
         connPool.releaseConnection(conn);
@@ -433,13 +431,13 @@ public class DB_Access {
     }
 
     public void newReservation(int resID, String name, String tel, int showID, String room, LinkedList<String> seats) throws Exception {
-        int seatID=0, roomID = 0;
+        int seatID = 0, roomID = 0;
         Connection conn = connPool.getConnection();
         LinkedList<Room> rooms = getRoomList();
         Statement stat = conn.createStatement();
         String sqlString;
         sqlString = "INSERT INTO reservation "
-                + "VALUES( 25 , '" + name + "', '" + tel + "', " + resID + ")";
+                + "VALUES( "+showID+" , '" + name + "', '" + tel + "', " + resID + ")";
         stat.executeUpdate(sqlString);
         for (int i = 0; i < rooms.size(); i++) {
             if (rooms.get(i).getRoomName().equals(room)) {
@@ -455,29 +453,36 @@ public class DB_Access {
             sqlString = "SELECT seatid "
                     + "FROM seat "
                     + "WHERE col=" + strArray[1] + " AND row=" + strArray[0] + " AND roomid=" + roomID + "";
-            ResultSet rs = stat.executeQuery(sqlString);           
-            while (rs.next()) 
-            {
+            ResultSet rs = stat.executeQuery(sqlString);
+            while (rs.next()) {
                 seatID = Integer.parseInt(rs.getString(1));
                 System.out.println(Integer.parseInt(rs.getString(1)));
                 System.out.println("while");
             }
             System.out.println(seatID);
             sqlString = "INSERT INTO reservationseat "
-                    + "VALUES("+resID+", "+seatID+")";
+                    + "VALUES(" + resID + ", " + seatID + ")";
             stat.executeUpdate(sqlString);
         }
     }
-    
-    public LinkedList<String> getReservatedSeats() throws Exception
-    {
-        LinkedList<String> reservatedSeats = new LinkedList<String>(); 
+
+    public LinkedList<String> getReservatedSeats() throws Exception {
+        LinkedList<String> reservatedSeats = new LinkedList<String>();
         Connection conn = connPool.getConnection();
         Statement stat = conn.createStatement();
-        String sqlString = "SELECT ";
+        String sqlString = "SELECT s.row, s.col, rs.showid "
+                + "FROM seat s INNER JOIN reservationseat r ON (s.seatid = r.seatid) "
+                + "            INNER JOIN reservation rs ON (r.reservationid = rs.reservationid)";
         ResultSet rs = stat.executeQuery(sqlString);
-        
-        
+        String row;
+        String col;
+        int showID;
+        while (rs.next()) {
+            row = rs.getString(1);
+            col = rs.getString(2);
+            showID = Integer.parseInt(rs.getString(3));
+            reservatedSeats.add("" + row + "X" + col+"X"+showID);
+        }
         return reservatedSeats;
     }
 
