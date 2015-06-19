@@ -29,7 +29,8 @@ import util.LanguageSelector;
 public class CineticServlet6 extends HttpServlet {
 
     String lang;
-    DB_Access dba = null;   
+    DB_Access dba = null; 
+    LinkedList<String> reservatedSeat;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -61,6 +62,9 @@ public class CineticServlet6 extends HttpServlet {
             
             try {
                 dba.newReservation( resID, (String) s.getAttribute("username"), (String) s.getAttribute("tel"), sh.getShowid(), sh.getRoomName(), (LinkedList<String>) s.getAttribute("reservateSeats"));
+                reservatedSeat = (LinkedList<String>) s.getAttribute("reservateSeats");
+                reservatedSeat.clear();
+                s.setAttribute("reservateSeats", reservatedSeat);               
             } catch (Exception ex) {
                 Logger.getLogger(CineticServlet6.class.getName()).log(Level.SEVERE, null, ex);
             }
