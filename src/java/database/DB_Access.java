@@ -71,6 +71,7 @@ public class DB_Access {
             ShowAnzeige s = new ShowAnzeige(roomName, movieid, d, takenseats, showid, time, freeseats);
             shows.add(s);
         }
+        connPool.releaseConnection(conn);
         return shows;
     }
 
@@ -84,7 +85,7 @@ public class DB_Access {
         while (rs.next()) {
             reID = Integer.parseInt(rs.getString(1)) + 1;
         }
-
+        connPool.releaseConnection(conn);
         return reID;
     }
 
@@ -115,6 +116,7 @@ public class DB_Access {
         if (shows.size() < 600) {
             setShows();
         }
+        connPool.releaseConnection(conn);
     }
 
     //}
@@ -362,6 +364,7 @@ public class DB_Access {
             Room r = new Room(id, name, seats, preis);
             roomList.add(r);
         }
+        connPool.releaseConnection(conn);
         return roomList;
     }
 
@@ -467,7 +470,7 @@ public class DB_Access {
                     + "VALUES(" + resID + ", " + seatID + ")";
             stat.executeUpdate(sqlString);
         }
-        
+        connPool.releaseConnection(conn);
         
     }
     
@@ -489,19 +492,9 @@ public class DB_Access {
             showID = Integer.parseInt(rs.getString(3));
             reservatedSeats.add("" + row + "X" + col+"X"+showID);
         }
+        connPool.releaseConnection(conn);
         return reservatedSeats;
     }
 
-    public static void main(String[] args) {
-        try {
-            DB_Access dba = new DB_Access();
-            dba.setSeats();
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(DB_Access.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
+    
 }
