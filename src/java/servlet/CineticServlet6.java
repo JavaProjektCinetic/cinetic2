@@ -5,13 +5,13 @@
  */
 package servlet;
 
-import beans.Movie;
-import beans.Room;
-import beans.Show;
+import beans.ShowAnzeige;
 import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,37 +23,23 @@ import util.LanguageSelector;
 
 /**
  *
- * @author Laura
+ * @author Sarah
  */
-@WebServlet(name = "CineticServlet", urlPatterns = {"/CineticServlet"})
-public class CineticServlet extends HttpServlet {
+@WebServlet(name = "CineticServlet6", urlPatterns = {"/CineticServlet6"})
+public class CineticServlet6 extends HttpServlet {
 
-    DB_Access dba = null;
-    LinkedList<String> genreListE = null;
-    LinkedList<String> genreListD = null;
-    LinkedList<Movie> movieList  = null;
-    LinkedList<Movie> actualList = null;
-    LinkedList<String> reserSeats = null;
     String lang;
-    
+    DB_Access dba = null;   
+
     @Override
     public void init(ServletConfig config) throws ServletException {
-        super.init(config);
+        super.init(config); //To change body of generated methods, choose Tools | Templates.
         try {
             dba = DB_Access.getTheInstance();
-            genreListE = dba.getGenres("e");
-            genreListD = dba.getGenres("d");
-            
-            movieList = dba.getMovieList("","");
-            actualList = dba.getMovieList("","");
-            reserSeats = dba.getReservatedSeats();
         } catch (ClassNotFoundException ex) {
-            System.out.println(ex.toString());
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-        }      
+            Logger.getLogger(CineticServlet6.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -66,35 +52,21 @@ public class CineticServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) 
-        {
-            lang = LanguageSelector.selectLang(request, response);            
-            String t = request.getParameter("titlefilter");
-            String g = request.getParameter("genrefilter");
-            if (t == null) {
-                t = "";
-            }
-            if (g == null) {
-                g = "";
-            }
-            try {
-                actualList.clear();
-                actualList = dba.getMovieList(t, g);
-            } catch (Exception ex) {
-                System.out.println(ex.toString());
-            }            
-            
-                      
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            lang = LanguageSelector.selectLang(request, response);
             HttpSession s = request.getSession();
-            s.setAttribute("movieList", movieList);
-            s.setAttribute("actualList", actualList);
-            s.setAttribute("genreListE", genreListE);
-            s.setAttribute("genreListD", genreListD);
-            s.setAttribute("reserSeats", reserSeats);
-            request.getRequestDispatcher("/jsp/"+lang+"/WelcomePage.jsp").forward(request, response);
+            ShowAnzeige sh = (ShowAnzeige) s.getAttribute("choosenShow");
+            int resID = (Integer)s.getAttribute("reservationID");
             
+            try {
+                dba.newReservation( resID, (String) s.getAttribute("username"), (String) s.getAttribute("tel"), sh.getShowid(), sh.getRoomName(), (LinkedList<String>) s.getAttribute("reservateSeats"));
+            } catch (Exception ex) {
+                Logger.getLogger(CineticServlet6.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            request.getRequestDispatcher("/jsp/"+lang+"/RealLastPage.jsp").forward(request, response);
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -122,7 +94,6 @@ public class CineticServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         processRequest(request, response);
     }
 
