@@ -75,6 +75,7 @@
             <center>
                 <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%">Thank you for your Reservation!</span></h2>
                 
+                
             </center>
         
     </body>

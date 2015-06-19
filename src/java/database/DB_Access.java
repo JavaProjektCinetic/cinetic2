@@ -428,6 +428,7 @@ public class DB_Access {
                 genreList.add(genre);
             }
         }
+        
         connPool.releaseConnection(conn);
         return genreList;
     }

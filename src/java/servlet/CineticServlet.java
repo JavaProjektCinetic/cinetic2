@@ -36,6 +36,7 @@ public class CineticServlet extends HttpServlet {
     LinkedList<String> reserSeats = null;
     String lang;
     
+    
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);

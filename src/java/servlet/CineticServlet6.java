@@ -66,6 +66,7 @@ public class CineticServlet6 extends HttpServlet {
             }
             request.getRequestDispatcher("/jsp/"+lang+"/RealLastPage.jsp").forward(request, response);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

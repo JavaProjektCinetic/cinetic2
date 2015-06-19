@@ -74,6 +74,7 @@ public class CineticServlet2 extends HttpServlet {
             }
             
             
+            
             lang = LanguageSelector.selectLang(request, response);
             HttpSession s = request.getSession();
             s.setAttribute("movieList",movieList);
