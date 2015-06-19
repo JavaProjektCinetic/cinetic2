@@ -81,9 +81,10 @@
             {
                 String rs = reservatedSeat.get(i);
                 String strArray2[] = rs.split("X");
-                seats+="Column: "+ (Integer.parseInt(strArray2[0])+1) + " Row: "+(Integer.parseInt(strArray2[1])+1)+"<br>";
+                seats+="Row: "+ (Integer.parseInt(strArray2[0])+1) + " Column: "+(Integer.parseInt(strArray2[1])+1)+"<br>";
             }
-            int preis = reservatedSeat.size()*7;
+            int k = (Integer)s.getAttribute("preis");
+            int preis = reservatedSeat.size()*k;
         %>
             <div class="header">
             <table class="table2"><tr><td>

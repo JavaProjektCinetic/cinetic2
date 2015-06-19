@@ -86,7 +86,16 @@
                 width:20px;
                 text-decoration: none;
             }
-
+            .seats22 
+            {
+                font-family: Arial;
+                color: #c0c0c0;
+                font-size: 21px;
+                background: #c0c0c0;;
+                height:20px;
+                width:20px;
+                text-decoration: none;
+            }
 
             div.aisle2
             {
@@ -115,7 +124,7 @@
                 width:45px;
                 text-decoration: none;
             }
-            
+
             .seats32 
             {
                 font-family: Arial;
@@ -127,7 +136,6 @@
                 text-decoration: none;
             }
 
-           
             .seats1 
             {
                 font-family: Arial;
@@ -149,6 +157,17 @@
                 width:35px;
                 text-decoration: none;
             }
+
+            .seats12 
+            {
+                font-family: Arial;
+                color: #c0c0c0;
+                font-size: 21px;
+                background: #c0c0c0;
+                height:20px;
+                width:35px;
+                text-decoration: none;
+            }
             div.aisle1
             {
                 height:20px;
@@ -166,6 +185,7 @@
             Movie actMovie2 = (Movie) s.getAttribute("choosenMovie");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             int reservatID = (Integer) s.getAttribute("reservationID");
+            int preis = 0;
             LinkedList<String> resSeats = (LinkedList<String>) s.getAttribute("reserSeats");
             String str = sdf.format(sh.getDate());
             String strArray[] = str.split("-");
@@ -197,12 +217,12 @@
                     </td></tr></table>
         </div>
     <center>
-        <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%"><%=sh.getRoomName()%></span></br><%=datum%><%=sh.getShowid()%></h2>  
+        <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%"><%=sh.getRoomName()%></span></br><%=datum%></h2>  
         <div class="room">
             </br>
             <form action="CineticServlet4" method="post">
                 <table id="roomview">
-                    
+
 
                     <%
                         if (roomid2 == 2) {//cozy
@@ -221,10 +241,9 @@
                                         } else {
                                             out.println("<td><input type='submit' class=seats3 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
                                         }
-                                    } else if (!resSeats.isEmpty()) {                                      
-                                        String stri = i + "X" + j+"X"+sh.getShowid();   
+                                    } else if (!resSeats.isEmpty()) {
+                                        String stri = i + "X" + j + "X" + sh.getShowid();
                                         if (resSeats.contains(stri)) {
-                                            System.out.println("inif");
                                             out.println("<td><input type='submit' class=seats32 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + " disabled='disabled'/></td>");
                                         } else {
                                             if (!reservatedSeat.isEmpty()) {
@@ -238,13 +257,12 @@
                                             } else {
                                                 out.println("<td><input type='submit' class=seats3 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
                                             }
-
                                         }
                                     }
-
                                 }
                                 out.println("</tr>");
                             }
+                            preis = roomList.get(1).getPreis();
                         }
 
                         if (roomid2 == 3) {//glamour
@@ -254,21 +272,46 @@
                                     if (j == 5) {
                                         out.println("<td><div class='aisle1'/></td>");
                                     } else {
-                                        if (!reservatedSeat.isEmpty()) {
-                                            String stri = i + "X" + j;
-                                            if (reservatedSeat.contains(stri)) {
-                                                out.println("<td><input type='submit' class=seats11 value='" + i + "X" + j + "' name='glamour' id=" + i + "X" + j + "/></td>");
+                                        if (resSeats.isEmpty()) {
+                                            if (!reservatedSeat.isEmpty()) {
+                                                String stri = i + "X" + j;
+                                                if (reservatedSeat.contains(stri)) {
+                                                    out.println("<td><input type='submit' class=seats11 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
 
+                                                } else {
+                                                    out.println("<td><input type='submit' class=seats1 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
+                                                }
                                             } else {
-                                                out.println("<td><input type='submit' class=seats1 value='" + i + "X" + j + "' name='glamour' id=" + i + "X" + j + "/></td>");
+                                                out.println("<td><input type='submit' class=seats1 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
                                             }
-                                        } else {
-                                            out.println("<td><input type='submit' class=seats1 value='" + i + "X" + j + "' name='glamour' id=" + i + "X" + j + "/></td>");
+                                        } else if (!resSeats.isEmpty()) {
+                                            String stri = i + "X" + j + "X" + sh.getShowid();
+                                            if (resSeats.contains(stri)) {
+                                                out.println("<td><input type='submit' class=seats12 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + " disabled='disabled'/></td>");
+                                            } else {
+                                                if (!reservatedSeat.isEmpty()) {
+                                                    stri = i + "X" + j;
+                                                    if (reservatedSeat.contains(stri)) {
+                                                        out.println("<td><input type='submit' class=seats11 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
+
+                                                    } else {
+                                                        out.println("<td><input type='submit' class=seats1 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
+                                                    }
+                                                } else {
+                                                    out.println("<td><input type='submit' class=seats1 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
+                                                }
+
+                                            }
                                         }
+                                        
+                                        
+                                        
+                                        
                                     }
                                 }
                                 out.println("</tr>");
                             }
+                            preis = roomList.get(2).getPreis();
                         }
 
                         if (roomid2 == 1) {//the room
@@ -280,24 +323,45 @@
                                     } else if (i == 7 || i == 2) {
                                         out.println("<td><div class='aisle2'/></td>");
                                     } else {
-                                        if (!reservatedSeat.isEmpty()) {
-                                            String stri = i + "X" + j;
-                                            if (reservatedSeat.contains(stri)) {
-                                                out.println("<td><input type='submit' class=seats21 value='" + i + "X" + j + "' name='room' id=" + i + "X" + j + "/></td>");
+                                        if (resSeats.isEmpty()) {
+                                            if (!reservatedSeat.isEmpty()) {
+                                                String stri = i + "X" + j;
+                                                if (reservatedSeat.contains(stri)) {
+                                                    out.println("<td><input type='submit' class=seats21 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
 
+                                                } else {
+                                                    out.println("<td><input type='submit' class=seats2 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
+                                                }
                                             } else {
-                                                out.println("<td><input type='submit' class=seats2 value='" + i + "X" + j + "' name='room' id=" + i + "X" + j + "/></td>");
+                                                out.println("<td><input type='submit' class=seats2 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
                                             }
-                                        } else {
-                                            out.println("<td><input type='submit' class=seats2 value='" + i + "X" + j + "' name='room' id=" + i + "X" + j + "/></td>");
+                                        } else if (!resSeats.isEmpty()) {
+                                            String stri = i + "X" + j + "X" + sh.getShowid();
+                                            if (resSeats.contains(stri)) {
+                                                out.println("<td><input type='submit' class=seats22 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + " disabled='disabled'/></td>");
+                                            } else {
+                                                if (!reservatedSeat.isEmpty()) {
+                                                    stri = i + "X" + j;
+                                                    if (reservatedSeat.contains(stri)) {
+                                                        out.println("<td><input type='submit' class=seats21 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
+
+                                                    } else {
+                                                        out.println("<td><input type='submit' class=seats2 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
+                                                    }
+                                                } else {
+                                                    out.println("<td><input type='submit' class=seats2 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
+                                                }
+
+                                            }
                                         }
                                     }
                                 }
                             }
 
                             out.println("</tr>");
+                            preis = roomList.get(0).getPreis();
                         }
-
+                        s.setAttribute("preis", preis);
 
                     %>
                 </table>
@@ -310,7 +374,7 @@
         <form action="CineticServlet5">         
             <table>
                 <%                    if (reservatedSeat.size() > 0) {
-                        out.println("<tr><td><p>Price: </p></td><td><p>7.00€ x " + reservatedSeat.size() + " = " + reservatedSeat.size() * 7 + ".00 €</p></td></tr>");
+                        out.println("<tr><td><p>Price: </p></td><td><p>" + preis + ".00€ x " + reservatedSeat.size() + " = " + reservatedSeat.size() * preis + ".00 €</p></td></tr>");
                     } else {
                         out.println("<tr><td><p>Price: </p></td><td></td></tr>");
                     }

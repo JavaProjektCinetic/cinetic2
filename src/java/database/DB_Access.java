@@ -348,16 +348,18 @@ public class DB_Access {
         Connection conn = connPool.getConnection();
         LinkedList<Room> roomList = new LinkedList<>();
         Statement stat = conn.createStatement();
-        String sqlString = "SELECT roomid, name, seats FROM room";
+        String sqlString = "SELECT roomid, name, seats, preis FROM room";
         ResultSet rs = stat.executeQuery(sqlString);
         int id;
         String name;
         int seats;
+        int preis;
         while (rs.next()) {
             id = rs.getInt("roomid");
             name = rs.getString("name");
             seats = rs.getInt("seats");
-            Room r = new Room(id, name, seats);
+            preis = rs.getInt("preis");
+            Room r = new Room(id, name, seats, preis);
             roomList.add(r);
         }
         return roomList;
@@ -464,8 +466,11 @@ public class DB_Access {
                     + "VALUES(" + resID + ", " + seatID + ")";
             stat.executeUpdate(sqlString);
         }
+        
+        
     }
-
+    
+   
     public LinkedList<String> getReservatedSeats() throws Exception {
         LinkedList<String> reservatedSeats = new LinkedList<String>();
         Connection conn = connPool.getConnection();
