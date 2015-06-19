@@ -75,10 +75,6 @@
             <center>
                 <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%">Thank you for your Reservation!</span></h2>
                 
-                <form action="CineticServlet">
-                    
-                        <input type="submit" value="Back to Startpage"/>
-                </form>
             </center>
         
     </body>
