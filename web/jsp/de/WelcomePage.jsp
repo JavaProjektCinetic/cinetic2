@@ -166,6 +166,7 @@
         %>
     <center>
         <div class='suggestions' style="display: block">
+            <font face='Georgia'>
             <form action="CineticServlet" name="x" method="get">
                 Titel <input type="text" name="titlefilter" style='margin-top: 20px'/>
                 <select name="genrefilter">
@@ -237,7 +238,7 @@
 
                 }
             </script>
-
+            </font>
         </div>
     </center>
 </body>

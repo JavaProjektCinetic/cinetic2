@@ -17,7 +17,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Movie Page</title>
         <style>
@@ -96,26 +96,26 @@
                 }
             } while (randiList.size() < 8);
         %>
-         <div  class="header">
+        <div  class="header">
             <table class="table2"><tr><td>
-                    <div style="text-align:left; float:left" class='logo'>
-                        <table>
-                            <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"/></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
-                        </table>
-                    </div>
-                </td>
-                <td>
-                    <form action="#" method="get">
-                        <div style="text-align:right; float:right;" class="lang">
-                            <select name="lang" onchange="submit();">
-                                <option value="de">Deutsch</option>
-                                <option value="en">Englisch</option>
-                            </select>
+                        <div style="text-align:left; float:left" class='logo'>
+                            <table>
+                                <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"/></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
+                            </table>
                         </div>
-                    </form>
-                 </td></tr></table>
+                    </td>
+                    <td>
+                        <form action="#" method="get">
+                            <div style="text-align:right; float:right;" class="lang">
+                                <select name="lang" onchange="submit();">
+                                    <option value="de">Deutsch</option>
+                                    <option value="en">Englisch</option>
+                                </select>
+                            </div>
+                        </form>
+                    </td></tr></table>
         </div>
-
+        <font face='Georgia'>
         <table align="center" cellpadding="50">
             <tr><td>
                     <div class="movie">
@@ -128,7 +128,7 @@
                                     <td>
                                         <p>
                                             <%if (movieList != null) {
-                                                    out.println("<h1 style='font-family:Playbill'>" + actMovie.getTitleGerman()+ "</h1>");
+                                                    out.println("<h1 style='font-family:Playbill'>" + actMovie.getTitleGerman() + "</h1>");
                                                     for (int i = 0; i < actMovie.getRating(); i++) {
                                                         out.println("<img src='res/stern.png' style='width:30px'/>");
                                                     }
@@ -156,12 +156,12 @@
                                             }
                                         }
                                         s.setAttribute("choosenMovie", actMovie);
-                                        
+
                                     %>
                                 </select>   
-                                <input type="submit" value="reserve"/> 
+                                <input type="submit" value="reservieren"/> 
                                 <p>Hinweis: Lade die Seite neu um mehr Shows anzuzeigen, aber es sind nur 600 Shows verfügbar!</p>
-                             </form>
+                            </form>
                         </center>
                     </div>
                 </td>
@@ -190,7 +190,6 @@
                 </td>
             </tr>
         </table>              
-
-
+        </font>
     </body>
 </html>

@@ -170,20 +170,24 @@
         
             <center>
                 <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%">Reservierung für <%=actMovie2.getTitleGerman()%></span></h2>
-                <div class="room">
-                    <table>
-                        <tr><td><h2 style="color: #644030">Name: </h2></td><td><p style="color: #644030"><%=username%></p></td>
-                        <tr><td><h2 style="color: #644030">Telefon Nummer: </h2></td><td><p style="color: #644030"><%=tel%></p></td></tr> 
-                        <tr><td><h2 style="color: #644030">Datum: </h2></td><td><p style="color: #644030"><%=date%></p></td></tr>
-                        <tr><td><h2 style="color: #644030">Raum: </h2></td><td><p style="color: #644030"><%=sh.getRoomName()%></p></td></tr>
-                        <tr><td><h2 style="color: #644030">Sitze: </h2></td><td><p style="color: #644030"><%=seats%></p></td></tr>
-                        <tr><td><h2 style="color: #644030">Preis: </h2></td><td><p style="color: #644030"><%=price%>.00 €</p></td></tr>
-                        <tr><td><h2 style="color: #644030">Reservierungs Nummer:&nbsp;&nbsp;&nbsp;</h2></td><td><p style="color: #644030"><%=reservatID%></p></td></tr>                        
-                    </table>    
-                </div>
+                <font color="#644030" face='Georgia'>
+        <div class="room">
+
+            <table>
+                <tr><td><b>Name: </b></td><td><%=username%></td>
+                <tr><td><b>Telefon Nummer: </b></td><td><%=tel%></td></tr> 
+                <tr><td><b>Datum: </b></td><td><%=date%></td></tr>
+                <tr><td><b>Raum: </b></td><td><%=sh.getRoomName()%></td></tr>
+                <tr><td><b>Sitze: </b></td><td><%=seats%></td></tr>
+                <tr><td><b>Preis: </b></td><td><%=price%>.00 €</td></tr>
+                <tr><td><b>Reservierungs Nummer:&nbsp;&nbsp;&nbsp;</b></td><td><%=reservatID%></td></tr>                        
+            </table>
+
+        </div>
+        </font>
                 <p>Bitte vergiss deine Reservierungs Nummer nicht! Du brauchst sie um deine Tickets zu bekommen.</p>
                 <form action="CineticServlet6">
-                    <input type="submit" value="Validate the Reservation"/>
+                    <input type="submit" value="Reservierung fertigstellen"/>
                 </form>
             </center>
         

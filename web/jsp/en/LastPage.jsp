@@ -69,7 +69,7 @@
             int reservatID = (Integer) s.getAttribute("reservationID");
             String str = sdf.format(sh.getDate());
             String strArray[] = str.split("-");
-            String datum = strArray[2] + "." + strArray[1] + "." + strArray[0] + "     " + sh.getTime();
+            String date = strArray[2] + "." + strArray[1] + "." + strArray[0] + "     " + sh.getTime();
             String seats = "";
             for (int i = 0; i < reservatedSeat.size(); i++) {
                 String rs = reservatedSeat.get(i);
@@ -77,7 +77,7 @@
                 seats += "Row: " + (Integer.parseInt(strArray2[0]) + 1) + " Column: " + (Integer.parseInt(strArray2[1]) + 1) + "<br>";
             }
             int k = (Integer) s.getAttribute("preis");
-            int preis = reservatedSeat.size() * k;
+            int price = reservatedSeat.size() * k;
         %>
         <div class="header">
             <table class="table2"><tr><td>
@@ -107,10 +107,10 @@
             <table>
                 <tr><td><b>Name: </b></td><td><%=username%></td>
                 <tr><td><b>Telephone number: </b></td><td><%=tel%></td></tr> 
-                <tr><td><b>Date: </b></td><td><%=datum%></td></tr>
+                <tr><td><b>Date: </b></td><td><%=date%></td></tr>
                 <tr><td><b>Room: </b></td><td><%=sh.getRoomName()%></td></tr>
                 <tr><td><b>Seats: </b></td><td><%=seats%></td></tr>
-                <tr><td><b>Price: </b></td><td><%=preis%>.00 €</td></tr>
+                <tr><td><b>Price: </b></td><td><%=price%>.00 €</td></tr>
                 <tr><td><b>Reservation Number:&nbsp;&nbsp;&nbsp;</b></td><td><%=reservatID%></td></tr>                        
             </table>
 

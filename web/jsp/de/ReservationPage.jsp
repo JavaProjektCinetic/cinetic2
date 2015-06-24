@@ -26,7 +26,6 @@
                 margin-left: -8px;
                 margin-top: -8px;
             }
-
             div.logo{
                 width: 220px;
                 background-color: white;
@@ -35,25 +34,21 @@
                 margin-left: 20px;
                 margin-top: 20px;
             }
-
             div.lang{
                 height:150px;
                 margin-top: 20px;
                 margin-right: 20px;
             }
-
             table.table2
             {
                 width:100%;
             }
-
             div.room{
 
                 width:450px;
                 background-color: white;
                 opacity: 0.8;
             }
-
             body
             {
                 background-image: url("res/background2.jpg");
@@ -64,7 +59,6 @@
                 background-attachment: fixed;
                 background-repeat: no-repeat;
             }
-
             .seats2 
             {
                 font-family: Arial;
@@ -75,7 +69,6 @@
                 width:20px;
                 text-decoration: none;
             }
-
             .seats21 
             {
                 font-family: Arial;
@@ -96,13 +89,11 @@
                 width:20px;
                 text-decoration: none;
             }
-
             div.aisle2
             {
                 height:20px;
                 width:20px;
             }
-
             .seats3 
             {
                 font-family: Arial;
@@ -113,7 +104,6 @@
                 width:45px;
                 text-decoration: none;
             }
-
             .seats31 
             {
                 font-family: Arial;
@@ -124,7 +114,6 @@
                 width:45px;
                 text-decoration: none;
             }
-
             .seats32 
             {
                 font-family: Arial;
@@ -135,7 +124,6 @@
                 width:45px;
                 text-decoration: none;
             }
-
             .seats1 
             {
                 font-family: Arial;
@@ -146,7 +134,6 @@
                 width:35px;
                 text-decoration: none;
             }
-
             .seats11 
             {
                 font-family: Arial;
@@ -157,7 +144,6 @@
                 width:35px;
                 text-decoration: none;
             }
-
             .seats12 
             {
                 font-family: Arial;
@@ -218,6 +204,7 @@
         </div>
     <center>
         <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%"><%=sh.getRoomName()%></span></br><%=date%></h2>  
+        <font face='Georgia'>
         <div class="room">
             </br>
             <form action="CineticServlet4" method="post">
@@ -375,6 +362,7 @@
                 <tr><td><p>Reservierungs Nummer: <%=reservatID%></p></td><td><input type="submit" value="reserviere"/></td></tr>            
             </table>
         </form>
+        </font>
     </center>
 </body>
 </html>
