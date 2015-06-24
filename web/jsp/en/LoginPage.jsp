@@ -1,7 +1,7 @@
 <%-- 
-    Document   : LoginPage
     Created on : 10.04.2015
     Author     : Laura Rössl
+    Projectname: Cinetic
 --%>
 
 <%@page import="java.util.LinkedList"%>

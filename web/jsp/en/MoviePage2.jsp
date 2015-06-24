@@ -1,7 +1,7 @@
 <%-- 
-    Document   : MoviePage2
     Created on : 08.05.2015
     Author     : Laura Rössl and Sarah Resch
+    Projectname: Cinetic
 --%>
 
 <%@page import="beans.ShowAnzeige"%>

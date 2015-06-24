@@ -1,7 +1,7 @@
 <%-- 
-    Document   : RealLastPage
-    Created on : 17.06.2015, 16:07:39
-    Author     : Sarah
+    Created on : 17.06.2015
+    Author     : Sarah Resch
+    Projectname: Cinetic
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

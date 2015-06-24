@@ -1,7 +1,7 @@
 <%--
-    Document   : ReservationPage
-    Created on : 10.04.2015, 09:48:12
-    Author     : Laura
+    Created on : 10.04.2015
+    Author     : Laura Rössl and Sarah Resch
+    Projectname: Cinetic
 --%>
 
 <%@page import="java.text.SimpleDateFormat"%>

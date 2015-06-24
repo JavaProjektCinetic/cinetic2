@@ -1,7 +1,7 @@
 <%-- 
-    Document   : WelcomePage
-    Created on : 10.04.2015, 09:47:08
-    Author     : Laura
+    Created on : 10.04.2015
+    Author     : Laura Rössl
+    Projectname: Cinetic
 --%>
 
 <%@page import="java.util.Random"%>
