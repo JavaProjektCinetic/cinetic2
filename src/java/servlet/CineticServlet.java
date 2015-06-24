@@ -80,8 +80,7 @@ public class CineticServlet extends HttpServlet {
                 actualList = dba.getMovieList(t, g);
             } catch (Exception ex) {
                 System.out.println(ex.toString());
-            }            
-            
+            }
                       
             HttpSession s = request.getSession();
             s.setAttribute("movieList", movieList);
