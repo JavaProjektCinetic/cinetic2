@@ -1,14 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Author:      Laura Rössl
+ * Date:        10.04.2015
+ * Projectname: Cinetic
  */
 package database;
 
-/**
- *
- * @author Laura
- */
 public interface DB_Config {
     public static final String DB_NAME = "cinetic";
     public static final String DB_USER = "postgres";

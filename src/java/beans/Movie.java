@@ -1,14 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Author:      Laura Rössl
+ * Date:        10.04.2015
+ * Projectname: Cinetic
  */
 package beans;
 
-/**
- *
- * @author Laura
- */
+
 public class Movie {
    private String titleEnglish;
    private String picture;

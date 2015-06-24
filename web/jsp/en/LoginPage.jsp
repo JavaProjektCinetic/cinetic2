@@ -1,7 +1,7 @@
 <%-- 
     Document   : LoginPage
-    Created on : 10.04.2015, 09:47:45
-    Author     : Laura
+    Created on : 10.04.2015
+    Author     : Laura Rössl
 --%>
 
 <%@page import="java.util.LinkedList"%>

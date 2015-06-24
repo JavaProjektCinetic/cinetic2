@@ -1,10 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Author:      Laura Rössl and Sarah Resch
+ * Date:        10.04.2015
+ * Projectname: Cinetic
  */
 package servlet;
-
 
 import beans.Movie;
 import beans.Room;
@@ -26,10 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import util.LanguageSelector;
 
-/**
- *
- * @author Laura
- */
 @WebServlet(name = "CineticServlet3", urlPatterns = {"/CineticServlet3"})
 public class CineticServlet3 extends HttpServlet {
 

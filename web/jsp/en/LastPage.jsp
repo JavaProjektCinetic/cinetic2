@@ -1,7 +1,7 @@
 <%-- 
-    Document   : LastPage
-    Created on : 16.06.2015, 16:18:44
-    Author     : Sarah
+    Created on : 16.06.2015
+    Author     : Sarah Resch
+    Projectname: Cinetic
 --%>
 
 <%@page import="java.text.SimpleDateFormat"%>

@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Author:      Laura Rössl
+ * Date:        10.04.2015
+ * Projectname: Cinetic
  */
 package database;
 
@@ -11,10 +11,6 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Laura
- */
 public class DB_ConnectionPool implements DB_Config {
 
     private LinkedList<Connection> connections = new LinkedList<>();

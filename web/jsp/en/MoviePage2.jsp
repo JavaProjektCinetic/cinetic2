@@ -1,7 +1,7 @@
 <%-- 
     Document   : MoviePage2
-    Created on : 08.05.2015, 08:04:07
-    Author     : Laura
+    Created on : 08.05.2015
+    Author     : Laura Rössl and Sarah Resch
 --%>
 
 <%@page import="beans.ShowAnzeige"%>
