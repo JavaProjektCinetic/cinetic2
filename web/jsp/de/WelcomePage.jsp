@@ -1,7 +1,7 @@
 <%-- 
-    Document   : WelcomePage
-    Created on : 10.04.2015, 09:47:08
-    Author     : Laura
+    Created on : 10.04.2015
+    Author     : Laura Rössl
+    Projectname: Cinetic
 --%>
 
 <%@page import="java.util.Random"%>
@@ -12,10 +12,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Welcome Page</title>
 
+        
         <style>
             div.header {
                 width: 1366px;
@@ -167,7 +167,7 @@
     <center>
         <div class='suggestions' style="display: block">
             <form action="CineticServlet" name="x" method="get">
-                Titel: <input type="text" name="titlefilter" style='margin-top: 20px'/>
+                Titel <input type="text" name="titlefilter" style='margin-top: 20px'/>
                 <select name="genrefilter">
                     <% if (genreListE != null) {
                             for (int i = 0; i < genreListD.size(); i++) {
@@ -178,7 +178,7 @@
                         }
                     %>
                 </select>
-                <input type="submit" value="Suchen"/>
+                <input type="submit" value="Search"/>
                 </br>
                 </br>
                 

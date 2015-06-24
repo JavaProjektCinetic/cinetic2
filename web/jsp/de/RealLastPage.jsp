@@ -1,18 +1,15 @@
 <%-- 
-    Created on : 10.04.2015
-    Author     : Laura Rössl
+    Created on : 17.06.2015
+    Author     : Sarah Resch
     Projectname: Cinetic
 --%>
 
-<%@page import="java.util.LinkedList"%>
-<%@page import="beans.Movie"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login Page</title>
+        <title>Thank you</title>     
         <style>
             div.header {
                 width: 100%;
@@ -40,7 +37,7 @@
             {
                 width:100%;
             }
-            
+
             body
             {
                 background-image: url("res/background2.jpg");
@@ -50,10 +47,11 @@
                 background-size: cover; 
                 background-attachment: fixed;
                 background-repeat: no-repeat;
-            }
+            }           
+
         </style>
     </head>
-    <body>
+    <body>       
             <div class="header">
             <table class="table2"><tr><td>
             <div style="text-align:left; float:left" class='logo'>
@@ -75,13 +73,9 @@
         </div>
         
             <center>
-                <form action="CineticServlet4" method="get">
-                <h1>Einloggen</h1>
-                <h4>Du musst dich bitte anmelden bevor du einen Sitz reservieren kannst!</h4>
-                Name: <input type="text" id="username" name="username"/></br>
-                Telefon nummer: <input type="text" id="tel" name="tel"/>
-                <input type="submit" value="Login"/>
-                </form>
+                <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%">Vielen Dank für Ihre Reservierung!</span></h2>
+                
+                
             </center>
         
     </body>

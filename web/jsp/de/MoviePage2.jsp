@@ -1,7 +1,7 @@
 <%-- 
-    Document   : MoviePage2
-    Created on : 08.05.2015, 08:04:07
-    Author     : Laura
+    Created on : 08.05.2015
+    Author     : Laura Rössl and Sarah Resch
+    Projectname: Cinetic
 --%>
 
 <%@page import="beans.ShowAnzeige"%>
@@ -17,6 +17,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Movie Page</title>
         <style>
@@ -95,16 +96,15 @@
                 }
             } while (randiList.size() < 8);
         %>
-        <div class="header">
-            <table class="table2"><tr><td><left>
+         <div  class="header">
+            <table class="table2"><tr><td>
                     <div style="text-align:left; float:left" class='logo'>
                         <table>
                             <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"/></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
                         </table>
                     </div>
-                    
-                </left></td>
-                <td><right>
+                </td>
+                <td>
                     <form action="#" method="get">
                         <div style="text-align:right; float:right;" class="lang">
                             <select name="lang" onchange="submit();">
@@ -113,12 +113,12 @@
                             </select>
                         </div>
                     </form>
-                </right> </td></tr></table>
+                 </td></tr></table>
         </div>
 
         <table align="center" cellpadding="50">
             <tr><td>
-                    <div name="<%=actMovie.getTitleGerman()%>" class="movie">
+                    <div class="movie">
                         <center>
                             <table>
                                 <tr>
@@ -134,7 +134,7 @@
                                                     }
                                                     out.println("</br>" + actMovie.getDescription());
                                                 } else {
-                                                    out.println("ERROR: keine Beschreibung gefunden!");
+                                                    out.println("ERROR: No description found!");
                                                 }
                                             %>
                                         </p>
@@ -143,33 +143,30 @@
                             </table>
 
                             <iframe width="500" height="300" src="https://www.youtube.com/embed/<%=actMovie.getTrailer()%>?autoplay=1"></iframe>
-
                             <form action="CineticServlet3" method="get">
                                 <select name="datum">
                                     <%
                                         LinkedList<ShowAnzeige> shows = (LinkedList<ShowAnzeige>) s.getAttribute("showList");
                                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                                         int movieId = actMovie.getMovieID();
-                                        String time;
-                                        Date date;
-                                        String roomname;
                                         System.out.println(shows.size());
                                         for (int i = 0; i < shows.size(); i++) {
                                             if (movieId == shows.get(i).getMovieID()) {
                                                 out.println("<option>" + sdf.format(shows.get(i).getDate()) + " | " + shows.get(i).getTime() + " | " + shows.get(i).getRoomName() + "</option>");
                                             }
                                         }
+                                        s.setAttribute("choosenMovie", actMovie);
+                                        
                                     %>
                                 </select>   
-                                <input type="submit" value="reservieren"/> 
-                                <p>Hinweis: um mehr Shows anzuzeigen die Seite neu laden!</p>
-                            </form>
+                                <input type="submit" value="reserve"/> 
+                                <p>Hinweis: Lade die Seite neu um mehr Shows anzuzeigen, aber es sind nur 600 Shows verfügbar!</p>
+                             </form>
                         </center>
                     </div>
                 </td>
                 <td>
-
-                    <div name="suggestions" class="suggestions">
+                    <div class="suggestions">
                         <form name="1" method="post">
                             <table  align="center" cellpadding="13">
                                 <tr><td><div  onclick="schickenX('' +<%=randiList.get(1)%>)"><img src="res/<%=movieList.get(randiList.get(1)).getPicture()%>.jpg" alt="<%=movieList.get(randiList.get(1)).getTitleGerman()%>" style="width:150px"/></div> </td></tr>
@@ -197,4 +194,3 @@
 
     </body>
 </html>
-
