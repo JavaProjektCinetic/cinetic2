@@ -87,7 +87,7 @@ public class DB_Access {
     }
     
     /*
-     * update the ShowList and the databse --> delete every Show
+     * update the ShowList and the database --> delete every Show
      * which isn't playing in the current year or month
      */
     public void setActualShows() throws Exception {
@@ -120,10 +120,10 @@ public class DB_Access {
     }
 
     /*
-     * creates the Shows and save them at the databse
+     * creates the Shows and save them at the database
      * the first show starts at 3 p.m., the next one at 6 p.m., the next one at
      * 9 p.m. and the last one at 12 p.m.
-     * The movies are choosen randomly
+     * The movies are chosen randomly
      */
     public void setShows() throws Exception {
         LinkedList<Show> showList = new LinkedList<>();
@@ -282,8 +282,8 @@ public class DB_Access {
     }
     
     /*
-     * save the seats with room, row, column and seatID at the databse
-     * everyroom has a specific number of seats
+     * save the seats with room, row, column and seatID at the database
+     * everyroom has a different number of seats
      */
     public void setSeats() throws Exception {
         LinkedList<Room> roomL = getRoomList();
@@ -379,6 +379,7 @@ public class DB_Access {
     
     /*
      * load the movies from the database into a list
+     * if there was chosen any title or genre for filtering it will be considered
      */
     public LinkedList<Movie> getMovieList(String t, String g) throws Exception 
     {
@@ -412,7 +413,7 @@ public class DB_Access {
     }
     
     /*
-     * load genres from the database and save them at a list
+     * load genres from the database and save them in a list
      */
     public LinkedList<String> getGenres(String lang) throws Exception {
         Connection conn = connPool.getConnection();
@@ -446,7 +447,7 @@ public class DB_Access {
     }
     
     /*
-     * create a new reservation and save it at the database with right parameters
+     * create a new reservation and save it in the database with right parameters
      */
     public void newReservation(int resID, String name, String tel, int showID, String room, LinkedList<String> seats) throws Exception {
         int seatID = 0, roomID = 0;
@@ -482,7 +483,7 @@ public class DB_Access {
     }   
    
     /*
-     * get all reservatedSeats and where they are located --> save it in a list
+     * get all reservated Seats and where they are located --> save it in a list
      */ 
     public LinkedList<String> getReservatedSeats() throws Exception {
         LinkedList<String> reservatedSeats = new LinkedList<String>();
