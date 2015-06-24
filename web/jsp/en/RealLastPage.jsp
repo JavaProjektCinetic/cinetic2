@@ -17,7 +17,6 @@
                 margin-left: -8px;
                 margin-top: -8px;
             }
-
             div.logo{
                 width: 220px;
                 background-color: white;
@@ -26,18 +25,15 @@
                 margin-left: 20px;
                 margin-top: 20px;
             }
-
             div.lang{
                 height:150px;
                 margin-top: 20px;
                 margin-right: 20px;
             }
-
             table.table2
             {
                 width:100%;
             }
-
             body
             {
                 background-image: url("res/background2.jpg");
@@ -48,7 +44,6 @@
                 background-attachment: fixed;
                 background-repeat: no-repeat;
             }           
-
         </style>
     </head>
     <body>       
@@ -70,13 +65,9 @@
             </div>
             </form>
                  </td></tr></table>
-        </div>
-        
+        </div>      
             <center>
-                <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%">Thank you for your Reservation!</span></h2>
-                
-                
-            </center>
-        
+                <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%">Thank you for your Reservation!</span></h2>      
+            </center>       
     </body>
 </html>

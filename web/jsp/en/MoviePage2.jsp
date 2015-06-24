@@ -16,8 +16,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        
+    <head>     
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Movie Page</title>
         <style>
@@ -155,8 +154,7 @@
                                                 out.println("<option>" + sdf.format(shows.get(i).getDate()) + " | " + shows.get(i).getTime() + " | " + shows.get(i).getRoomName() + "</option>");
                                             }
                                         }
-                                        s.setAttribute("choosenMovie", actMovie);
-                                        
+                                        s.setAttribute("choosenMovie", actMovie);                            
                                     %>
                                 </select>   
                                 <input type="submit" value="reserve"/> 
@@ -190,7 +188,5 @@
                 </td>
             </tr>
         </table>              
-
-
     </body>
 </html>

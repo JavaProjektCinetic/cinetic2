@@ -9,8 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        
+    <head>      
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
         <style>
@@ -20,7 +19,6 @@
                 margin-left: -8px;
                 margin-top: -8px;
             }
-
             div.logo{
                 width: 220px;
                 background-color: white;
@@ -29,18 +27,15 @@
                 margin-left: 20px;
                 margin-top: 20px;
             }
-
             div.lang{
                 height:150px;
                 margin-top: 20px;
                 margin-right: 20px;
             }
-
             table.table2
             {
                 width:100%;
-            }
-            
+            }           
             body
             {
                 background-image: url("res/background2.jpg");
@@ -82,7 +77,6 @@
                 Telephone number: <input type="text" id="tel" name="tel"/>
                 <input type="submit" value="Login"/>
                 </form>
-            </center>
-        
+            </center>       
     </body>
 </html>

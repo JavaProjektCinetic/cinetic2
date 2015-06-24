@@ -26,7 +26,6 @@
                 margin-left: -8px;
                 margin-top: -8px;
             }
-
             div.logo{
                 width: 220px;
                 background-color: white;
@@ -35,25 +34,21 @@
                 margin-left: 20px;
                 margin-top: 20px;
             }
-
             div.lang{
                 height:150px;
                 margin-top: 20px;
                 margin-right: 20px;
             }
-
             table.table2
             {
                 width:100%;
             }
-
             div.room{
 
                 width:450px;
                 background-color: white;
                 opacity: 0.8;
             }
-
             body
             {
                 background-image: url("res/background2.jpg");
@@ -64,7 +59,6 @@
                 background-attachment: fixed;
                 background-repeat: no-repeat;
             }
-
             .seats2 
             {
                 font-family: Arial;
@@ -75,7 +69,6 @@
                 width:20px;
                 text-decoration: none;
             }
-
             .seats21 
             {
                 font-family: Arial;
@@ -96,13 +89,11 @@
                 width:20px;
                 text-decoration: none;
             }
-
             div.aisle2
             {
                 height:20px;
                 width:20px;
             }
-
             .seats3 
             {
                 font-family: Arial;
@@ -113,7 +104,6 @@
                 width:45px;
                 text-decoration: none;
             }
-
             .seats31 
             {
                 font-family: Arial;
@@ -124,7 +114,6 @@
                 width:45px;
                 text-decoration: none;
             }
-
             .seats32 
             {
                 font-family: Arial;
@@ -135,7 +124,6 @@
                 width:45px;
                 text-decoration: none;
             }
-
             .seats1 
             {
                 font-family: Arial;
@@ -146,7 +134,6 @@
                 width:35px;
                 text-decoration: none;
             }
-
             .seats11 
             {
                 font-family: Arial;
@@ -157,7 +144,6 @@
                 width:35px;
                 text-decoration: none;
             }
-
             .seats12 
             {
                 font-family: Arial;
@@ -176,7 +162,6 @@
         </style>
     </head>
     <body>
-
         <%
             HttpSession s = request.getSession();
             LinkedList<Room> roomList = (LinkedList<Room>) s.getAttribute("roomList");
@@ -222,8 +207,6 @@
             </br>
             <form action="CineticServlet4" method="post">
                 <table id="roomview">
-
-
                     <%
                         if (roomid2 == 2) {//cozy
                             for (int i = 0; i < 5; i++) {
@@ -234,7 +217,6 @@
                                             String stri = i + "X" + j;
                                             if (reservatedSeat.contains(stri)) {
                                                 out.println("<td><input type='submit' class=seats31 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
-
                                             } else {
                                                 out.println("<td><input type='submit' class=seats3 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
                                             }
@@ -264,7 +246,6 @@
                             }
                             preis = roomList.get(1).getPreis();
                         }
-
                         if (roomid2 == 3) {//glamour
                             for (int i = 0; i < 7; i++) {
                                 out.println("<tr>");
@@ -277,7 +258,6 @@
                                                 String stri = i + "X" + j;
                                                 if (reservatedSeat.contains(stri)) {
                                                     out.println("<td><input type='submit' class=seats11 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
-
                                                 } else {
                                                     out.println("<td><input type='submit' class=seats1 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
                                                 }
@@ -293,27 +273,20 @@
                                                     stri = i + "X" + j;
                                                     if (reservatedSeat.contains(stri)) {
                                                         out.println("<td><input type='submit' class=seats11 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
-
                                                     } else {
                                                         out.println("<td><input type='submit' class=seats1 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
                                                     }
                                                 } else {
                                                     out.println("<td><input type='submit' class=seats1 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
                                                 }
-
                                             }
-                                        }
-                                        
-                                        
-                                        
-                                        
+                                        }   
                                     }
                                 }
                                 out.println("</tr>");
                             }
                             preis = roomList.get(2).getPreis();
                         }
-
                         if (roomid2 == 1) {//the room
                             for (int i = 0; i < 15; i++) {
                                 out.println("<tr>");
@@ -328,7 +301,6 @@
                                                 String stri = i + "X" + j;
                                                 if (reservatedSeat.contains(stri)) {
                                                     out.println("<td><input type='submit' class=seats21 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
-
                                                 } else {
                                                     out.println("<td><input type='submit' class=seats2 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
                                                 }
@@ -344,26 +316,21 @@
                                                     stri = i + "X" + j;
                                                     if (reservatedSeat.contains(stri)) {
                                                         out.println("<td><input type='submit' class=seats21 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
-
                                                     } else {
                                                         out.println("<td><input type='submit' class=seats2 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
                                                     }
                                                 } else {
                                                     out.println("<td><input type='submit' class=seats2 value='" + i + "X" + j + "' name='cozy' id=" + i + "X" + j + "/></td>");
                                                 }
-
                                             }
-                                        }
-                                        
+                                        }    
                                     }
                                 }
                             }
-
                             out.println("</tr>");
                             preis = roomList.get(0).getPreis();
                         }
                         s.setAttribute("preis", preis);
-
                     %>
                 </table>
             </form>
@@ -380,7 +347,6 @@
                         out.println("<tr><td><p>Price: </p></td><td></td></tr>");
                     }
                 %>
-
                 <tr><td><p>Reservation Number: <%=reservatID%></p></td><td><input type="submit" value="reservate"/></td></tr>            
             </table>
         </form>

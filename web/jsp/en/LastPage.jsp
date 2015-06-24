@@ -22,7 +22,6 @@
                 margin-left: -8px;
                 margin-top: -8px;
             }
-
             div.logo{
                 width: 220px;
                 background-color: white;
@@ -31,18 +30,15 @@
                 margin-left: 20px;
                 margin-top: 20px;
             }
-
             div.lang{
                 height:150px;
                 margin-top: 20px;
                 margin-right: 20px;
             }
-
             table.table2
             {
                 width:100%;
             }
-
             body
             {
                 background-image: url("res/background2.jpg");
@@ -59,8 +55,6 @@
                 background-color: white;
                 opacity: 0.8;
             }
-
-
         </style>
     </head>
     <body>
@@ -123,7 +117,6 @@
                 <form action="CineticServlet6">
                     <input type="submit" value="Validate the Reservation"/>
                 </form>
-            </center>
-        
+            </center>     
     </body>
 </html>

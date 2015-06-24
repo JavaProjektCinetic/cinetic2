@@ -14,8 +14,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Welcome Page</title>
-
-        
         <style>
             div.header {
                 width: 1366px;
@@ -23,7 +21,6 @@
                 margin-left: -8px;
                 margin-top: -8px;
             }
-
             div.logo{
                 width: 220px;
                 background-color: white;
@@ -32,13 +29,11 @@
                 margin-left: 20px;
                 margin-top: 20px;
             }
-
             div.lang{
                 height:150px;
                 margin-top: 20px;
                 margin-right: 20px;
             }
-
             div.suggestions
             {
                 width:600px;
@@ -46,12 +41,10 @@
                 background-color: white;
                 //opacity: 0.8;                
             }
-
             table.table
             {
                 width:500px;
             }
-
             body{
                 background-image: url("res/background2.jpg");
                 -webkit-background-size: cover;
@@ -60,29 +53,23 @@
                 background-size: cover; 
                 background-attachment: fixed;
                 background-repeat: no-repeat;
-
             }
-
             .datagrid table 
             { border-collapse: collapse; 
               text-align: left; width: 100%;
               width:500px;
             } 
-
             .datagrid 
             {font: normal 12px/150% Georgia, Times New Roman, Times, serif; 
              background: #fff; 
              overflow: hidden; 
              -webkit-border-radius: 7px; 
-             -moz-border-radius: 7px; 
-             
+             -moz-border-radius: 7px;          
             }
-
             .datagrid table td, .datagrid table th 
             { 
                 padding: 5px 14px;
             }
-
             .datagrid table thead th 
             {
                 background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #AD866F), color-stop(1, #644030) );
@@ -93,12 +80,10 @@
                 font-size: 15px; 
                 font-weight: bold; 
             } 
-
             .datagrid table thead th:first-child 
             { 
                 border: none; 
             }
-
             .datagrid table tbody td
             { 
                 color: #AD866F; 
@@ -106,31 +91,25 @@
                 font-size: 13px;
                 font-weight: normal; 
             }
-
             .datagrid table tbody .alt td 
             { background: #AD866F;
               color: #644030; 
             }
-
             .datagrid table tbody td:first-child 
             { 
                 border-left: none; 
             }
-
             .datagrid table tbody tr:last-child td 
             { 
                 border-bottom: none; 
             }
-
             div.dhtmlx_window_active, div.dhx_modal_cover_dv 
             { 
                 position: fixed !important; 
             }
         </style>
-
     </head>
     <body>
-
         <div class="header">
             <div style="text-align:left; float:left" class='logo'>
                 <table>
@@ -151,12 +130,10 @@
             LinkedList<String> genreListE = (LinkedList<String>) s.getAttribute("genreListE");
             LinkedList<String> genreListD = (LinkedList<String>) s.getAttribute("genreListD");
             LinkedList<Movie> movieList = (LinkedList<Movie>) s.getAttribute("movieList");
-            LinkedList<Movie> actualList = (LinkedList<Movie>) s.getAttribute("actualList");
-            
+            LinkedList<Movie> actualList = (LinkedList<Movie>) s.getAttribute("actualList");       
             s.setAttribute("al", actualList);
             LinkedList<Integer> randiList = new LinkedList<>();
             Random randi = new Random();
-
             do {
                 int temp = randi.nextInt(46) + 1;
                 if (!randiList.contains(temp)) {
@@ -180,8 +157,7 @@
                 </select>
                 <input type="submit" value="Search"/>
                 </br>
-                </br>
-                
+                </br>               
                 <div class="datagrid">
                     <table>
                         <thead><tr><th>Title</th><th>Genre</th><th>Length</th></tr></thead>
@@ -195,9 +171,7 @@
                         </tbody>
                     </table>
                 </div>
-
             </form>
-
             <div id="divSuggestions" class="suggestions" style='display: table'>
                 <form action="CineticServlet2" name="y" method="post">
                     <table class="table" style="width: 500px; height: 400px;" >
@@ -226,7 +200,6 @@
                 {
                     document.forms[2].action = "CineticServlet2?name=" + name;
                     document.forms[2].submit();
-
                 }
             </script>
             <script>
@@ -234,10 +207,8 @@
                 {
                     document.forms[2].action = "CineticServlet2?name=" + name+"X";
                     document.forms[2].submit();
-
                 }
             </script>
-
         </div>
     </center>
 </body>
