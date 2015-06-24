@@ -4,7 +4,6 @@
  * Projectname: Cinetic
  */
 package database;
-
 import beans.Movie;
 import beans.Room;
 import beans.Seat;
@@ -15,15 +14,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class DB_Access {
-
     private DB_ConnectionPool connPool;
     private static DB_Access theInstance = null;
     private LinkedList<Show> showList = new LinkedList<>();
@@ -40,9 +34,8 @@ public class DB_Access {
     }
     
     /*
-    
-    */
-
+     * get the created Shows from the Database and put them into a list
+     */
     public LinkedList<ShowAnzeige> getShows() throws Exception {
         LinkedList<ShowAnzeige> shows = new LinkedList<>();
         LinkedList<Room> rooms = getRoomList();
@@ -74,7 +67,11 @@ public class DB_Access {
         connPool.releaseConnection(conn);
         return shows;
     }
-
+    
+    /*
+     * return the highest reservationID which already exists and add one,
+     * to get the new reservationID
+     */
     public int getReservationID() throws Exception {
         int reID = 0;
         Connection conn = connPool.getConnection();
@@ -88,11 +85,14 @@ public class DB_Access {
         connPool.releaseConnection(conn);
         return reID;
     }
-
+    
+    /*
+     * update the ShowList and the databse --> delete every Show
+     * which isn't playing in the current year or month
+     */
     public void setActualShows() throws Exception {
         LinkedList<ShowAnzeige> shows = getShows();
         SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
-
         Date curDay = new Date();
         int cday = curDay.getDay();
         int cmonth = curDay.getMonth();
@@ -119,7 +119,12 @@ public class DB_Access {
         connPool.releaseConnection(conn);
     }
 
-    //}
+    /*
+     * creates the Shows and save them at the databse
+     * the first show starts at 3 p.m., the next one at 6 p.m., the next one at
+     * 9 p.m. and the last one at 12 p.m.
+     * The movies are choosen randomly
+     */
     public void setShows() throws Exception {
         LinkedList<Show> showList = new LinkedList<>();
         SimpleDateFormat forDate = new SimpleDateFormat("yyyy-MM-dd");
@@ -154,7 +159,6 @@ public class DB_Access {
             str = rs.getString(1);
         }
         showID = Integer.parseInt(str);
-
         for (int i = 1; i <= 7; i++) {
             switch (month) {
                 case 0:
@@ -258,7 +262,6 @@ public class DB_Access {
             Random randi = new Random();
             String dDate = year + "-" + (month + 1) + "-" + day;
             Date d = forDate.parse(dDate);
-
             for (int roomID = 1; roomID <= 3; roomID++) {
                 for (int j = 0; j < time.size(); j++) {
                     showID++;
@@ -277,7 +280,11 @@ public class DB_Access {
         }
         connPool.releaseConnection(conn);
     }
-
+    
+    /*
+     * save the seats with room, row, column and seatID at the databse
+     * everyroom has a specific number of seats
+     */
     public void setSeats() throws Exception {
         LinkedList<Room> roomL = getRoomList();
         LinkedList<Seat> seatList = new LinkedList<>();
@@ -340,12 +347,14 @@ public class DB_Access {
             }
             Statement stat = conn.createStatement();
             String sqlString = "INSERT INTO seat VALUES (" + (i + 1) + ",  " + s.getRow() + ", " + roomID + ", " + s.getColumn() + ")";
-
             stat.executeUpdate(sqlString);
         }
         connPool.releaseConnection(conn);
     }
-
+    
+    /*
+     * get the rooms from the database and save them in a list
+     */
     public LinkedList<Room> getRoomList() throws Exception {
         Connection conn = connPool.getConnection();
         LinkedList<Room> roomList = new LinkedList<>();
@@ -367,15 +376,16 @@ public class DB_Access {
         connPool.releaseConnection(conn);
         return roomList;
     }
-
-    public LinkedList<Movie> getMovieList(String t, String g) throws Exception //parameter upper case
+    
+    /*
+     * load the movies from the database into a list
+     */
+    public LinkedList<Movie> getMovieList(String t, String g) throws Exception 
     {
-        //Int id, String titleEnglish, String picture, String description, String trailer, String music, String titleGerman, int rating, String genreEnglish, String genreGerman, int length
         Connection conn = connPool.getConnection();
         LinkedList<Movie> movieList = new LinkedList<>();
         Statement stat = conn.createStatement();
         t = t.toUpperCase();
-
         if (g.equals("All Movies")) {
             g = "";
         }
@@ -400,7 +410,10 @@ public class DB_Access {
         int count = getMovieList("", "").size();
         return count;
     }
-
+    
+    /*
+     * load genres from the database and save them at a list
+     */
     public LinkedList<String> getGenres(String lang) throws Exception {
         Connection conn = connPool.getConnection();
         LinkedList<String> genreList = new LinkedList<>();
@@ -408,12 +421,10 @@ public class DB_Access {
         if (lang.equals("e")) {
             String sqlString = "SELECT genre\n"
                     + "FROM movie;";
-
             ResultSet rs = stat.executeQuery(sqlString);
             String genre;
             genreList.add("All Movies");
             while (rs.next()) {
-
                 genre = rs.getString("genre");
                 if (!genreList.contains(genre)) {
                     genreList.add(genre);
@@ -422,7 +433,6 @@ public class DB_Access {
         } else if (lang.equals("d")) {
             String sqlString = "SELECT genregerman\n"
                     + "FROM movie;";
-
             ResultSet rs = stat.executeQuery(sqlString);
             String genre;
             genreList.add("Alle Filme");
@@ -430,12 +440,14 @@ public class DB_Access {
                 genre = rs.getString("genregerman");
                 genreList.add(genre);
             }
-        }
-        
+        }    
         connPool.releaseConnection(conn);
         return genreList;
     }
-
+    
+    /*
+     * create a new reservation and save it at the database with right parameters
+     */
     public void newReservation(int resID, String name, String tel, int showID, String room, LinkedList<String> seats) throws Exception {
         int seatID = 0, roomID = 0;
         Connection conn = connPool.getConnection();
@@ -454,27 +466,24 @@ public class DB_Access {
         for (int i = 0; i < seats.size(); i++) {
             String str = seats.get(i);
             String strArray[] = str.split("X");
-            System.out.println(strArray[1]);
-            System.out.println(strArray[0]);
             sqlString = "SELECT seatid "
                     + "FROM seat "
                     + "WHERE col=" + strArray[1] + " AND row=" + strArray[0] + " AND roomid=" + roomID + "";
             ResultSet rs = stat.executeQuery(sqlString);
             while (rs.next()) {
                 seatID = Integer.parseInt(rs.getString(1));
-                System.out.println(Integer.parseInt(rs.getString(1)));
-                System.out.println("while");
             }
-            System.out.println(seatID);
             sqlString = "INSERT INTO reservationseat "
                     + "VALUES(" + resID + ", " + seatID + ")";
             stat.executeUpdate(sqlString);
         }
         connPool.releaseConnection(conn);
         
-    }
-    
+    }   
    
+    /*
+     * get all reservatedSeats and where they are located --> save it in a list
+     */ 
     public LinkedList<String> getReservatedSeats() throws Exception {
         LinkedList<String> reservatedSeats = new LinkedList<String>();
         Connection conn = connPool.getConnection();
@@ -494,7 +503,5 @@ public class DB_Access {
         }
         connPool.releaseConnection(conn);
         return reservatedSeats;
-    }
-
-    
+    }  
 }
