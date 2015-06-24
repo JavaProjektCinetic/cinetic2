@@ -42,6 +42,10 @@ public class DB_Access {
     private DB_Access() throws ClassNotFoundException {
         connPool = DB_ConnectionPool.getTheInstance();
     }
+    
+    /*
+    
+    */
 
     public LinkedList<ShowAnzeige> getShows() throws Exception {
         LinkedList<ShowAnzeige> shows = new LinkedList<>();
