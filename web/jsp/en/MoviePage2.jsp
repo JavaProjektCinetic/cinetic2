@@ -95,26 +95,26 @@
                 }
             } while (randiList.size() < 8);
         %>
-         <div  class="header">
+        <div  class="header">
             <table class="table2"><tr><td>
-                    <div style="text-align:left; float:left" class='logo'>
-                        <table>
-                            <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"/></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
-                        </table>
-                    </div>
-                </td>
-                <td>
-                    <form action="#" method="get">
-                        <div style="text-align:right; float:right;" class="lang">
-                            <select name="lang" onchange="submit();">
-                                <option value="en">English</option>
-                                <option value="de">German</option>
-                            </select>
+                        <div style="text-align:left; float:left" class='logo'>
+                            <table>
+                                <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"/></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
+                            </table>
                         </div>
-                    </form>
-                 </td></tr></table>
+                    </td>
+                    <td>
+                        <form action="#" method="get">
+                            <div style="text-align:right; float:right;" class="lang">
+                                <select name="lang" onchange="submit();">
+                                    <option value="en">English</option>
+                                    <option value="de">German</option>
+                                </select>
+                            </div>
+                        </form>
+                    </td></tr></table>
         </div>
-
+        <font face='Georgia'>
         <table align="center" cellpadding="50">
             <tr><td>
                     <div class="movie">
@@ -159,7 +159,7 @@
                                 </select>   
                                 <input type="submit" value="reserve"/> 
                                 <p>Hint: to display more shows reload the page but there are only 600 Shows available!</p>
-                             </form>
+                            </form>
                         </center>
                     </div>
                 </td>
@@ -174,19 +174,20 @@
                         </form>
                     </div>
                     <script>
-                        function schicken(name)
+                            function schicken(name)
                         {
                             document.forms[2].action = "CineticServlet2?name=" + name;
-                            document.forms[2].submit();
+                        document.forms[2].submit();
                         }
-                        function schickenX(name)
+                            function schickenX(name)
                         {
                             document.forms[2].action = "CineticServlet2?name=" + name + "X";
-                            document.forms[2].submit();
+                        document.forms[2].submit();
                         }
                     </script>
                 </td>
             </tr>
-        </table>              
+        </table> 
+        </font>
     </body>
 </html>

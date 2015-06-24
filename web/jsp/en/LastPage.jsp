@@ -61,62 +61,66 @@
         <%
             HttpSession s = request.getSession();
             String username = (String) s.getAttribute("username");
-            String tel = (String)s.getAttribute("tel");
+            String tel = (String) s.getAttribute("tel");
             Movie actMovie2 = (Movie) s.getAttribute("choosenMovie");
             ShowAnzeige sh = (ShowAnzeige) s.getAttribute("choosenShow");
             LinkedList<String> reservatedSeat = (LinkedList<String>) s.getAttribute("reservateSeats");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            int reservatID = (Integer)s.getAttribute("reservationID");
+            int reservatID = (Integer) s.getAttribute("reservationID");
             String str = sdf.format(sh.getDate());
             String strArray[] = str.split("-");
             String datum = strArray[2] + "." + strArray[1] + "." + strArray[0] + "     " + sh.getTime();
-            String seats="";
-            for(int i = 0; i<reservatedSeat.size(); i++)
-            {
+            String seats = "";
+            for (int i = 0; i < reservatedSeat.size(); i++) {
                 String rs = reservatedSeat.get(i);
                 String strArray2[] = rs.split("X");
-                seats+="Row: "+ (Integer.parseInt(strArray2[0])+1) + " Column: "+(Integer.parseInt(strArray2[1])+1)+"<br>";
+                seats += "Row: " + (Integer.parseInt(strArray2[0]) + 1) + " Column: " + (Integer.parseInt(strArray2[1]) + 1) + "<br>";
             }
-            int k = (Integer)s.getAttribute("preis");
-            int preis = reservatedSeat.size()*k;
+            int k = (Integer) s.getAttribute("preis");
+            int preis = reservatedSeat.size() * k;
         %>
-            <div class="header">
+        <div class="header">
             <table class="table2"><tr><td>
-            <div style="text-align:left; float:left" class='logo'>
-                <table>
-                    <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
-                </table>
-            </div>
-                </td>
-                <td>
-            <form action="#" method="get">
-            <div style="text-align:right; float:right;" class="lang">
-                <select name="lang" onchange="submit();">
-                    <option value="en">English</option>
-                    <option value="de">German</option>
-                </select>
-            </div>
-            </form>
-                 </td></tr></table>
+                        <div style="text-align:left; float:left" class='logo'>
+                            <table>
+                                <tr><td><img src="res/logo.png" alt="Cinetic Logo" style="width:120px;height:90px"></td><td><span style="font-family: 'Playbill'; font-size:300%">Cinetic</span></td></tr>
+                            </table>
+                        </div>
+                    </td>
+                    <td>
+                        <form action="#" method="get">
+                            <div style="text-align:right; float:right;" class="lang">
+                                <select name="lang" onchange="submit();">
+                                    <option value="en">English</option>
+                                    <option value="de">German</option>
+                                </select>
+                            </div>
+                        </form>
+                    </td></tr></table>
         </div>
-        
-            <center>
-                <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%">Reservation for <%=actMovie2.getTitleEnglish()%></span></h2>
-                <div class="room">
-                    <table>
-                        <tr><td><h2 style="color: #644030">Name: </h2></td><td><p style="color: #644030"><%=username%></p></td>
-                        <tr><td><h2 style="color: #644030">Telephone number: </h2></td><td><p style="color: #644030"><%=tel%></p></td></tr> 
-                        <tr><td><h2 style="color: #644030">Date: </h2></td><td><p style="color: #644030"><%=datum%></p></td></tr>
-                        <tr><td><h2 style="color: #644030">Room: </h2></td><td><p style="color: #644030"><%=sh.getRoomName()%></p></td></tr>
-                        <tr><td><h2 style="color: #644030">Seats: </h2></td><td><p style="color: #644030"><%=seats%></p></td></tr>
-                        <tr><td><h2 style="color: #644030">Price: </h2></td><td><p style="color: #644030"><%=preis%>.00 €</p></td></tr>
-                        <tr><td><h2 style="color: #644030">Reservation Number:&nbsp;&nbsp;&nbsp;</h2></td><td><p style="color: #644030"><%=reservatID%></p></td></tr>                        
-                    </table>    
-                </div>
-                <p>Please keep in mind your Reservation Number to get your tickets!</p>
-                <form action="CineticServlet6">
-                    <input type="submit" value="Validate the Reservation"/>
-                </form>
-            </center>     
-    </body>
+
+    <center>
+        <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%">Reservation for <%=actMovie2.getTitleEnglish()%></span></h2>
+        <font color="#644030" face='Georgia'>
+        <div class="room">
+
+            <table>
+                <tr><td><b>Name: </b></td><td><%=username%></td>
+                <tr><td><b>Telephone number: </b></td><td><%=tel%></td></tr> 
+                <tr><td><b>Date: </b></td><td><%=datum%></td></tr>
+                <tr><td><b>Room: </b></td><td><%=sh.getRoomName()%></td></tr>
+                <tr><td><b>Seats: </b></td><td><%=seats%></td></tr>
+                <tr><td><b>Price: </b></td><td><%=preis%>.00 €</td></tr>
+                <tr><td><b>Reservation Number:&nbsp;&nbsp;&nbsp;</b></td><td><%=reservatID%></td></tr>                        
+            </table>
+
+        </div>
+        </font>
+        <p>Please keep in mind your Reservation Number to get your tickets!</p>
+        <form action="CineticServlet6">
+            <input type="submit" value="Validate the Reservation"/>
+        </form>
+
+    </center>     
+</body>
 </html>
