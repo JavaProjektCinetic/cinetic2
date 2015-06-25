@@ -114,7 +114,6 @@
                         </form>
                     </td></tr></table>
         </div>
-        <font face='Georgia'>
         <table align="center" cellpadding="50">
             <tr><td>
                     <div class="movie">
@@ -188,6 +187,5 @@
                 </td>
             </tr>
         </table> 
-        </font>
     </body>
 </html>

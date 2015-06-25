@@ -67,20 +67,16 @@
             </div>
             </form>
                  </td></tr></table>
-        </div>
-        
+        </div>     
             <center>
                
                 <form action="CineticServlet4" method="get">
-                <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%">Login</span></h2>
-                
+                <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%">Login</span></h2>   
                 <h4>Please log in before reservating a seat!</h4>
                 Name: <input type="text" id="username" name="username" value=" "/></br>
-                Telephone number: <input type="text" id="tel" name="tel" value=" "/>
+                Telephone number: <input type="text" id="tel" name="tel" value=" "/>               
                 <input type="submit" value="Login"/>
-              
-                </form>
-                
+                </form>                
             </center>       
     </body>
 </html>

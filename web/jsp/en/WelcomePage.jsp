@@ -143,7 +143,6 @@
         %>
     <center>
         <div class='suggestions' style="display: block">
-            <font face='Georgia'>
             <form action="CineticServlet" name="x" method="get">
                 Title: <input type="text" name="titlefilter" style='margin-top: 20px'/>
                 <select name="genrefilter">
@@ -210,7 +209,6 @@
                     document.forms[2].submit();
                 }
             </script>
-            </font>
         </div>
     </center>
 </body>

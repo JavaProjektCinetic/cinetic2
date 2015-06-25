@@ -166,13 +166,10 @@
             </div>
             </form>
                  </td></tr></table>
-        </div>
-        
+        </div>       
             <center>
                 <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%">Reservierung für <%=actMovie2.getTitleGerman()%></span></h2>
-                <font color="#644030" face='Georgia'>
         <div class="room">
-
             <table>
                 <tr><td><b>Name: </b></td><td><%=username%></td>
                 <tr><td><b>Telefon Nummer: </b></td><td><%=tel%></td></tr> 
@@ -182,14 +179,11 @@
                 <tr><td><b>Preis: </b></td><td><%=price%>.00 €</td></tr>
                 <tr><td><b>Reservierungs Nummer:&nbsp;&nbsp;&nbsp;</b></td><td><%=reservatID%></td></tr>                        
             </table>
-
         </div>
-        </font>
                 <p>Bitte vergiss deine Reservierungs Nummer nicht! Du brauchst sie um deine Tickets zu bekommen.</p>
                 <form action="CineticServlet6">
                     <input type="submit" value="Reservierung fertigstellen"/>
                 </form>
-            </center>
-        
+            </center>     
     </body>
 </html>

@@ -9,8 +9,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        
+    <head> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
         <style>
@@ -77,12 +76,11 @@
             <center>
                 <form action="CineticServlet4" method="get">
                 <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%">Einloggen</span></h2>
-                <font face='Georgia'>
+
                 <h4>Du musst dich bitte anmelden bevor du einen Sitz reservieren kannst!</h4>
                 Name: <input type="text" id="username" name="username"/></br>
                 Telefon nummer: <input type="text" id="tel" name="tel"/>
                 <input type="submit" value="Anmelden"/>
-                </form>
                 </form>
             </center>
         

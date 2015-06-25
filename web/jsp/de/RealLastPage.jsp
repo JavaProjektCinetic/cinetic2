@@ -73,10 +73,8 @@
         </div>
         
             <center>
-                <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%">Vielen Dank für Ihre Reservierung!</span></h2>
+                <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%">Vielen Dank für Ihre Reservierung!</span></h2>              
                 
-                
-            </center>
-        
+            </center>       
     </body>
 </html>

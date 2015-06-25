@@ -101,7 +101,6 @@
 
     <center>
         <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%">Reservation for <%=actMovie2.getTitleEnglish()%></span></h2>
-        <font color="#644030" face='Georgia'>
         <div class="room">
 
             <table>
@@ -115,7 +114,7 @@
             </table>
 
         </div>
-        </font>
+  
         <p>Please keep in mind your Reservation Number to get your tickets!</p>
         <form action="CineticServlet6">
             <input type="submit" value="Validate the Reservation"/>
