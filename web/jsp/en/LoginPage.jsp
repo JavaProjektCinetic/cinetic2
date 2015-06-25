@@ -69,6 +69,9 @@
                  </td></tr></table>
         </div>     
             <center>
+                <%
+                    
+                    %>
                
                 <form action="CineticServlet4" method="get">
                 <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%">Login</span></h2>   

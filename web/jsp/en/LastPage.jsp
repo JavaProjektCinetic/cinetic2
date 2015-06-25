@@ -61,6 +61,7 @@
         <%
             HttpSession s = request.getSession();
             String username = (String) s.getAttribute("username");
+            System.out.println("username lastpage:   "+username);
             String tel = (String) s.getAttribute("tel");
             Movie actMovie2 = (Movie) s.getAttribute("choosenMovie");
             ShowAnzeige sh = (ShowAnzeige) s.getAttribute("choosenShow");

@@ -205,7 +205,7 @@
         <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%"><%=sh.getRoomName()%></span></br><%=datum%></h2>  
         <div class="room">    
             </br>
-            <form action="CineticServlet4" method="post">
+            <form action="CineticServlet7" method="post">
                 <table id="roomview">
                     <%
                         if (roomid2 == 2) {//cozy

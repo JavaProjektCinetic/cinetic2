@@ -1,19 +1,13 @@
 /*
- * Author:      Laura Rössl
- * Date:        10.04.2015
- * Projectname: Cinetic
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package servlet;
 
-import beans.Movie;
-import beans.Room;
-import database.DB_Access;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,31 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import util.LanguageSelector;
 
-@WebServlet(name = "CineticServlet4", urlPatterns = {"/CineticServlet4"})
-public class CineticServlet4 extends HttpServlet {
+/**
+ *
+ * @author Sarah
+ */
+@WebServlet(name = "CineticServlet7", urlPatterns = {"/CineticServlet7"})
+public class CineticServlet7 extends HttpServlet {
 
-    LinkedList<Movie> movieList = null;
-    LinkedList<Room> roomList = null;
     LinkedList<String> reservateSeats = new LinkedList<>();
-    DB_Access dba = null;
     String lang;
-    int reservatID;
-
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-        try {
-            dba = DB_Access.getTheInstance();
-            movieList = dba.getMovieList("", "");
-            roomList = dba.getRoomList();
-            reservatID = dba.getReservationID();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CineticServlet3.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            Logger.getLogger(CineticServlet3.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -63,18 +41,7 @@ public class CineticServlet4 extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             lang = LanguageSelector.selectLang(request, response);
             HttpSession s = request.getSession();
-            s.setAttribute("movieList", movieList);
-            s.setAttribute("roomList", roomList);
             s.setAttribute("reservateSeats", reservateSeats);
-            s.setAttribute("reservationID", reservatID);
-
-            
-            
-            s.setAttribute("tel", request.getParameter("tel"));
-            s.setAttribute("username", request.getParameter("username"));
-            
-
-            System.out.println("cintetivservvlet4: " + s.getAttribute("username"));
             request.getRequestDispatcher("/jsp/" + lang + "/ReservationPage.jsp").forward(request, response);
         }
     }
@@ -105,7 +72,6 @@ public class CineticServlet4 extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String str = request.getParameter("room");
         String stri = request.getParameter("glamour");
         String stra = request.getParameter("cozy");
