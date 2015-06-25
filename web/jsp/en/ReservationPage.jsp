@@ -203,7 +203,6 @@
         </div>
     <center>
         <h2 style="color: #644030"><span style="font-family: 'Playbill'; font-size:250%"><%=sh.getRoomName()%></span></br><%=datum%></h2>  
-        <font face='Georgia'>
         <div class="room">    
             </br>
             <form action="CineticServlet4" method="post">
@@ -351,7 +350,6 @@
                 <tr><td><p>Reservation Number: <%=reservatID%></p></td><td><input type="submit" value="reservate"/></td></tr>            
             </table>
         </form>
-       </font>
     </center>
 </body>
 </html>

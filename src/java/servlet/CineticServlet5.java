@@ -21,8 +21,6 @@ import util.LanguageSelector;
 
 @WebServlet(name = "CineticServlet5", urlPatterns = {"/CineticServlet5"})
 public class CineticServlet5 extends HttpServlet {
-
-
     DB_Access dba = null;
     String lang;
     
@@ -42,8 +40,16 @@ public class CineticServlet5 extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             lang = LanguageSelector.selectLang(request, response);
             HttpSession s = request.getSession();
-
-            request.getRequestDispatcher("/jsp/"+lang+"/LastPage.jsp").forward(request, response);
+            LinkedList<String> reserSeats = (LinkedList<String>) s.getAttribute("reservateSeats");
+            if(reserSeats.isEmpty())
+            {
+                request.getRequestDispatcher("/jsp/"+lang+"/ReservationPage.jsp").forward(request, response);
+            }
+            else
+            {
+                request.getRequestDispatcher("/jsp/"+lang+"/LastPage.jsp").forward(request, response);
+            }
+            
         }
     }
 

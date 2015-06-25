@@ -66,12 +66,26 @@ public class CineticServlet4 extends HttpServlet {
             s.setAttribute("movieList", movieList);
             s.setAttribute("roomList", roomList);
             s.setAttribute("reservateSeats", reservateSeats);
-            s.setAttribute("reservationID", reservatID); 
-            if (request.getParameter("tel") != null) {
+            s.setAttribute("reservationID", reservatID);
+            
+            String tel = request.getParameter("tel");
+            String user = request.getParameter("username");
+            if (tel.equals(" ")) 
+            {
+                System.out.println("in if");
+                request.getRequestDispatcher("/jsp/" + lang + "/LoginPage.jsp").forward(request, response);
+            }
+            else if(user.equals(" "))
+            {
+                request.getRequestDispatcher("/jsp/" + lang + "/LoginPage.jsp").forward(request, response);
+            }
+            else
+            {
                 s.setAttribute("tel", request.getParameter("tel"));
                 s.setAttribute("username", request.getParameter("username"));
+                request.getRequestDispatcher("/jsp/" + lang + "/ReservationPage.jsp").forward(request, response);
             }
-            request.getRequestDispatcher("/jsp/" + lang + "/ReservationPage.jsp").forward(request, response);
+            
         }
     }
 
